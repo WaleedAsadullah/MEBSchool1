@@ -114,7 +114,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `assign_student_class_id`"ID", `user_id`"Assign By", `gr_no`"GR No.", `name`"Name", `date`"Date of Assign", `assign_class`"Assign Class", `comment`"Comments" FROM `ad_assign_student_class` ORDER BY  `assign_student_class_id` DESC';
+                                            $sql = 'SELECT `ad_assign_student_class`.`assign_student_class_id`"ID", `ad_assign_student_class`.`user_id`"Assign By", `ad_assign_student_class`.`gr_no`"GR No.", `ad_assign_student_class`.`name`"Name", `ad_assign_student_class`.`date`"Date of Assign", `ad_assign_student_class`.`assign_class`"Assign Class ID",`ad_class`.`class_name`"class name",`ad_class`.`section`"Section", `ad_assign_student_class`.`comment`"Comments" FROM `ad_assign_student_class` , `ad_class` WHERE `ad_class`.`class_id`=`assign_class` ORDER BY `assign_student_class_id` DESC';
                                             display_query($sql);
 
                                             ?>
@@ -188,7 +188,7 @@ if(isset($_REQUEST['gr_no2'])){
 
                                         <?php
 
-                                        dropDownSimple("Assign Class","assign_class","class_name","ad_class",NULL);
+                                        dropDownConditional3section("Assign Class", "assign_class","class_id","class_name","section","ad_class",Null);
 
                                         ?>
                                           

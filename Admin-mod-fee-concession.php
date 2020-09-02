@@ -3,7 +3,7 @@ include_once('session_end.php');
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +12,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
-
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
+        <?php include_once("title.php") ?>
 
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -23,6 +20,10 @@ include_once('session_end.php');
         <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+        <!--Morris Chart CSS -->
+        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -40,14 +41,9 @@ include_once('session_end.php');
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
 
-        <script src="assets/js/modernizr.min.js"></script>
+        <script src="assets/js/modernizr.min.js"></script> 
 
-        <style>
-            th,td{
-                text-align: center;
-            }
-        </style>
-</head>
+    </head>
 <body class="smallscreen fixed-left-void">
     <div id="wrapper" class="enlarged">
 
@@ -85,7 +81,7 @@ include_once('session_end.php');
                             </div>
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Class Fee </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Concession</h4>
                                     <br>
 
                                     <div class="table-responsive">
@@ -96,9 +92,9 @@ include_once('session_end.php');
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
                                                 // print_r($_REQUEST);
-                                                $sql = 'INSERT INTO `ad_class_fee`(`class_fee_id`, `user_id`, `user_date`, `monthly_fee`, `admission_fee`, `exam`, `misc`, `special`, `annual`, `class_id`, `class_name`, `date_of_setting`, `section_name`, `comment`) VALUES (NULL,\'';
+                                                $sql = 'INSERT INTO `ad_fee_concession`(`fee_concession_id`, `user_id`, `user_date`, `student_id`, `monthly_con`, `admission_con`, `exam_con`, `misc_con`, `special_con`, `annual_con`, `sibling_dis`, `zakat_adj`, `from_zakat_account_id`, `from_zakat_account_name`, `comment`) VALUES (NULL,\'';
                                                 $sql .= get_curr_user();
-                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['monthly_fee'].'\', \''.$_REQUEST['admission_fee'].'\', \''.$_REQUEST['exam'].'\', \''.$_REQUEST['misc'].'\', \''.$_REQUEST['special'].'\', \''.$_REQUEST['annual'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['class_name'].'\', \''.$_REQUEST['date_of_setting'].'\', \''.$_REQUEST['section_name'].'\', \''.$_REQUEST['comment'].'\')';
+                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['monthly_con'].'\', \''.$_REQUEST['admission_con'].'\', \''.$_REQUEST['exam_con'].'\', \''.$_REQUEST['misc_con'].'\', \''.$_REQUEST['special_con'].'\', \''.$_REQUEST['annual_con'].'\', \''.$_REQUEST['sibling_dis'].'\', \''.$_REQUEST['zakat_adj'].'\', \''.$_REQUEST['from_zakat_account_id'].'\', \''.$_REQUEST['from_zakat_account_name'].'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
                                                 insert_query($sql);
                                             }
@@ -106,19 +102,19 @@ include_once('session_end.php');
                                             // ------------------------
 
                                             ///edit code
-                                            check_edit("ad_class_fee","class_fee_id");
-                                            edit_display("ad_class_fee","class_fee_id");
+                                            check_edit("ad_fee_concession","fee_concession_id");
+                                            edit_display("ad_fee_concession","fee_concession_id");
                                             //end of edit code -shift view below delete
 
                                             // ------------------------
-                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ad_class_fee` WHERE `ad_class_fee`.`class_fee_id` = '.$_REQUEST['deleteid'];
+                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ad_fee_concession` WHERE `ad_fee_concession`.`fee_concession_id` = '.$_REQUEST['deleteid'];
 
                                             insert_query($sql);
                                             // echo "done deleting";
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `class_fee_id`"ID",`class_id`"Class ID", `class_name`"Class Name",`section_name`"Section Name",`monthly_fee`"Monthly Fee", `admission_fee`"Admission Fee", `exam` "Exams and Other Activities", `misc`"Mics", `special`"Other Charges", `annual`"Annual Charges",  `date_of_setting`"Date of Setting", `section_name`"Section Name", `comment` FROM `ad_class_fee` order by `class_fee_id` DESC';
+                                            $sql = 'SELECT `fee_concession_id`"ID", `student_id`"Student ID", `monthly_con`"Monthy Concession", `admission_con`"Admission Concession", `exam_con`"Exams and Other Activities Concession", `misc_con`"Mics Concession", `special_con`"Other Charges Concession", `annual_con`"Annual Concession", `sibling_dis`"Sibling Discount", `zakat_adj`"Zakat Adjustment", `from_zakat_account_id`"Zakat Account ID", `from_zakat_account_name`"Zakat Account Name", `comment`"comments" FROM `ad_fee_concession` order by `fee_concession_id` DESC';
                                             display_query($sql);
                                             // -----------------------
 
@@ -139,13 +135,12 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Class Fee </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Concession </h4>
                                     <br>
-                                        <form action="Admin-mod-class-fee.php#formadd" method="post" id="submitted">
+                                        <form action="Admin-mod-fee-concession.php#formadd" method="post" id="submitted">
                                         <?php
-                                        dropDownConditional3section("Class", "class_id2","class_id","class_name","section","ad_class",Null);
+                                        dropDownConditional2("Student ID","gr_no2","addmission_id","name_of_student","ad_admission",NULL);
                                         ?>
-                                        
                                         <div class="form-group text-right m-b-0">
                                                 
                                             <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
@@ -155,78 +150,154 @@ include_once('session_end.php');
                                     </form>
                                     <div class="row">
                                         <div class="col-sm-12 text-right">
-                                            <p class="text-muted">Can't Find Class? <a href="Admin-mod-class.php" class="text-primary m-l-5"><b> Add a Class Here</b></a></p>
+                                            <p class="text-muted">Can't Find Student? <a href="Admin-mod-admission-management.php" class="text-primary m-l-5"><b> Add a Student Here</b></a></p>
                                         </div>
                                     </div>
+
 <?php
-if(isset($_REQUEST['class_id2'])){
+if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
     $conn = connect_db();
-    $sql_s = 'SELECT `class_id`, `class_name`, `section` FROM `ad_class` WHERE `class_id` = '.$_REQUEST['class_id2'].' ';
+
+    if(isset($_REQUEST['gr_no2'])){
+        $gr_no2 = $_REQUEST['gr_no2'];
+    }else {
+        $gr_no2 = $_REQUEST['student_id'];
+    }
+
+    $sql_s = 'SELECT `ad_admission`.`addmission_id`"ID",`ad_admission`.`name_of_student`"name",`ad_assign_student_class`.`assign_class`"assign_class",`ad_class`.`class_name`,`ad_class`.`section` FROM `ad_admission`, `ad_assign_student_class`,`ad_class` WHERE `ad_assign_student_class`.`gr_no` ='.$gr_no2.' AND `ad_admission`.`addmission_id` = '.$gr_no2.' AND `ad_class`.`class_id` = `ad_assign_student_class`.`assign_class` ' ;
     $result = mysqli_query($conn,$sql_s);
     $row = mysqli_fetch_assoc($result);
 
-    $value_id = $row['class_id'];
-    $value_name =  $row['class_name'];
-    $value_section =  $row['section'];
+    
+    // echo $row['assign_class'];
+    $value_id = $row['ID'];
+    $value_name =  $row['name'];
+    $value_class =  $row['class_name'];
+
+    $sql = 'SELECT `class_fee_id`,`monthly_fee`, `admission_fee`, `exam`, `misc`, `special`, `annual`, `class_id` FROM `ad_class_fee` WHERE `class_id` = '.$row['assign_class'].'' ;
+    $result2 = mysqli_query($conn,$sql);
+    $row2 = mysqli_fetch_assoc($result2);
+
+    
+
+    $value_month = $row2['monthly_fee'];
+    $value_admission =  $row2['admission_fee'];
+    $value_exam =  $row2['exam'];
+    $value_muisc =  $row2['misc'];
+    $value_special =  $row2['special'];
+    $value_annual =  $row2['annual'];
 }
 ?>
-                                    <form action="Admin-mod-class-fee.php" method="post">
-
-                                        <div class="form-group">
-                                            <label for="">Class ID</label>
-                                            <input type="number" name="class_id" placeholder="Enter class id" class="form-control"
-                                        <?php if(isset($_REQUEST['class_id2']))echo 'value="'.$value_id.'" readonly' ;else { if(isset($_REQUEST['class_id']))echo'value="'.$_REQUEST['class_id'].'" readonly';} ?>>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Class Name</label>
-                                            <input type="text" name="class_name" placeholder="Enter class name" class="form-control"
-                                        <?php if(isset($_REQUEST['class_id2']))echo 'value="'.$value_name.'" readonly' ;else { if(isset($_REQUEST['class_name']))echo'value="'.$_REQUEST['class_name'].'" readonly';} ?>>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="">Section</label>
-                                            <input type="text" name="section_name" placeholder="Enter section" class="form-control"
-                                        <?php if(isset($_REQUEST['class_id2']))echo 'value="'.$value_section.'" readonly' ;else { if(isset($_REQUEST['section_name']))echo'value="'.$_REQUEST['section_name'].'" readonly';} ?>>
-                                        </div>
-
-
-                                        <div class="form-group">
+                            <div class="row">
+                                <form>
+                                <div class="col-sm-6" style="padding-top: 226px ">
+                                    <div class="form-group">
                                             <label for="">Monthly Fee</label>
-                                            <input type="number" name="monthly_fee" required="" placeholder="Enter monthly fee" class="form-control" value="<?php if(isset($_REQUEST['monthly_fee'])) echo $_REQUEST['monthly_fee']?>">
+                                            <input type="number" name="monthly_fee" required="" placeholder="Enter monthly fee" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_month.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
                                         </div>
                                     
                                
                                         <div class="form-group">
                                             <label for="">Admission Fee</label>
-                                            <input type="number" name="admission_fee" required="" placeholder="Enter admission fee" class="form-control" value="<?php if(isset($_REQUEST['admission_fee'])) echo $_REQUEST['admission_fee']?>">
+                                            <input type="number" name="admission_fee" required="" placeholder="Enter admission fee" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_admission.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="">Exams and Other Activities</label>
-                                            <input type="number" name="exam" placeholder="Enter exams and other activities charges" class="form-control" value="<?php if(isset($_REQUEST['exam'])) echo $_REQUEST['exam']?>">
+                                            <input type="number" name="exam" placeholder="Enter exams and other activities charges" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_exam.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="">Mics</label>
-                                            <input type="number" name="misc" placeholder="Enter  mics charges" class="form-control" value="<?php if(isset($_REQUEST['exam'])) echo $_REQUEST['exam']?>">
+                                            <input type="number" name="misc" placeholder="Enter  mics charges" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_muisc.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="">Other Charges</label>
-                                            <input type="number" name="special" placeholder="Enter  other charges" class="form-control" value="<?php if(isset($_REQUEST['special'])) echo $_REQUEST['special']?>">
+                                            <input type="number" name="special" placeholder="Enter  other charges" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_special.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="">Annual</label>
-                                            <input type="number" name="annual" placeholder="Enter  annual charges" class="form-control" value="<?php if(isset($_REQUEST['annual'])) echo $_REQUEST['annual']?>">
+                                            <input type="number" name="annual" placeholder="Enter  annual charges" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_annual.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
+                                        </div>
+                                </div>
+                                </form>
+                                <div class="col-sm-6" >
+                                    <form action="Admin-mod-fee-concession.php" method="post">
+
+                                        <div class="form-group">
+                                            <label for="">Student ID</label>
+                                            <input type="text" name="student_id" placeholder="Enter student id" class="form-control"
+                                        <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_id.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$_REQUEST['student_id'].'" readonly';} ?>>
                                         </div>
 
 
 
                                         <div class="form-group">
-                                            <label for="">Date of Setting</label>
-                                            <input type="date" name="date_of_setting" required=""  class="form-control"  value="<?php if (isset($_REQUEST['date_of_setting'])) echo $_REQUEST['date_of_setting']; else echo (date("Y-m-d")); ?>">
+                                            <label for="">Student Name</label>
+                                            <input type="text" name="student_name" placeholder="Enter student name" class="form-control"
+                                        <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_name.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_name.'" readonly';} ?>>
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="">Class</label>
+                                            <input type="text" name="class_name" placeholder="Enter class " class="form-control"
+                                        <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_class.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_class.'" readonly';} ?>>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="">Monthly Fee Concession</label>
+                                            <input type="number" name="monthly_con" required="" placeholder="Enter monthly fee concession" class="form-control" value="<?php if(isset($_REQUEST['monthly_con'])) echo $_REQUEST['monthly_con']?>">
+                                        </div>
+                                    
+                               
+                                        <div class="form-group">
+                                            <label for="">Admission Fee Concession</label>
+                                            <input type="number" name="admission_con" required="" placeholder="Enter admission fee concession" class="form-control" value="<?php if(isset($_REQUEST['admission_con'])) echo $_REQUEST['admission_con']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Exams and Other Activities Concession</label>
+                                            <input type="number" name="exam_con" placeholder="Enter exams and other activities charges concession" class="form-control" value="<?php if(isset($_REQUEST['exam_con'])) echo $_REQUEST['exam_con']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Mics Concession</label>
+                                            <input type="number" name="misc_con" placeholder="Enter  mics charges concession" class="form-control" value="<?php if(isset($_REQUEST['misc_con'])) echo $_REQUEST['misc_con']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Other Charges Concession</label>
+                                            <input type="number" name="special_con" placeholder="Enter  other charges concession" class="form-control" value="<?php if(isset($_REQUEST['special_con'])) echo $_REQUEST['special_con']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Annual Concession</label>
+                                            <input type="number" name="annual_con" placeholder="Enter  annual charges concession" class="form-control" value="<?php if(isset($_REQUEST['annual_con'])) echo $_REQUEST['annual_con']?>">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Sibling Discount</label>
+                                            <input type="number" name="sibling_dis" placeholder="Enter  sibling discount" class="form-control" value="<?php if(isset($_REQUEST['sibling_dis'])) echo $_REQUEST['sibling_dis']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Zakat Adjustment</label>
+                                            <input type="number" name="zakat_adj" placeholder="Enter  zakat adjustment" class="form-control" value="<?php if(isset($_REQUEST['zakat_adj'])) echo $_REQUEST['zakat_adj']?>">
+                                        </div>
+
+
+
+                                        <?php 
+
+                                        dropDownSimple("From Zakat Account ID","from_zakat_account_id","zakat_id","ac_zakat",Null);
+
+                                        dropDownSimple("From Zakat Account Name","from_zakat_account_name","zakat_id","ac_zakat",Null);
+
+
+
+                                        ?>
 
 
                                     
@@ -246,11 +317,13 @@ if(isset($_REQUEST['class_id2'])){
                                         </div>
                                     </form>
                                 </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
             <!-- Form end -->
 
                 <!-- footer -->
@@ -295,7 +368,7 @@ if(isset($_REQUEST['class_id2'])){
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
-           <!-- Datatables-->
+        <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>

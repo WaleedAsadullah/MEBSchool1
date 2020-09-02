@@ -122,8 +122,12 @@
                                 <a href="Accounts-mod-procurement.php" class="waves-effect"><i class="dripicons-box"></i> <span> Procurement </span> </a>
                             </li>
 
-
-                            
+                            <li>
+                                <a href="Accounts-mod-generate-fee-for-class.php" class="waves-effect"><i class="dripicons-box"></i> <span> Generate Fee For Class </span> </a>
+                            </li>
+                            <li>
+                                <a href="Accounts-mod-generate-fee-specfic-student.php" class="waves-effect"><i class="dripicons-box"></i> <span> Generate Fee For Specific Student </span> </a>
+                            </li>
 
                         </ul>
                         <div class="clearfix"></div>

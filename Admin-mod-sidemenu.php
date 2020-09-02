@@ -126,6 +126,10 @@
                             <li>
                                 <a href="Admin-mod-class-fee.php" class="waves-effect"><i class="zmdi zmdi-accounts-list"></i> <span> Class Fee </span> </a>
                             </li>
+
+                            <li>
+                                <a href="Admin-mod-fee-concession.php" class="waves-effect"><i class="zmdi zmdi-money-off"></i> <span> Fee Concession </span> </a>
+                            </li>
                             
                         <div class="clearfix"></div>
                     </ul>

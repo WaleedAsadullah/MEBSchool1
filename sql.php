@@ -1,3 +1,8 @@
+SELECT * FROM `ad_class_fee` WHERE `class_id` = 19
+SELECT * FROM `ad_fee_concession`,`ad_assign_student_class` WHERE `student_id` = `gr_no` and `assign_class` = 19
+
+SELECT count(a.`addmission_id`) "Number_of_siblings" FROM `ad_admission` a WHERE a.`cnic_guradian` = (SELECT b.`cnic_guradian` from `ad_admission` b where b.`addmission_id` = 55)
+
 SELECT `type`, `account_title`, SUM(`exp_amount`) FROM `ac_rev_exp` WHERE `date_of_rev_exp` <= '2021-08-20' AND `date_of_rev_exp` >= '2019-08-20' GROUP BY `account_title`
 
 SELECT * FROM `ad_teacher_class` WHERE `class_id` in (select `class_id` from `ad_teacher_class` where `class_id` > 1)
