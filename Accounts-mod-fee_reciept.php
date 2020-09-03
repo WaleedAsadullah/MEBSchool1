@@ -43,20 +43,20 @@ include_once("db_functions.php");
 
         	}
         	.halfpage{
-        		width:30%;
-        		height: 90%;
+        		width:500px;
+        		height: 780px;
         		margin: auto;
-        		padding: 2%;
+        		padding: 40px;
+                padding-top: 35px;
         		border :2px solid #95B9C7;
         		box-shadow: 0 0 10px rgba(0, 0, 0, .15);
                 display: inline-block;
                 text-align: left;
-                margin-bottom: 10%;
         		
         	}
         	body{
         		background-color: white;
-        		/*padding-top: 20px;*/
+        		padding-top: 20px;
         	}
             h4{
                 font-family: 'Roboto', sans-serif;
@@ -66,16 +66,16 @@ include_once("db_functions.php");
             p{
                 font-family: 'Roboto', sans-serif;
                 color: rgb(50,50,50);
-                font-size: 0.8em;
+                font-size: 14px;
             }
             th, td {
                 border: 1px solid black;
                 border-collapse: collapse;
-                width: 10%;
+                width: 70px
             }
             table{
                 position: relative;
-                /*top: 155px;*/
+                top: 155px;
             }
             th{
                 padding: 6px;
@@ -84,8 +84,7 @@ include_once("db_functions.php");
             }
             .innercontent{
                 display: inline-flex;
-                margin-top: 10%;
-                width: 100%;
+                margin-top: 50px;
             }
             table>thead>tr>th , table>thead {
                 border: none;
@@ -108,7 +107,7 @@ include_once("db_functions.php");
 
 
 	<body>
-        <div class="mainpage"  >
+        <div class="mainpage">
 
 
 
@@ -116,8 +115,8 @@ include_once("db_functions.php");
 
 //if(isset($_REQUEST[dateid]))
 // search using date
-$print_data = query_to_array("SELECT * FROM `ac_fee_collection` where `class_id` = 19  order by user_date desc");
-// print_r($print_data);
+$print_data = query_to_array("SELECT * FROM `ac_fee_collection` where `fee_collection_id` = 22  ");
+//print_r($print_data);
 
 // Array ( [0] => Array ( [fee_collection_id] => 1 [user_id] => 2 [user_date] => 2020-09-03 10:57:21 [which_month] => September [year] => 2020 [class_id] => 19 [class_name] => 2 [section] => Girls [studend_id] => 92 [student_name] => Danish Khan [month_fee] => 500 [month_con] => 0 [admission_fee] => 600 [admission_con] => 0 [exam_fee] => 700 [exam_con] => 0 [misc_fee] => 800 [misc_con] => 0 [other_fee] => 900 [other_con] => 0 [annual_fee] => 1000 [annual_con] => 0 [monfee] => 500 [admfee] => 0 [examfee] => 0 [miscfee] => 800 [specialfee] => 900 [annualfee] => 1000 [feesibdisc] => 0 [feeza] => 0 [fee] => 3200 ) [1] => Array ( [fee_collection_id] => 2 [user_id] => 2 [user_date] => 2020-09-03 10:57:21 [which_month] => September [year] => 2020 [class_id] => 19 [class_name] => 2 [section] => Girls [studend_id] => 55 [student_name] => Waleed Asad [month_fee] => 500 [month_con] => 100 [admission_fee] => 600 [admission_con] => 90 [exam_fee] => 700 [exam_con] => 80 [misc_fee] => 800 [misc_con] => 70 [other_fee] => 900 [other_con] => 60 [annual_fee] => 1000 [annual_con] => 50 [monfee] => 400 [admfee] => 0 [examfee] => 0
 
@@ -125,7 +124,6 @@ $print_data = query_to_array("SELECT * FROM `ac_fee_collection` where `class_id`
 
 for($i=0;$i<count($print_data);$i++)
 {
-    //$fee_collection_id
 $concession_id = $print_data[$i]['concsession_id'] ;
 $sno = $print_data[$i]['fee_collection_id'] ;
 $which_month = $print_data[$i]['which_month'] ;
@@ -172,40 +170,38 @@ $fee = $print_data[$i]['fee'] ;
 
 
 
- $echo_string = '
+ $echo_string_start = '
             <div class="halfpage">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-lg-3">
                         <img src="assets/images/med-logo.png" width="70px" style="padding-top: 12px" />
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-lg-6">
                         <h4><strong>The MEB School</strong></h4>
                     </div>
-                    <div class="col-sm-3" >
+                    <div class="col-lg-3" >
                         <p style="margin: 0px">Ph  : 36333824</p>
                         <p style="margin: 0px">    36336335</p>
                         <hr>
-                        <p style="font-weight: bold" ><u>
-
-                        Student Copy
-
-                        </u></p>
+                        <p style="font-weight: bold" ><u>';
+                        
+$echo_string = '</u></p>
                     </div>
                 </div>
-                        <div class="row">
-                            <div class = "col-sm-6">
-                                <p>Voucher no. <span><u>'.$sno.'</u></span></p>
-                            </div>
-                            <div class = "col-sm-6">
-                                <p>Class : <span><u>'.$class_name.'</u></span></p>
-                            </div>
+                <div class="innercontent">
+                    <div style="width: 33%">
+                    <div class = "row" >
+                        <div class = "col-sm-6" >
+                            <p>S.no <span><u>'.$sno.'</u></span></p>
                         </div>
+                        <div class = "col-sm-6" >
+                            <p>Class : <span><u>'.$class_name.'</u></span></p>
+                        </div>
+                    </div>
                         <p>G.R No. <span><u>'.$studend_id.'</u></span></p>
                         <p>Name of Student :<span><u>'.$student_name.'</u></span></p>
                         <p>Fee For:<span><u>'.$which_month.'</u></span><span><u>'.$year.'</u></span></p>
                         <hr>
-                    <div class="row innercontent">
-                    <div class= "col-sm-6" >
                         <p>Fees for the Month</p>
                         <p>Admission Fee/Re-Admission Fee</p>
                         <p>Exams and Other Activities</p>
@@ -214,8 +210,8 @@ $fee = $print_data[$i]['fee'] ;
                         <p>Annual Charges</p>
                         <p>Total</p>
                     </div>
-                    <div class= "col-sm-6">
-                         <table class = "text-right" >
+                    <div>
+                         <table>
                             <thead>
                                 <tr>
                                     <th>Rs.</th>
@@ -259,9 +255,8 @@ $fee = $print_data[$i]['fee'] ;
                                 </tr>
 
                                 <tr>
-                                    <th></th>'; if($concession_id) $echo_string .='
                                     <th></th>
-  '; $echo_string .='
+                                    <th></th>
                                     <th>'.$fee.'</th>
                                 </tr>
 
@@ -271,19 +266,21 @@ $fee = $print_data[$i]['fee'] ;
                 </div>
                 <hr>
                 <div class="row my-3">
-                    <div class="col-sm-6"><p>Date : <span><u>7/6/2020</u></span></p></div>
-                    <div class="col-sm-6"><p>Cashier :<span><u>Kashif</u></span></p></div>
+                    <div class="col-lg-6"><p>Date : <span><u>7/6/2020</u></span></p></div>
+                    <div class="col-lg-6"><p>Cashier :<span><u>Kashif</u></span></p></div>
 
                 </div>
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-lg-12">
                         <div class="footer"><p style="color: white; font-size: 10px; font-weight: 100 ;margin-bottom : 0px; padding: 2px;">Fees once received, will not be refunded and not transferable not adjustable</p></div>
                     </div>
                 </div>
             </div>';
-            echo $echo_string;
-            echo str_replace("Student Copy", "Bank Copy", $echo_string);
-            echo str_replace("Student Copy", "Admin Copy", $echo_string);
+            echo $echo_string_start." Student Copy ".$echo_string ;
+            echo $echo_string_start." Bank Copy ".$echo_string ;
+            echo $echo_string_start." Admin Copy ".$echo_string ;
+            //echo str_replace("", "", $echo_string);
+           // echo str_replace("Student Copy", "", $echo_string);
            }
 ?>
         </div>

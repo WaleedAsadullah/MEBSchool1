@@ -1,4 +1,4 @@
-F<?php
+<?php
 include_once('connect_db.php');
 $conn = connect_db();
 
@@ -136,7 +136,7 @@ for($j=0;$j<count($row_data);$j++){
               <td>'.$i.'</td>
               <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
             
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
@@ -350,7 +350,14 @@ else {echo ' <button class="btn btn-primary waves-effect waves-light" type="subm
 }
 
 // 
+function find_concession($student_id)
+{
 
+
+return query_to_array("SELECT * FROM `ad_fee_concession` WHERE `student_id` = $student_id");
+
+
+}
 function edit_display($table_name,$col_id)
 {
 

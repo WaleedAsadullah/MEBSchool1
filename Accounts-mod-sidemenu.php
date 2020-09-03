@@ -129,6 +129,10 @@
                                 <a href="Accounts-mod-generate-fee-specfic-student.php" class="waves-effect"><i class="dripicons-box"></i> <span> Generate Fee For Specific Student </span> </a>
                             </li>
 
+                            <li>
+                                <a href="Accounts-mod-fee-collection.php" class="waves-effect"><i class="dripicons-box"></i> <span> Fee Collection </span> </a>
+                            </li>
+
                         </ul>
                         <div class="clearfix"></div>
                     </div>

@@ -1,7 +1,20 @@
+SELECT `which_month`, `year`, `class_id`, `class_name`, `section`, count(`class_id`) "number of records generated" FROM `ac_fee_collection` group by `class_id` , `which_month`, `year` ORDER BY `user_date` DESC
+
+//delete with run date
+SELECT `user_date` "Run date" ,`which_month`, `year`, `class_id`, `class_name`, `section`, count(`class_id`) "number of records generated" FROM `ac_fee_collection` group by `user_date` ORDER BY `user_date` DESC
+
 SELECT * FROM `ad_class_fee` WHERE `class_id` = 19
 SELECT * FROM `ad_fee_concession`,`ad_assign_student_class` WHERE `student_id` = `gr_no` and `assign_class` = 19
+//dashboard
+SELECT `guardian_name`, count(a.`addmission_id`) "Number_of_siblings" FROM `ad_admission` a WHERE a.`cnic_guradian` in (SELECT b.`cnic_guradian` from `ad_admission` b group by b.`cnic_guradian`) group by a.`cnic_guradian`
 
+//show on discount
 SELECT count(a.`addmission_id`) "Number_of_siblings" FROM `ad_admission` a WHERE a.`cnic_guradian` = (SELECT b.`cnic_guradian` from `ad_admission` b where b.`addmission_id` = 55)
+
+
+studnet siblings view
+
+SELECT * FROM `ad_admission` a WHERE a.`cnic_guradian` = (SELECT b.`cnic_guradian` from `ad_admission` b where b.`addmission_id` = 55)
 
 SELECT `type`, `account_title`, SUM(`exp_amount`) FROM `ac_rev_exp` WHERE `date_of_rev_exp` <= '2021-08-20' AND `date_of_rev_exp` >= '2019-08-20' GROUP BY `account_title`
 

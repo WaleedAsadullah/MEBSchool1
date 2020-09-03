@@ -83,8 +83,8 @@ include_once('session_end.php');
                             </div>
                             <div class="col-lg-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Generate Fee For Class </h4>
-
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">  Fee settings  For Class </h4>
+to generate fee click here 
                                     <div class="table-responsive" id="view">
                                         <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
@@ -185,7 +185,7 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Generate Fee For Class  </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">  Fee settings For Class  </h4>
                                     <br>
                                         <form action="Accounts-mod-generate-fee-for-class.php#formadd" method="post" id="submitted">
                                         <?php

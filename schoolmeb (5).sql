@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 02, 2020 at 01:41 PM
+-- Generation Time: Sep 03, 2020 at 01:07 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -271,6 +271,56 @@ CREATE TABLE `ac_fee_card` (
 
 INSERT INTO `ac_fee_card` (`fee_card_id`, `user_id`, `user_date`, `from_year`, `till_year`, `name`, `father_name`, `class`, `section`, `address`, `phone`, `cell`) VALUES
 (5, 2, '2020-07-24 04:00:24', 2020, 2021, 'Waleed Asad', 'AsadUllah', '8th', 'C', 'al Aziziya ,jeddah , karachi', '03111043612', '0988');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ac_fee_collection`
+--
+
+CREATE TABLE `ac_fee_collection` (
+  `fee_collection_id` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `user_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `which_month` varchar(255) NOT NULL,
+  `year` int(11) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `class_name` varchar(255) NOT NULL,
+  `section` varchar(255) DEFAULT NULL,
+  `studend_id` int(11) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `month_fee` int(11) DEFAULT NULL,
+  `month_con` int(11) DEFAULT NULL,
+  `admission_fee` int(11) DEFAULT NULL,
+  `admission_con` int(11) DEFAULT NULL,
+  `exam_fee` int(11) DEFAULT NULL,
+  `exam_con` int(11) DEFAULT NULL,
+  `misc_fee` int(11) DEFAULT NULL,
+  `misc_con` int(11) DEFAULT NULL,
+  `other_fee` int(11) DEFAULT NULL,
+  `other_con` int(11) DEFAULT NULL,
+  `annual_fee` int(11) DEFAULT NULL,
+  `annual_con` int(11) DEFAULT NULL,
+  `monfee` int(11) DEFAULT NULL,
+  `admfee` int(11) DEFAULT NULL,
+  `examfee` int(11) DEFAULT NULL,
+  `miscfee` int(11) DEFAULT NULL,
+  `specialfee` int(11) DEFAULT NULL,
+  `annualfee` int(11) DEFAULT NULL,
+  `feesibdisc` int(11) DEFAULT NULL,
+  `feeza` int(11) DEFAULT NULL,
+  `fee` int(11) NOT NULL,
+  `concsession_id` int(11) NOT NULL DEFAULT 0,
+  `generate_id` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ac_fee_collection`
+--
+
+INSERT INTO `ac_fee_collection` (`fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`, `concsession_id`, `generate_id`) VALUES
+(22, '2', '2020-09-03 06:33:34', 'September', 2020, 19, '2', 'Girls', 92, 'Danish Khan', 500, 0, 0, 0, 0, 0, 800, 0, 900, 0, 1000, 0, 500, 0, 0, 800, 900, 1000, 0, 0, 3200, 0, 8),
+(23, '2', '2020-09-03 06:33:34', 'September', 2020, 19, '2', 'Girls', 55, 'Waleed Asad', 500, 100, 0, 0, 0, 0, 800, 70, 900, 60, 1000, 50, 400, 0, 0, 730, 840, 950, 40, 30, 2850, 2, 8);
 
 -- --------------------------------------------------------
 
@@ -1867,6 +1917,12 @@ ALTER TABLE `ac_fee_card`
   ADD PRIMARY KEY (`fee_card_id`);
 
 --
+-- Indexes for table `ac_fee_collection`
+--
+ALTER TABLE `ac_fee_collection`
+  ADD PRIMARY KEY (`fee_collection_id`);
+
+--
 -- Indexes for table `ac_fee_module`
 --
 ALTER TABLE `ac_fee_module`
@@ -2179,6 +2235,12 @@ ALTER TABLE `ac_fee_calculated`
 --
 ALTER TABLE `ac_fee_card`
   MODIFY `fee_card_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `ac_fee_collection`
+--
+ALTER TABLE `ac_fee_collection`
+  MODIFY `fee_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `ac_fee_module`
