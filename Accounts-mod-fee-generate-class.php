@@ -84,7 +84,11 @@ include_once('session_end.php');
                             <div class="col-lg-12">
                                 <div class="card-box table-responsive">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">  Generate Fee  For Class </h4>
-To set fee instructions click here 
+                                        <div class="row">
+                                            <div class="col-sm-12 text-right">
+                                                <p class="text-muted">To Set Fee Instruction <a href="Accounts-mod-fee-setting-for-class.php" class="text-primary m-l-5"><b> Click Here</b></a></p>
+                                            </div>
+                                        </div>
                                     <div class="table-responsive" id="view">
                                         <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
@@ -110,19 +114,19 @@ if(!isset($class_fee) || ($class_fee == "no result")) {
 $ok_to_print = 0;
 }
 else
-print_r($class_fee);
+// print_r($class_fee);
 if(!isset($students) || ($students == "no result")) {
-    echo "Student not assigend to class. Assign student to class here  <br>";
+    // echo "Student not assigend to class. Assign student to class here  <br>";
 $ok_to_print = 0;
 }
 else
-print_r($students);
+// print_r($students);
 
 if(!isset($generate_fee) || ($generate_fee == "no result")) {echo "Generate instructions not set. Set generate instructions here <br>";
 $ok_to_print = 0;
 }
 else
-print_r($generate_fee);
+// print_r($generate_fee);
 
 if($ok_to_print)
 {
@@ -155,7 +159,7 @@ $student_fee[0]['monthly_con'] = 0;
 
 }
 else
-print_r($student_fee);
+// print_r($student_fee);
 $fee = 0;
 $monfee = 0; $admfee = 0;
 $examfee = 0;
@@ -221,11 +225,8 @@ $sql .= get_curr_user();
 
 $sql .= '\',\''. $time_now.'\',\''.$generate_fee_for_month.'\', \''.$generate_fee_for_year.'\', \''.$class_id.'\', \''.$class_fee[0]['class_name'].'\', \''.$class_fee[0]['section_name'].'\', \''.$students[$students_count]['gr_no'].'\', \''.$students[$students_count]['name'].'\', \''.$class_fee[0]['monthly_fee'].'\', \''.$student_fee[0]['monthly_con'].'\', \''.$class_fee[0]['admission_fee'].'\', \''.$student_fee[0]['admission_con'].'\', \''.$class_fee[0]['exam'].'\', \''.$student_fee[0]['exam_con'].'\', \''.$class_fee[0]['misc'].'\', \''.$student_fee[0]['misc_con'].'\', \''.$class_fee[0]['special'].'\', \''.$student_fee[0]['special_con'].'\', \''.$class_fee[0]['annual'].'\', \''.$student_fee[0]['annual_con'].'\', \''.$monfee.'\', \''.$admfee.'\', \''.$examfee.'\', \''.$miscfee.'\', \''.$specialfee.'\', \''.$annualfee.'\', \''.$feesibdisc.'\', \''.$feeza.'\', \''.$fee.'\', \''.$student_fee[0]['fee_concession_id'].'\', \''.$generate_fee[0]['generate_fee_class_id'].'\')';
 
-                                                echo $sql;
-
 insert_query($sql);
 
-echo "<br>";
 
 }
 }
@@ -237,7 +238,7 @@ echo "<br>";
                                             edit_display("ac_fee_collection","user_date");
                                             //end of edit code -shift view below delete
                                             // --------------------------
-print_r($_REQUEST);
+// print_r($_REQUEST);
                                             if(isset($_REQUEST['deleteid'])){ 
                                                 $echo_check = $sql = 'DELETE FROM `ac_fee_collection` WHERE `ac_fee_collection`.`user_date` = "'.str_replace("___"," ",$_REQUEST['deleteid']).'"';
 
@@ -247,7 +248,7 @@ print_r($_REQUEST);
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
                                             $sql = '
-                                            SELECT `user_date` "Run date" ,`which_month`, `year`, `class_id`, `class_name`, `section`, count(`class_id`) "number of records generated" FROM `ac_fee_collection` group by `user_date` ORDER BY `user_date` DESC';
+                                            SELECT `user_date` "Run date" ,`which_month`"Which Month", `year`"Of Year", `class_id`"Class ID", `class_name`"Class Name", `section`"Section", count(`class_id`) "Number Of Records Generated" FROM `ac_fee_collection` group by `user_date` ORDER BY `user_date` DESC';
                                             display_query($sql);
 
                                             ?>
@@ -271,11 +272,10 @@ print_r($_REQUEST);
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">  Fee settings For Class  </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">   Generate Fee  For Class  </h4>
                                     <br>
                                         <form action="Accounts-mod-fee-generate-class.php#formadd" method="post" id="submitted">
                                         <div class="form-group">
-                                            <?php echo $echo_check; ?>
                                             <label for="">Year</label>
                                             <input type="number" name="year" required=""  class="form-control" id="prVacation" value="<?php if (isset($_REQUEST['date_booking'])) echo $_REQUEST['date_booking']; else echo (date("Y")); ?>">
                                         </div>

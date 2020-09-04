@@ -71,7 +71,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                      <div class="m-t-5 m-b-5" style="text-align: center" >
                                          <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
@@ -79,7 +79,7 @@ include_once('session_end.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Concession</h4>
                                     <br>
@@ -92,9 +92,9 @@ include_once('session_end.php');
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
                                                 // print_r($_REQUEST);
-                                                $sql = 'INSERT INTO `ad_fee_concession`(`fee_concession_id`, `user_id`, `user_date`, `student_id`, `monthly_con`, `admission_con`, `exam_con`, `misc_con`, `special_con`, `annual_con`, `sibling_dis`, `zakat_adj`, `from_zakat_account_id`, `from_zakat_account_name`, `comment`) VALUES (NULL,\'';
+                                                $sql = 'INSERT INTO `ad_fee_concession`(`fee_concession_id`, `user_id`, `user_date`, `student_id`, `monthly_con`, `admission_con`, `exam_con`, `misc_con`, `special_con`, `annual_con`, `sibling_dis`, `zakat_adj`, `from_zakat_account_id`, `comment`) VALUES (NULL,\'';
                                                 $sql .= get_curr_user();
-                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['monthly_con'].'\', \''.$_REQUEST['admission_con'].'\', \''.$_REQUEST['exam_con'].'\', \''.$_REQUEST['misc_con'].'\', \''.$_REQUEST['special_con'].'\', \''.$_REQUEST['annual_con'].'\', \''.$_REQUEST['sibling_dis'].'\', \''.$_REQUEST['zakat_adj'].'\', \''.$_REQUEST['from_zakat_account_id'].'\', \''.$_REQUEST['from_zakat_account_name'].'\', \''.$_REQUEST['comment'].'\')';
+                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['monthly_con'].'\', \''.$_REQUEST['admission_con'].'\', \''.$_REQUEST['exam_con'].'\', \''.$_REQUEST['misc_con'].'\', \''.$_REQUEST['special_con'].'\', \''.$_REQUEST['annual_con'].'\', \''.$_REQUEST['sibling_dis'].'\', \''.$_REQUEST['zakat_adj'].'\', \''.$_REQUEST['from_zakat_account_id'].'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
                                                 insert_query($sql);
                                             }
@@ -114,7 +114,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `fee_concession_id`"ID", `student_id`"Student ID", `monthly_con`"Monthy Concession", `admission_con`"Admission Concession", `exam_con`"Exams and Other Activities Concession", `misc_con`"Mics Concession", `special_con`"Other Charges Concession", `annual_con`"Annual Concession", `sibling_dis`"Sibling Discount", `zakat_adj`"Zakat Adjustment", `from_zakat_account_id`"Zakat Account ID", `from_zakat_account_name`"Zakat Account Name", `comment`"comments" FROM `ad_fee_concession` order by `fee_concession_id` DESC';
+                                            $sql = 'SELECT `fee_concession_id`"ID", `student_id`"Student ID", `monthly_con`"Monthy Concession", `admission_con`"Admission Concession", `exam_con`"Exams and Other Activities Concession", `misc_con`"Mics Concession", `special_con`"Other Charges Concession", `annual_con`"Annual Concession", `sibling_dis`"Sibling Discount", `zakat_adj`"Zakat Adjustment", `from_zakat_account_id`"Zakat Account ID", `comment`"comments" FROM `ad_fee_concession` order by `fee_concession_id` DESC';
                                             display_query($sql);
                                             // -----------------------
 
@@ -133,7 +133,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Concession </h4>
                                     <br>
@@ -291,9 +291,7 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
 
                                         <?php 
 
-                                        dropDownSimple("From Zakat Account ID","from_zakat_account_id","zakat_id","ac_zakat",Null);
-
-                                        dropDownSimple("From Zakat Account Name","from_zakat_account_name","zakat_id","ac_zakat",Null);
+                                        dropDownConditionalUnsumit("From Zakat Account","from_zakat_account_id","zakat_id","doner","ac_zakat",Null);
 
 
 

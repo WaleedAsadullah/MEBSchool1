@@ -73,115 +73,61 @@ include_once('session_end.php');
 
 
 
-            <div class="content-page" id="formadd">
+            <div class="content-page">
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
-
-                                    <h4 class="header-title m-t-0 m-b-30">Miscellaneous query report</h4>
-
-                                    <div class="row">
-
-
-                                        <div>
-                                            <div class="panel-group" id="accordion" role="tablist"
-                                                 aria-multiselectable="true">
-                                                <div class="panel panel-default bx-shadow-none">
-                                                    <div class="panel-heading" role="tab" id="headingOne">
-                                                        <h4 class="panel-title">
-                                                            <a role="button" data-toggle="collapse"
-                                                               data-parent="#accordion" href="#collapseOne"
-                                                               aria-expanded="true" aria-controls="collapseOne">
-                                                                miscellaneous query report #1
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapseOne" class="panel-collapse collapse in"
-                                                         role="tabpanel" aria-labelledby="headingOne">
-                                                        <div class="panel-body">
-                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                            accusamus terry richardson ad squid. 3 wolf moon officia
-                                                            aute, non cupidatat skateboard dolor brunch. Food truck
-                                                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                            sunt aliqua put a bird on it squid single-origin coffee
-                                                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                                            helvetica, craft beer labore wes anderson cred nesciunt
-                                                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                            Leggings occaecat craft beer farm-to-table, raw denim
-                                                            aesthetic synth nesciunt you probably haven't heard of them
-                                                            accusamus labore sustainable VHS.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel panel-default bx-shadow-none">
-                                                    <div class="panel-heading" role="tab" id="headingTwo">
-                                                        <h4 class="panel-title">
-                                                            <a class="collapsed" role="button" data-toggle="collapse"
-                                                               data-parent="#accordion" href="#collapseTwo"
-                                                               aria-expanded="false" aria-controls="collapseTwo">
-                                                                miscellaneous query report #2
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapseTwo" class="panel-collapse collapse"
-                                                         role="tabpanel" aria-labelledby="headingTwo">
-                                                        <div class="panel-body">
-                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                            accusamus terry richardson ad squid. 3 wolf moon officia
-                                                            aute, non cupidatat skateboard dolor brunch. Food truck
-                                                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                            sunt aliqua put a bird on it squid single-origin coffee
-                                                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                                            helvetica, craft beer labore wes anderson cred nesciunt
-                                                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                            Leggings occaecat craft beer farm-to-table, raw denim
-                                                            aesthetic synth nesciunt you probably haven't heard of them
-                                                            accusamus labore sustainable VHS.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="panel panel-default bx-shadow-none">
-                                                    <div class="panel-heading" role="tab" id="headingThree">
-                                                        <h4 class="panel-title">
-                                                            <a class="collapsed" role="button" data-toggle="collapse"
-                                                               data-parent="#accordion" href="#collapseThree"
-                                                               aria-expanded="false" aria-controls="collapseThree">
-                                                                miscellaneous query report #3
-                                                            </a>
-                                                        </h4>
-                                                    </div>
-                                                    <div id="collapseThree" class="panel-collapse collapse"
-                                                         role="tabpanel" aria-labelledby="headingThree">
-                                                        <div class="panel-body">
-                                                            Anim pariatur cliche reprehenderit, enim eiusmod high life
-                                                            accusamus terry richardson ad squid. 3 wolf moon officia
-                                                            aute, non cupidatat skateboard dolor brunch. Food truck
-                                                            quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-                                                            sunt aliqua put a bird on it squid single-origin coffee
-                                                            nulla assumenda shoreditch et. Nihil anim keffiyeh
-                                                            helvetica, craft beer labore wes anderson cred nesciunt
-                                                            sapiente ea proident. Ad vegan excepteur butcher vice lomo.
-                                                            Leggings occaecat craft beer farm-to-table, raw denim
-                                                            aesthetic synth nesciunt you probably haven't heard of them
-                                                            accusamus labore sustainable VHS.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- end col -->
-
-                                    </div><!-- end row -->
-
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">Miscellaneous Querry  </h4>
+                                    <form action="Accounts-mod-miscellaneous-querry-reporting.php" method="post">
+                                        <div class="form-group">
+                                            <label for="name">Insert Querry </label>
+                                            <input type="text" name="sql" required="" placeholder="Enter Querry" class="form-control" id="prID"
+                                            value="<?php if(isset($_REQUEST['sql'])) echo $_REQUEST['sql']?>">
+                                        </div>
+                                        <div class="form-group text-right m-b-0">
+                                            <button type="submit" name="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                                Set 
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
-                            </div><!-- end col -->
+                            </div>
                         </div>
-                        <!-- end row -->
+                    </div>
+                </div>
+            </div>
 
+             <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box" >
+                                    <h4 class="header-title m-t-0 m-b-30" style="text-align: center; font-size: 22px; padding: 10px">Miscellaneous Querry</h4>
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
 
+                                            <?php
+                                            if (isset($_POST['submit'])){
 
+                                            
 
+                                            $sql = ''.$_REQUEST['sql'].'';
+
+                                            echo $sql;
+
+                                            display_query($sql);
+
+                                            // --------------------------
+                                            }
+                                            ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

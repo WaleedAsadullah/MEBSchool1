@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 03, 2020 at 01:07 PM
+-- Generation Time: Sep 04, 2020 at 12:19 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -319,8 +319,41 @@ CREATE TABLE `ac_fee_collection` (
 --
 
 INSERT INTO `ac_fee_collection` (`fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`, `concsession_id`, `generate_id`) VALUES
-(22, '2', '2020-09-03 06:33:34', 'September', 2020, 19, '2', 'Girls', 92, 'Danish Khan', 500, 0, 0, 0, 0, 0, 800, 0, 900, 0, 1000, 0, 500, 0, 0, 800, 900, 1000, 0, 0, 3200, 0, 8),
-(23, '2', '2020-09-03 06:33:34', 'September', 2020, 19, '2', 'Girls', 55, 'Waleed Asad', 500, 100, 0, 0, 0, 0, 800, 70, 900, 60, 1000, 50, 400, 0, 0, 730, 840, 950, 40, 30, 2850, 2, 8);
+(24, '2', '2020-09-04 01:00:24', 'September', 2020, 19, '2', 'Girls', 92, 'Danish Khan', 500, 0, 0, 0, 0, 0, 800, 0, 900, 0, 1000, 0, 500, 0, 0, 800, 900, 1000, 0, 0, 3200, 0, 8),
+(25, '2', '2020-09-04 01:00:24', 'September', 2020, 19, '2', 'Girls', 55, 'Waleed Asad', 500, 100, 0, 0, 0, 0, 800, 70, 900, 60, 1000, 50, 400, 0, 0, 730, 840, 950, 40, 30, 2850, 2, 8),
+(26, '2', '2020-09-04 03:05:55', 'October', 2020, 22, '1', 'Boys', 59, 'Waleed Asad', 1800, 0, 200, 0, 0, 0, 0, 0, 0, 0, 100, 0, 1800, 200, 0, 0, 0, 100, 0, 0, 2100, 0, 9),
+(27, '2', '2020-09-04 03:08:23', 'September', 2020, 22, '1', 'Boys', 59, 'Waleed Asad', 1800, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1800, 0, 0, 0, 0, 0, 0, 0, 1800, 0, 10);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ac_fee_collection_done`
+--
+
+CREATE TABLE `ac_fee_collection_done` (
+  `fee_collection_done_id` int(11) NOT NULL,
+  `user_id` varchar(255) NOT NULL,
+  `user_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `student_id` int(11) NOT NULL,
+  `student_name` varchar(255) NOT NULL,
+  `class_id` int(11) NOT NULL,
+  `class_name` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
+  `fee_total` float NOT NULL,
+  `amount_pay` float NOT NULL,
+  `balance` float DEFAULT NULL,
+  `date` date DEFAULT NULL,
+  `voucher_no` int(11) NOT NULL,
+  `month` varchar(255) NOT NULL,
+  `year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ac_fee_collection_done`
+--
+
+INSERT INTO `ac_fee_collection_done` (`fee_collection_done_id`, `user_id`, `user_date`, `student_id`, `student_name`, `class_id`, `class_name`, `section`, `fee_total`, `amount_pay`, `balance`, `date`, `voucher_no`, `month`, `year`) VALUES
+(2, '2', '2020-09-04 05:36:35', 92, 'Danish Khan', 19, '2', 'Girls', 3200, 3000, 200, '2020-09-04', 22, 'September', 2020);
 
 -- --------------------------------------------------------
 
@@ -385,7 +418,9 @@ INSERT INTO `ac_generate_fee_class` (`generate_fee_class_id`, `user_id`, `user_d
 (5, '2', '2020-09-02 10:42:37', 21, '2020-09-04', 'September', 2020, 'yes', 'no', 'no', 'no', 'no', 'no'),
 (6, '2', '2020-09-02 10:32:19', 19, '2020-07-09', 'July', 2020, 'yes', 'yes', 'no', 'no', 'no', 'no'),
 (7, '2', '2020-09-02 10:05:54', 24, '2020-10-02', 'October', 2020, 'yes', 'no', 'yes', 'no', 'no', 'no'),
-(8, '2', '2020-09-02 10:06:31', 19, '2020-09-01', 'September', 2020, 'yes', 'no', 'no', 'yes', 'yes', 'yes');
+(8, '2', '2020-09-02 10:06:31', 19, '2020-09-01', 'September', 2020, 'yes', 'no', 'no', 'yes', 'yes', 'yes'),
+(9, '2', '2020-09-04 06:01:37', 22, '2020-10-01', 'October', 2020, 'yes', 'yes', 'no', 'no', 'no', 'yes'),
+(10, '2', '2020-09-04 06:07:15', 22, '2020-09-05', 'September', 2020, 'yes', 'no', 'no', 'no', 'no', 'no');
 
 -- --------------------------------------------------------
 
@@ -865,7 +900,8 @@ CREATE TABLE `ac_zakat` (
 INSERT INTO `ac_zakat` (`zakat_id`, `user_id`, `user_date`, `period`, `doner`, `amount`, `purpose`, `comment`) VALUES
 (1, '2', '2020-08-27 05:16:21', '2 month', 'doner', 30000, 'xyz2', ''),
 (2, '2', '2020-08-17 08:12:52', '2 month', 'doner', 30000, 'g', 'g'),
-(3, '2', '2020-08-17 08:43:50', '', '', 0, '', '');
+(3, '2', '2020-08-17 08:43:50', '', '', 0, '', ''),
+(4, '2', '2020-09-04 07:30:15', '3 month', 'Irfan', 20000, 'student fee', '');
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1196,8 @@ INSERT INTO `ad_class_fee` (`class_fee_id`, `user_id`, `user_date`, `monthly_fee
 (1, '2', '2020-09-01 07:31:46', 100, 200, 50, 0, 20, 30, 20, '3', '2020-09-01', '', 'wqe'),
 (2, '2', '2020-09-01 07:58:53', 5000, 1000, 2000, 11, 9, 7, 24, '3', '2020-09-01', 'Boys', ''),
 (3, '2', '2020-09-01 08:02:12', 1, 1, 1, 1, 1, 1, 21, '4', '2020-09-01', 'Girls', '1'),
-(4, '2', '2020-09-02 09:22:39', 500, 600, 700, 800, 900, 1000, 19, '2', '2020-09-02', 'Girls', 'testing');
+(4, '2', '2020-09-02 09:22:39', 500, 600, 700, 800, 900, 1000, 19, '2', '2020-09-02', 'Girls', 'testing'),
+(5, '2', '2020-09-04 06:05:36', 1800, 200, 100, 50, 50, 100, 22, '1', '2020-09-04', 'Boys', '1');
 
 -- --------------------------------------------------------
 
@@ -1284,7 +1321,8 @@ CREATE TABLE `ad_fee_concession` (
 
 INSERT INTO `ad_fee_concession` (`fee_concession_id`, `user_id`, `user_date`, `student_id`, `monthly_con`, `admission_con`, `exam_con`, `misc_con`, `special_con`, `annual_con`, `sibling_dis`, `zakat_adj`, `from_zakat_account_id`, `from_zakat_account_name`, `comment`) VALUES
 (1, '2', '2020-09-02 11:02:06', '94', 10, 10, 10, 10, 10, 10, 10, 10, 1, '1', '1'),
-(2, '2', '2020-09-02 09:27:27', '55', 100, 90, 80, 70, 60, 50, 40, 30, 1, '1', 'testing');
+(2, '2', '2020-09-02 09:27:27', '55', 100, 90, 80, 70, 60, 50, 40, 30, 1, '1', 'testing'),
+(3, '2', '2020-09-04 05:53:11', '55', 10, 10, 10, 10, 10, 10, 10, 10, 1, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1923,6 +1961,12 @@ ALTER TABLE `ac_fee_collection`
   ADD PRIMARY KEY (`fee_collection_id`);
 
 --
+-- Indexes for table `ac_fee_collection_done`
+--
+ALTER TABLE `ac_fee_collection_done`
+  ADD PRIMARY KEY (`fee_collection_done_id`);
+
+--
 -- Indexes for table `ac_fee_module`
 --
 ALTER TABLE `ac_fee_module`
@@ -2240,7 +2284,13 @@ ALTER TABLE `ac_fee_card`
 -- AUTO_INCREMENT for table `ac_fee_collection`
 --
 ALTER TABLE `ac_fee_collection`
-  MODIFY `fee_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `fee_collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `ac_fee_collection_done`
+--
+ALTER TABLE `ac_fee_collection_done`
+  MODIFY `fee_collection_done_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `ac_fee_module`
@@ -2252,7 +2302,7 @@ ALTER TABLE `ac_fee_module`
 -- AUTO_INCREMENT for table `ac_generate_fee_class`
 --
 ALTER TABLE `ac_generate_fee_class`
-  MODIFY `generate_fee_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `generate_fee_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ac_generate_fee_student`
@@ -2306,7 +2356,7 @@ ALTER TABLE `ac_std_fee_detail`
 -- AUTO_INCREMENT for table `ac_zakat`
 --
 ALTER TABLE `ac_zakat`
-  MODIFY `zakat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `zakat_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `ac_zakat_form`
@@ -2348,7 +2398,7 @@ ALTER TABLE `ad_class`
 -- AUTO_INCREMENT for table `ad_class_fee`
 --
 ALTER TABLE `ad_class_fee`
-  MODIFY `class_fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `class_fee_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `ad_course_planning`
@@ -2372,7 +2422,7 @@ ALTER TABLE `ad_employee_record`
 -- AUTO_INCREMENT for table `ad_fee_concession`
 --
 ALTER TABLE `ad_fee_concession`
-  MODIFY `fee_concession_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `fee_concession_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ad_inquiry`

@@ -83,8 +83,12 @@ include_once('session_end.php');
                             </div>
                             <div class="col-lg-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Generate Fee For Specific Students </h4>
-
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Settings For Specific Student </h4>
+                                    <div class="row">
+                                        <div class="col-sm-12 text-right">
+                                            <p class="text-muted">To Generate Fee <a href="Admin-mod-class.php" class="text-primary m-l-5"><b> Click Here</b></a></p>
+                                        </div>
+                                    </div>
                                     <div class="table-responsive" id="view">
                                         <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
@@ -185,10 +189,10 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Generate Fee For Specific Student  </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Settings For Specific Student  </h4>
                                     <br>
                                         <br>
-                                        <form action="Accounts-mod-generate-fee-specfic-student.php#formadd" method="post" id="submitted">
+                                        <form action="Accounts-mod-fee-setting-specfic-student.php#formadd" method="post" id="submitted">
                                         <?php
                                         dropDownConditional2("Student ID","gr_no2","addmission_id","name_of_student","ad_admission",NULL);
                                         ?>

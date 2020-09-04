@@ -43,8 +43,8 @@ include_once("db_functions.php");
 
         	}
         	.halfpage{
-        		width:30%;
-        		height: 90%;
+        		width:33%;
+        		height: 100%;
         		margin: auto;
         		padding: 2%;
         		border :2px solid #95B9C7;
@@ -72,6 +72,7 @@ include_once("db_functions.php");
                 border: 1px solid black;
                 border-collapse: collapse;
                 width: 10%;
+                font-size: 80%;
             }
             table{
                 position: relative;
@@ -100,8 +101,8 @@ include_once("db_functions.php");
                 top: 20px;
                 left: 0px;
                 text-align: center;
-                padding: 8px 30px 8px;
-                margin-top: 8px
+                padding: 5px 30px 5px;
+                margin-bottom: : 3px
             }
         </style>
 	</head>
@@ -175,16 +176,20 @@ $fee = $print_data[$i]['fee'] ;
  $echo_string = '
             <div class="halfpage">
                 <div class="row">
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 text-left">
                         <img src="assets/images/med-logo.png" width="70px" style="padding-top: 12px" />
                     </div>
                     <div class="col-sm-6">
                         <h4><strong>The MEB School</strong></h4>
                     </div>
                     <div class="col-sm-3" >
-                        <p style="margin: 0px">Ph  : 36333824</p>
+                        <p style="margin: 0px">Ph : 36333824</p>
                         <p style="margin: 0px">    36336335</p>
-                        <hr>
+                        
+                    </div>
+                </div>
+                <div class = "row my-5">
+                    <div class="col-sm-12 text-right">
                         <p style="font-weight: bold" ><u>
 
                         Student Copy
@@ -193,7 +198,7 @@ $fee = $print_data[$i]['fee'] ;
                     </div>
                 </div>
                         <div class="row">
-                            <div class = "col-sm-6">
+                            <div class = "col-sm-6 ">
                                 <p>Voucher no. <span><u>'.$sno.'</u></span></p>
                             </div>
                             <div class = "col-sm-6">
@@ -203,19 +208,21 @@ $fee = $print_data[$i]['fee'] ;
                         <p>G.R No. <span><u>'.$studend_id.'</u></span></p>
                         <p>Name of Student :<span><u>'.$student_name.'</u></span></p>
                         <p>Fee For:<span><u>'.$which_month.'</u></span><span><u>'.$year.'</u></span></p>
-                        <hr>
+                       
                     <div class="row innercontent">
-                    <div class= "col-sm-6" >
+                    <div class= "col-sm-6 text-left" >
+                        <br>
+                        <br>
                         <p>Fees for the Month</p>
-                        <p>Admission Fee/Re-Admission Fee</p>
-                        <p>Exams and Other Activities</p>
+                        <p>Admission Fee</p>
+                        <p>Exams & Activities</p>
                         <p>Misc</p>
                         <p>Other Charges</p>
                         <p>Annual Charges</p>
                         <p>Total</p>
                     </div>
-                    <div class= "col-sm-6">
-                         <table class = "text-right" >
+                    <div class= "col-sm-6 text-right p-r-0">
+                         <table >
                             <thead>
                                 <tr>
                                     <th>Rs.</th>
@@ -269,17 +276,19 @@ $fee = $print_data[$i]['fee'] ;
                         </table>
                     </div>
                 </div>
-                <hr>
+                <br>
+                <br>
                 <div class="row my-3">
-                    <div class="col-sm-6"><p>Date : <span><u>7/6/2020</u></span></p></div>
-                    <div class="col-sm-6"><p>Cashier :<span><u>Kashif</u></span></p></div>
+                    <div class="col-sm-6 text-left"><p>Date : <span><u>7/6/2020</u></span></p></div>
+                    <div class="col-sm-6 text-right"><p>Cashier :<span><u>Kashif</u></span></p></div>
 
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="footer"><p style="color: white; font-size: 10px; font-weight: 100 ;margin-bottom : 0px; padding: 2px;">Fees once received, will not be refunded and not transferable not adjustable</p></div>
+                        <div class="footer"><p style="color: white; font-size: 8px; font-weight: 100 ;margin-bottom : 0px; padding: 2px;" class="text-center" >Fees once received, will not be refunded and not transferable not adjustable</p></div>
                     </div>
                 </div>
+                <br>
             </div>';
             echo $echo_string;
             echo str_replace("Student Copy", "Bank Copy", $echo_string);
@@ -288,4 +297,4 @@ $fee = $print_data[$i]['fee'] ;
 ?>
         </div>
 	</body>
-</html>';
+</html>

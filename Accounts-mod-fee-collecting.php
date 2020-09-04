@@ -14,9 +14,6 @@ include_once('session_end.php');
 
           <?php include_once("title.php") ?>
 
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -32,13 +29,6 @@ include_once('session_end.php');
         <link href="assets/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
-
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
 
         <script src="assets/js/modernizr.min.js"></script>
 </head>
@@ -84,7 +74,7 @@ include_once('session_end.php');
                                 <div class="col-lg-12">
                                     <div class="card-box">
 
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fees Table</h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Collecting </h4>
 
                                     <div class="table-responsive">
                                         <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
@@ -95,29 +85,29 @@ include_once('session_end.php');
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
                                             // print_r($_REQUEST);
-                                            $sql = 'INSERT INTO  `ac_fee_module`(`fee_id`, `user_id`, `user_date`, `category`, `s_no`, `name`, `class`, `fee_month_name`, `gr_num`, `fees_month`, `admission_fee`, `exam`, `fine`, `mics`, `total`, `date`, `cashier`) VALUES (NULL,\'';
+                                            $sql = 'INSERT INTO `ac_fee_collection_done`(`fee_collection_done_id`, `user_id`, `user_date`, `student_id`, `student_name`, `class_id`, `class_name`, `section`, `fee_total`,`amount_pay`, `balance`, `date`, `voucher_no`,`month`,`year`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['category'].'\', \''.$_REQUEST['s_no'].'\', \''.$_REQUEST['name'].'\', \''.$_REQUEST['class'].'\', \''.$_REQUEST['fee_month_name'].'\', \''.$_REQUEST['gr_num'].'\', \''.$_REQUEST['fees_month'].'\', \''.$_REQUEST['admission_fee'].'\', \''.$_REQUEST['exam'].'\', \''.$_REQUEST['fine'].'\', \''.$_REQUEST['mics'].'\', \''.$_REQUEST['total'].'\', \''.$_REQUEST['date'].'\', \''.$_REQUEST['cashier'].'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['student_name'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['class_name'].'\', \''.$_REQUEST['section'].'\', \''.$_REQUEST['fee_total'].'\', \''.$_REQUEST['amount_pay'].'\', \''.$_REQUEST['balance'].'\', \''.$_REQUEST['date'].'\', \''.$_REQUEST['voucher_no'].'\', \''.$_REQUEST['month'].'\', \''.$_REQUEST['year'].'\')';
                                                 // echo $sql;
                                             insert_query($sql);
                                                 }
                                             //----------------------
 
                                             ///edit code
-                                            check_edit("ac_fee_module","fee_id");
-                                            edit_display("ac_fee_module","fee_id");
+                                            check_edit("ac_fee_collection_done","fee_collection_done_id");
+                                            edit_display("ac_fee_collection_done","fee_collection_done_id");
                                             //end of edit code -shift view below delete
 
                                             // ---------------------
 
-                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ac_fee_module` WHERE `ac_fee_module`.`fee_id` = '.$_REQUEST['deleteid'];
+                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ac_fee_collection_done` WHERE `ac_fee_collection_done`.`fee_collection_done_id` = '.$_REQUEST['deleteid'];
 
                                             insert_query($sql);
                                             // echo "done deleting";
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `fee_id`"ID", `category` "Category", `name`"name", `class`"Class",`fee_month_name`"Fee for the Month", `gr_num`"Gr No.", `fees_month`"Fees for the Month", `admission_fee`"Admission Fee", `exam`"Exams and Other Activities", `fine`"Fine", `mics`"Mics", `total`"Total", `date`"Date", `cashier`"Cashier" FROM `ac_fee_module`';
+                                            $sql = 'SELECT `fee_collection_done_id`"Transaction ID",`voucher_no`"Voucher No.", `user_id`"Cashier", `student_id`"Student ID", `student_name`"Student Name", `class_id`"Class ID", `class_name`"Class Name", `section`"Section", `fee_total`"Total Fee",`amount_pay`"Amount Pay", `balance`"Balance", `date`"Date Of Payment", `month`"Fee For Month",`year`"Year" FROM `ac_fee_collection_done`';
                                             display_query($sql);
 
                                             ?>
@@ -127,11 +117,10 @@ include_once('session_end.php');
                             </div>
                         </div>
                     </div>
-                            
-                    </div>
                 </div>
-            </dir>
-        </div>
+            </div>
+                            
+                    
 
 
 
@@ -143,11 +132,11 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Form </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Collecting </h4>
                                     <br>
                                     <form action="Accounts-mod-fee-collecting.php#formadd" method="post" id="submitted">
                                         <?php
-                                        dropDownConditional2("Student ID","gr_num2","addmission_id","name_of_student","ad_admission",NULL);
+                                        dropDownConditional2("Student ID","gr_num2","studend_id","student_name","ac_fee_collection",NULL);
                                         ?>
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
@@ -159,64 +148,78 @@ include_once('session_end.php');
 <?php
 if(isset($_REQUEST['gr_num2'])){
     $conn = connect_db();
-    $sql_s = 'SELECT `addmission_id`,`name_of_student`,`father_name`,`class`,`surname`, `guardian_name`, `cnic_guradian`, `occupation_of_father`,`address` FROM `ad_admission` WHERE `addmission_id` = '.$_REQUEST['gr_num2'].' ';
-    $result = mysqli_query($conn,$sql_s);
+
+    $sql = 'SELECT `fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`,`concsession_id`,`generate_id` from `ac_fee_collection` where `studend_id` = '.$_REQUEST['gr_num2'].' ';
+
+    $result = mysqli_query($conn,$sql);
+
     $row = mysqli_fetch_assoc($result);
 
-    $value_id = $row['addmission_id'];
-    $value_name =  $row['name_of_student'];}
+    $value_id = $row['fee_collection_id'];
+    $value_month =  $row['which_month'];
+    $value_year =  $row['year'];
+    $value_class_id =  $row['class_id'];
+    $value_class_name =  $row['class_name'];
+    $value_section =  $row['section'];
+    $value_studend_id =  $row['studend_id'];
+    $value_student_name =  $row['student_name'];
+    $value_fee =  $row['fee'];
+}
 ?>
                                     <form action="Accounts-mod-fee-collecting.php" method="post">
+                                        
                                         <div class="row">
-                                            <div class="col-lg-9"></div>
-                                            <div class="col-lg-3">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="feCategory">Category</label>
-                                                    <?php 
-                                                    table_to_dropdown("ad_section","section_id","section_name","category");
-                                                    ?>
+                                                    <label for="feSno">Voucher No.</label>
+                                                    <input type="text" placeholder="Enter voucher no" name="voucher_no" required="" class="form-control" id="feSno"<?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_id.'" readonly' ; else {if(isset($_REQUEST['voucher_no'])) echo'value="'.$_REQUEST['voucher_no'].'" readonly';} ?>>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <?php
-                                        // $sql1 = 'SELECT `class`, `name_of_student` FROM `ad_admission` WHERE `GR_No` LIKE \''..'\'';
-                                        // $arr_result = query_to_array($sql1);
-
-                                        // $sql2 = 'SELECT `student_fee_id`, `user_id`, `user_date`, `admitted_class`, `admission_fee`, `activities_fee`, `tution_fee`, `total`, `gr_no` FROM `ad_student_fee` WHERE `GR_No` LIKE \''..'\'';
-                                        ?>
-                                        <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
-                                                    <label for="feSno">S No.</label>
-                                                    <input type="text" name="s_no" required="" class="form-control" id="feSno"
-                                                     value="<?php if(isset($_REQUEST['s_no'])) echo $_REQUEST['s_no'] ?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feRollNo">Gr No. </label>
-                                                    <input type="text" name="gr_num" required="" placeholder="Enter roll no." class="form-control" id="feRollNo"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_id.'" readonly' ; else {if(isset($_REQUEST['gr_num'])) echo'value="'.$_REQUEST['gr_num'].'" readonly';} ?>>
+                                                    <label for="feRollNo">GR No.</label>
+                                                    <input type="text" name="student_id" required="" placeholder="Enter roll no." class="form-control" id="feRollNo"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_studend_id.'" readonly' ; else {if(isset($_REQUEST['student_id'])) echo'value="'.$_REQUEST['student_id'].'" readonly';} ?>>
                                                 </div>
                                             </div>
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="feNameOfStudent">Name of Student</label>
-                                                    <input id="feNameOfStudent" name="name" type="text" placeholder="Enter name of student" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_name.'" readonly' ; else {if(isset($_REQUEST['name'])) echo'value="'.$_REQUEST['name'].'" readonly';} ?>>
+                                                    <input id="feNameOfStudent" name="student_name" type="text" placeholder="Enter name of student" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_student_name.'" readonly' ; else {if(isset($_REQUEST['student_name'])) echo'value="'.$_REQUEST['student_name'].'" readonly';} ?>>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3">  
+                                            <div class="col-sm-3">  
                                                 <div class="form-group">
-                                                    <label for="feClass">Class</label>
-                                                    <input id="feClass" name="class" type="text" placeholder="Enter class" required="" class="form-control"  value="<?php if(isset($_REQUEST['class'])) echo $_REQUEST['class']?>">
+                                                    <label for="feClass">Class ID</label>
+                                                    <input id="feClass" name="class_id" type="text" placeholder="Enter class" required="" class="form-control"   <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_class_id.'" readonly' ; else {if(isset($_REQUEST['class_id'])) echo'value="'.$_REQUEST['class_id'].'" readonly';} ?>>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3">  
+                                            <div class="col-sm-3">  
                                                 <div class="form-group">
-                                                    <label >Fee for the Month</label>
-                                                    <input id="feClass" name="fee_month_name" type="text" placeholder="Enter month" required="" class="form-control"  value="<?php if(isset($_REQUEST['fee_month_name'])) echo $_REQUEST['fee_month_name']?>">
+                                                    <label >Class Name</label>
+                                                    <input id="feClass" name="class_name" type="text" placeholder="Enter month" required="" class="form-control"   <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_class_name.'" readonly' ; else {if(isset($_REQUEST['class_name'])) echo'value="'.$_REQUEST['class_name'].'" readonly';} ?>>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="feNameOfStudent">Section</label>
+                                                    <input id="feNameOfStudent" name="section" type="text" placeholder="Enter name of student" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_section.'" readonly' ; else {if(isset($_REQUEST['section'])) echo'value="'.$_REQUEST['section'].'" readonly';} ?>>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">  
+                                                <div class="form-group">
+                                                    <label for="">Fee Of Month</label>
+                                                    <input name="month" type="text" placeholder="Enter fee of month" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_month.'" readonly' ; else {if(isset($_REQUEST['month'])) echo'value="'.$_REQUEST['month'].'" readonly';} ?>>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">  
+                                                <div class="form-group">
+                                                    <label for="" >Year</label>
+                                                    <input name="year" type="text" placeholder="Enter year" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_year.'" readonly' ; else {if(isset($_REQUEST['year'])) echo'value="'.$_REQUEST['year'].'" readonly';} ?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -224,97 +227,55 @@ if(isset($_REQUEST['gr_num2'])){
                                         <br>
 
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Fees of the Month</label>
+                                                    <label>Total Fee</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
+                                            <div class="col-sm-4"></div>
+                                            <div class="col-sm-4">  
                                                 <div class="form-group">
-                                                    <input  type="text" name="fees_month" placeholder="Enter amount" required="" class="form-control"  value="<?php if(isset($_REQUEST['fees_month'])) echo $_REQUEST['fees_month']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label>Admission Fee</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
-                                                <div class="form-group">
-                                                    <input  type="number" name="admission_fee" placeholder="Enter amount" class="form-control" value="<?php if(isset($_REQUEST['admission_fee'])) echo $_REQUEST['admission_fee']?>">
+                                                    <input  type="text" name="fee_total" placeholder="Enter total fee" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$value_fee.'" readonly' ; else {if(isset($_REQUEST['fee_total'])) echo'value="'.$_REQUEST['fee_total'].'" readonly';} ?>>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Exams and Other Activities</label>
+                                                    <label>Amount Pay</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
+                                            <div class="col-sm-4"></div>
+                                            <div class="col-sm-4">  
                                                 <div class="form-group">
-                                                    <input  type="number" name="exam" placeholder="Enter amount"  class="form-control"  value="<?php if(isset($_REQUEST['exam'])) echo $_REQUEST['exam']?>">
+                                                    <input  type="number" name="amount_pay" placeholder="Enter amount pay" class="form-control" value="<?php if(isset($_REQUEST['amount_pay'])) echo $_REQUEST['amount_pay']?>">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-lg-4">
+                                            <div class="col-sm-4">
                                                 <div class="form-group">
-                                                    <label>Fine</label>
+                                                    <label>Balance</label>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
+                                            <div class="col-sm-4"></div>
+                                            <div class="col-sm-4">  
                                                 <div class="form-group">
-                                                    <input  type="number" name="fine" placeholder="Enter amount"  class="form-control"  value="<?php if(isset($_REQUEST['fine'])) echo $_REQUEST['fine']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label>Mics</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
-                                                <div class="form-group">
-                                                    <input  type="number" name="mics" placeholder="Enter amount"  class="form-control"  value="<?php if(isset($_REQUEST['mics'])) echo $_REQUEST['mics']?>">
+                                                    <input  type="number" name="balance" placeholder="Enter balance"  class="form-control"  value="<?php if(isset($_REQUEST['balance'])) echo $_REQUEST['balance']?>">
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
-                                                    <label><h3>Total</h3></label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4"></div>
-                                            <div class="col-lg-4">  
-                                                <div class="form-group">
-                                                    <input  type="number" name="total" placeholder="Total amount" required="" class="form-control"  value="<?php if(isset($_REQUEST['total'])) echo $_REQUEST['total']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label for="feNameOfStudent">Date</label>
-                                                    <input id="feNameOfStudent" name="date" type="date" placeholder="Enter name of student" required="" class="form-control" value="<?php if (isset($_REQUEST['date'])) echo $_REQUEST['date']; else echo (date("Y-m-d")); ?>">
+                                                    <label for="">Date</label>
+                                                    <input  name="date" type="date" placeholder="Enter name of student" required="" class="form-control" value="<?php if (isset($_REQUEST['date'])) echo $_REQUEST['date']; else echo (date("Y-m-d")); ?>">
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">  
                                                 <div class="form-group">
                                                     <label for="feClass">Cashier</label>
-                                                    <input id="feClass" name="cashier" type="text" placeholder="Enter class" required="" class="form-control"  value="<?php if (isset($_REQUEST['cashier'])) echo $_REQUEST['cashier'] ?>">
+                                                    <input type="text" required="" class="form-control"  <?php echo 'value="'.get_curr_user().'" readonly'; ?>>
                                                 </div>
                                             </div>
                                         </div>
@@ -328,17 +289,6 @@ if(isset($_REQUEST['gr_num2'])){
                                             </button>
                                         </div>
                                     </form>
-
-
-
-<div id="records" ></div>
-<div class="form-group">
-<label for="">Input</label>
-<input type="text" id="getusers" class="form-control">
-</div>
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -410,17 +360,6 @@ if(isset($_REQUEST['gr_num2'])){
                 $('#datatable-responsive').DataTable();
                 $('#datatable-scroller').DataTable( { ajax: "assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
                 var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
-            } );
-            TableManageButtons.init();
-
-        </script>
-                <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable2').dataTable();
-                $('#datatable2-keytable').DataTable( { keys: true } );
-                $('#datatable2-responsive').DataTable();
-                $('#datatable2-scroller').DataTable( { ajax: "assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
-                var table = $('#datatabl2e-fixed-header').DataTable( { fixedHeader: true } );
             } );
             TableManageButtons.init();
 

@@ -835,6 +835,31 @@ function dropDownConditional2($label,$name,$select,$select2,$from,$condition){
 
         ;
 }
+function dropDownConditionalUnsumit($label,$name,$select,$select2,$from,$condition){
+        $conn = connect_db();
+        $sql_id = 'SELECT `'.$select.'`,`'.$select2.'` FROM `'.$from.'`'.$condition.''; 
+
+        echo'
+            <div class="form-group">
+              <label for="">'.$label.'</label>
+              <select  name="'.$name.'"  class="form-control select2">';
+         $result_id = mysqli_query($conn ,$sql_id);
+          
+          while($row_id = mysqli_fetch_assoc($result_id)) {
+          // print_r($row_id);
+
+            if (isset($_REQUEST[$name]) && $_REQUEST[$name]==$row_id[$select]) {$selected = "selected";}else $selected = ""; 
+
+            echo'
+                    <option '.$selected.'
+                    value="'.$row_id[$select].'">'.$row_id[$select2].' ID('.$row_id[$select].')</option>';
+          }
+                    echo'
+                </select><br>'
+                
+
+        ;
+}
 
 function dropDownConditional3section($label,$name,$select,$select2,$select3,$from,$condition){
         $conn = connect_db();

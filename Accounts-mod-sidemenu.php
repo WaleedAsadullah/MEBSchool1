@@ -123,14 +123,14 @@
                             </li>
 
                             <li>
-                                <a href="Accounts-mod-generate-fee-for-class.php" class="waves-effect"><i class="dripicons-box"></i> <span> Generate Fee For Class </span> </a>
+                                <a href="Accounts-mod-fee-setting-for-class.php" class="waves-effect"><i class="dripicons-box"></i> <span>  Fee Settings  For Class </span> </a>
                             </li>
                             <li>
-                                <a href="Accounts-mod-generate-fee-specfic-student.php" class="waves-effect"><i class="dripicons-box"></i> <span> Generate Fee For Specific Student </span> </a>
+                                <a href="Accounts-mod-fee-setting-specfic-student.php" class="waves-effect"><i class="dripicons-box"></i> <span>Fee Settings For Specific Student </span> </a>
                             </li>
 
                             <li>
-                                <a href="Accounts-mod-fee-collection.php" class="waves-effect"><i class="dripicons-box"></i> <span> Fee Collection </span> </a>
+                                <a href="Accounts-mod-fee-generate-class.php" class="waves-effect"><i class="dripicons-box"></i> <span> Fee Generate For Class </span> </a>
                             </li>
 
                         </ul>

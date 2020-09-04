@@ -12,12 +12,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
-                  <!--Chartist Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/chartist/dist/chartist.min.css">
-
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
+        <?php include_once("title.php") ?>
 
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -35,20 +30,8 @@ include_once('session_end.php');
         <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
         <script src="assets/js/modernizr.min.js"></script>
 
-        <style>
-            th,td{
-                text-align: center;
-            }
-        </style>
 </head>
 <body class="smallscreen fixed-left-void">
     <div id="wrapper" class="enlarged">
@@ -69,7 +52,32 @@ include_once('session_end.php');
                             include_once("Admin-mod-sidemenu.php")
                     ?>
 
-                    <!-- Sidebar -->
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Parent Child </h4>
+                                    <br>
+
+                                    <div class="table-responsive">
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
+                                            <?php
+
+                                            $sql = 'SELECT `guardian_name`"Name",`cnic_guradian`"Cnic",COUNT(`cnic_guradian`)"Number Of Child" FROM `ad_admission` GROUP BY `cnic_guradian` order by `addmission_id` desc';
+                                            display_query($sql);
+                                            // -----------------------
+
+                                            ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -77,7 +85,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                      <div class="m-t-5 m-b-5" style="text-align: center" >
                                          <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
@@ -85,13 +93,13 @@ include_once('session_end.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Parent Child </h4>
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table id="datatable2" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
                                             <?php
                                             // ------------------------
 
@@ -139,7 +147,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Parent Child</h4>
                                     <br>
@@ -245,23 +253,9 @@ if(isset($_REQUEST['child_id2'])){
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
-        <!-- KNOB JS -->
-        <!--[if IE]>
-        <script type="text/javascript" src="assets/plugins/jquery-knob/excanvas.js"></script>
-        <![endif]-->
         <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
 
-        <!--Morris Chart-->
-        <script src="assets/plugins/morris/morris.min.js"></script>
-        <script src="assets/plugins/raphael/raphael-min.js"></script>
-
-        <!-- Dashboard init -->
-        <script src="assets/pages/jquery.dashboard.js"></script>
-
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
-           <!-- Datatables-->
+        <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
@@ -295,21 +289,7 @@ if(isset($_REQUEST['child_id2'])){
             TableManageButtons.init();
 
         </script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable2').dataTable();
-                $('#datatable2-keytable').DataTable( { keys: true } );
-                $('#datatable2-responsive').DataTable();
-                $('#datatable2-scroller').DataTable( { ajax: "assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
-                var table = $('#datatabl2e-fixed-header').DataTable( { fixedHeader: true } );
-            } );
-            TableManageButtons.init();
 
-        </script>
-                <!--Chartist Chart-->
-        <script src="assets/plugins/chartist/dist/chartist.min.js"></script>
-        <script src="assets/plugins/chartist/dist/chartist-plugin-tooltip.min.js"></script>
-        <script src="assets/pages/jquery.chartist.init.js"></script>
         <?php include_once('script.php') ?>
 </body>
 </html>
