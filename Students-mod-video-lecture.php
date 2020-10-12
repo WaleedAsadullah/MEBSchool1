@@ -1,7 +1,7 @@
 <?php
 include_once('session_end.php');
 include_once("db_functions.php")
-
+user_type_Access();
 ?>
 <!DOCTYPE html>
 <html>

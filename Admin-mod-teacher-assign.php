@@ -77,9 +77,9 @@ include_once('session_end.php');
 
                                             <?php
                                             if (isset($_POST['submit'])){
-                                            $sql = 'INSERT INTO `ad_teacher_assign`(`teacher_assign_id`, `user_id`, `user_date`, `teacher_id`, `teacher_name`, `assign_section`, `assign_class`, `assign_subject`) VALUES (NULL,\'';
+                                            $sql = 'INSERT INTO `ad_teacher_assign`(`teacher_assign_id`, `user_id`, `user_date`, `teacher_id`, `teacher_name`, `assign_class`, `assign_subject`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['teacher_id'].'\', \''.$_REQUEST['teacher_name'].'\', \''.$_REQUEST['assign_section'].'\', \''.$_REQUEST['assign_class'].'\', \''.$_REQUEST['assign_subject'].'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['teacher_id'].'\', \''.$_REQUEST['teacher_name'].'\', \''.$_REQUEST['assign_class'].'\', \''.$_REQUEST['assign_subject'].'\')';
                                                 // echo $sql;
                                             insert_query($sql);
                                             }
@@ -96,7 +96,7 @@ include_once('session_end.php');
                                                 }
                                                // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `teacher_assign_id`"ID",`teacher_id`"Teacher ID", `teacher_name`"Teacher Name", `assign_section`"Assigned Section", `assign_class`"Assigned Class", `assign_subject`"Assigned Subject" FROM `ad_teacher_assign`';
+                                            $sql = 'SELECT `ad_teacher_assign`.`teacher_assign_id`"ID",`ad_teacher_assign`.`assign_class`"Class ID",`ad_teacher_assign`.`teacher_id`"Teacher ID", `ad_teacher_assign`.`teacher_name`"Teacher Name", `ad_class`.`section`"Assigned Section", `ad_class`.`class_name`"Assigned Class", `ad_teacher_assign`.`assign_subject`"Assigned Subject" FROM `ad_teacher_assign`,`ad_class` WHERE `ad_class`.`class_id` = `ad_teacher_assign`.`assign_class` ';
                                             display_query($sql);
 
                                             // --------------------------
@@ -162,30 +162,14 @@ if(isset($_REQUEST['teacher_id2'])){
 
                                             <!-- class -->
                                         <?php
-                                        dropDownSimple('Assigned Section','assign_section','section_name','ad_section',NULL);
+                                        dropDownConditional3section("Assign Class", "assign_class","class_id","class_name","section","ad_class",Null);
 
-                                        echo'<div class="row">
-                                        <div class="col-sm-12 text-right">
-                                            <p class="text-muted">Can\'t Find Section? <a href="Admin-mod-section.php" class="text-primary m-l-5"><b> Add a Section Here</b></a></p>
-                                        </div>
-                                    </div>';
-
-                                        dropDownSimple('Assigned Class','assign_class','class_name','ad_class',NULL);
 
                                         echo'<div class="row">
                                         <div class="col-sm-12 text-right">
                                             <p class="text-muted">Can\'t Find Class? <a href="Admin-mod-class.php" class="text-primary m-l-5"><b> Add a Class Here</b></a></p>
-                                        </div>
-                                    </div>';
-
-
+                                            </div>';
                                         dropDownSimple('Assigned Subject','assign_subject','subject_name','ad_subject',NULL);
-
-                                        echo'<div class="row">
-                                        <div class="col-sm-12 text-right">
-                                            <p class="text-muted">Can\'t Find Subject? <a href="Admin-mod-subject.php" class="text-primary m-l-5"><b> Add a Subject Here</b></a></p>
-                                        </div>
-                                    </div>';
                                         ?>
 
 

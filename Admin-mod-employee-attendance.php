@@ -120,7 +120,7 @@ include_once('session_end.php');
                                                 }
                                                // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                                $sql = 'SELECT `employee_attendance_id`"ID",`name`"Name", `id_num`"Gr No.", `status` Status, `date`"Date" FROM `ad_employee_attendance` ';
+                                                $sql = 'SELECT `employee_attendance_id`"ID",`name`"Name", `id_num`"Gr No.", `status` Status, `date`"Date" FROM `ad_employee_attendance` order by `employee_attendance_id` desc ';
                                                 display_query_attendance_teacher($sql);
 
                                             // -------------------------

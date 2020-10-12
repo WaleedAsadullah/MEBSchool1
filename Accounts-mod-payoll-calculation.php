@@ -11,7 +11,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
+        <?php include_once("title.php") ?>
 
         <!--Morris Chart CSS -->
         <link rel="stylesheet" href="assets/plugins/morris/morris.css">
@@ -71,7 +71,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                      <div class="m-t-5 m-b-5" style="text-align: center" >
                                          <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
@@ -79,7 +79,7 @@ include_once('session_end.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px;"> Payroll Calculation </h4>
                                     <br>
@@ -110,7 +110,8 @@ include_once('session_end.php');
                                                     // echo "done deleting";
                                                     }
                                                // $sql = "SELECT * FROM `ac_annual_appraisal`";
-                                            $sql = 'SELECT `payroll_id`"ID",`type`"Type", `gr_number`"Gr No.", `name`"Employee Name", `designation`"Designation", `attendance`"Attendance", `basic_salary`"Basic salary", `house_ra`"House R/A", `utility`"Utility", `convey_allow` "Convey Allow", `gross_salary`"Gross Salary", `loan` "Loan", `i_t`"IT", `s_w_f`"S.W.F", `advance`"Advance", `leave_pay`"Leave Pay" ,`net_pay`"Net pay" FROM `ac_payroll_calculation`';
+                                           
+                                            $sql = 'SELECT `payroll_id`"ID",`type`"Type", `gr_number`"Gr No.", `name`"Employee Name", `designation`"Designation", `attendance`"Attendance", `basic_salary`"Basic salary", `house_ra`"House R/A", `utility`"Utility", `convey_allow` "Convey Allow", `gross_salary`"Gross Salary", `loan` "Loan", `i_t`"Absent Deduction", `s_w_f`"Late Deduction", `advance`"Advance", `leave_pay`"Leave Pay" ,`net_pay`"Net pay" FROM `ac_payroll_calculation`';
                                             display_query($sql);
 
                                             ?>
@@ -128,11 +129,52 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Payroll calculation form </h4>
                                     <br>
-                                    <form action="Accounts-mod-payoll-calculation.php#formadd" method="post" id="submitted2">
+                                        <form action="Accounts-mod-payoll-calculation.php" method="post">
+                                        <div class="form-group">
+                                            <label for="">Year</label>
+                                            <input type="number" name="year" required=""  class="form-control" id="prVacation" value="<?php if (isset($_REQUEST['year'])) echo $_REQUEST['year']; else echo (date("Y")); ?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Fee For Month</label>
+                                            <select type="text" name="which_month" required="" class="form-control" id=>
+                                                <option value="01" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "01" ) echo "selected";  ?> >January</option>
+                                                <option value="02" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "02" ) echo "selected";  ?>>February</option>
+                                                <option value="03" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "03" ) echo "selected";  ?>>March</option>
+                                                <option value="04" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "04" ) echo "selected";  ?>>April</option>
+                                                <option value="05" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "05" ) echo "selected";  ?>>May</option>
+                                                <option value="06" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "06" ) echo "selected";  ?>>June</option>
+
+                                                <option value="07" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "07" ) echo "selected";  ?>>July</option>
+                                                <option value="08" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "08" ) echo "selected";  ?>>August</option>
+                                                <option value="09" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "09" ) echo "selected";  ?>>September</option>
+                                                <option value="10" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "10" ) echo "selected";  ?>>October</option>
+                                                <option value="11" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "11" ) echo "selected";  ?>>November</option>
+
+                                                <option value="12" <?php if (isset($_REQUEST['which_month']) && $_REQUEST['which_month']== "12" ) echo "selected";  ?>>December</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Type</label>
+                                            <select name="settype" required="" class="form-control" >
+                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "" ) echo "selected";  ?>  value="">-Select</option>
+                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "Staff" ) echo "selected";  ?>  value="Staff">Staff</option>
+                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "Teacher" ) echo "selected";  ?> value="Teacher">Teacher</option>
+                                                
+                                            </select>
+                                        </div>
+                                        <div class="form-group text-right m-b-0">
+                                            <button type="submit" name="submittype" class="btn btn-default waves-effect waves-light m-l-5">
+                                                Submit
+                                            </button>
+                                        </div>
+                                        </form>
+<!--                                     <form action="Accounts-mod-payoll-calculation.php#formadd" method="post" id="submitted2">
                                         <div class="form-group">
                                             <label for="">Type</label>
                                             <select id="settype" name="settype" required="" class="form-control" >
@@ -144,85 +186,391 @@ include_once('session_end.php');
                                         </div>
                                         <div class="form-group text-right m-b-0">
                                                 
-                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                            <button type="submit" name="submittype" class="btn btn-default waves-effect waves-light m-l-5">
                                                 Submit
                                             </button>
                                         </div>
-                                    </form>
+                                    </form> -->
 
-<?php if(isset($_REQUEST['settype'])){
-    if( $_REQUEST['settype']=="Teacher"){
 
-    $settype = $_REQUEST['settype'];
-    echo '
-                                    <form action="Accounts-mod-payoll-calculation.php#formadd" method="post" id="submitted">';
-                                    if (isset($_REQUEST['settype']) ) echo '<input type="hidden" value="'.$_REQUEST['settype'].'" name="settype">';
-                                        dropDownConditional2("Teacher ID","gr_number2","Teacher_records_id","name","ad_teacher_records",NULL);
-                                        
-                                   echo'<div class="form-group text-right m-b-0">
-                                                
-                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
-                                                Submit
-                                            </button>
-                                        </div>
-                                   </form>';
-                               }} ?>
+
+
+
+
 <?php
-if(isset($_REQUEST['gr_number2'])){
-    if($_REQUEST['settype'] == "Teacher"){
-    $conn = connect_db();
-    $sql_s = 'SELECT `Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `phone_number`, `address`, `comment` FROM `ad_teacher_records` WHERE  `Teacher_records_id` = '.$_REQUEST['gr_number2'].' ';
-    $result = mysqli_query($conn,$sql_s);
-    $row = mysqli_fetch_assoc($result);
+if(isset($_REQUEST['submittype'])){
+    if( $_REQUEST['settype'] == "Staff"){
+    $staff = query_to_array('SELECT `employee_record_id`, `user_id`, `user_date`, `name`, `gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `house`, `utility`, `allow`, `gross`, `phone_number`, `address`, `comment` FROM `ad_employee_record`');
+    // print_r($staff);
 
-    $value_id = $row['Teacher_records_id'];
-    $value_name =  $row['name'];
-    $value_salary =  $row['salary'];
-    $value_position =  $row['position'];
+
+
+
+$month = $_REQUEST['which_month'];
+$y = $_REQUEST['year'];
+
+$date_start = ''.$y.'-'.$month.'-01';
+$date_end = ''.$y.'-'.$month.'-' . date('t', strtotime($date_start)); 
+
+$date = ''.$y.'-'.$month.'-01';
+$end = ''.$y.'-'.$month.'-' . date('t', strtotime($date)); //get end date of month
+$num_of_sunday = 0 ;
+
+
+
+
+while(strtotime($date) <= strtotime($end)) {
+        $day_num = date('d', strtotime($date));
+        $day_name = date('l', strtotime($date));
+        $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+
+        //echo "<td>$day_num  $day_name</td><br>";
+        if ($day_name == "Sunday"){
+            $num_of_sunday +=1; 
+        }
+    }
+    for($staff_number = 0;  $staff_number < count($staff);  $staff_number++)
+    { 
+
+    echo '<h1>'.$date_start.'</h1>';
+    echo '<h1>'.$date_end.'</h1>';
+
+    $value_id = $staff[$staff_number]['employee_record_id'];
+    $value_name =  $staff[$staff_number]['name'];
+    $value_salary =  $staff[$staff_number]['salary'];
+    $value_position =  $staff[$staff_number]['position'];
+    $value_house = $staff[$staff_number]['house'];
+    $value_utility = $staff[$staff_number]['utility'];
+    $value_allow = $staff[$staff_number]['allow'];
+    $value_gross = $staff[$staff_number]['gross'];
+
+    $employee_id_record = $staff[$staff_number]['employee_record_id'];
+    echo "<h1>".$employee_id_record."</h1>";
+    echo "<h1>".$staff[$staff_number]['name']."</h1>";
+    $sql_loan = 'SELECT sum(`loan_amount`)"amount", sum(`laon_installment_amount`)"loan_install" FROM `ac_employee_loan` WHERE `employee_id` = '.$employee_id_record.' and `type` = "'.$_REQUEST['settype'].'"';
+    echo $sql_loan;
+    $result_loan = mysqli_query($conn,$sql_loan);
+    $row_laon = mysqli_fetch_assoc($result_loan);
+    $sum_of_total_loan = $row_laon['amount'];
+    $installment = $row_laon['loan_install'];
+    if(gettype($sum_of_total_loan)=="NULL"){
+        $sum_of_total_loan = 0;
+    echo 'Loan Amount is Zero <br>';}else;{echo 'sum of loan amount '.$sum_of_total_loan. ' and the installment is '.$installment.'<br>';}
+
+    $sql_pay_loan = 'SELECT sum(`loan`)"pay_laon" FROM `ac_payroll_calculation` WHERE `gr_number`  = '.$employee_id_record.' and `type` = "'.$_REQUEST['settype'].'"';
+    // echo $sql_pay_loan;
+
+    $result_pay_loan = mysqli_query($conn,$sql_pay_loan);
+    $row_pay_loan = mysqli_fetch_assoc($result_pay_loan);
+    $sum_of_pay_loan = $row_pay_loan['pay_laon'];
+    echo 'sum of pay loan '.$sum_of_pay_loan.'<br>';
+
+    if(gettype($sum_of_pay_loan)  == "NULL" )
+        {
+
+            $sum_of_pay_loan = 0;
+            $balance = $sum_of_total_loan - $sum_of_pay_loan;
+            echo 'outstanding loan(not pay any installment) '.$balance.'<br>';
+        }
+    else{
+            $balance = $sum_of_total_loan - $sum_of_pay_loan;
+            echo 'outstanding loan'.$balance.'<br>';
+        }
+
+if( $balance <= $sum_of_total_loan && $balance >=$installment){
+  $loan_de = $installment;
+  echo "Loan Deduction".$loan_de."<br>";
+}else{$loan_de=$balance ; echo "Loan Deduction".$loan_de."<br>"; }
+
+    $sql_p = 'SELECT count(`status`)"Total Present" FROM `ad_employee_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Present" and `id_num` = '.$employee_id_record.' ';
+    // echo $sql_p ;
+    $result_p = mysqli_query($conn,$sql_p);
+    $row_p = mysqli_fetch_assoc($result_p);
+    $present = $row_p['Total Present'];
+    echo'Total Present '.$present ."<br>";
+
+    $sql_a = 'SELECT count(`status`)"Total Absent" FROM `ad_employee_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Absent" and `id_num` = '.$employee_id_record.' ';
+    $result_a = mysqli_query($conn,$sql_a);
+    $row_a = mysqli_fetch_assoc($result_a);
+    $Absent = $row_a['Total Absent'];
+    echo'Total Absent '.$Absent ."<br>";
+
+    $sql_l = 'SELECT count(`status`)"Total Late" FROM `ad_employee_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Late" and `id_num` = '.$employee_id_record.' ';
+    $result_l = mysqli_query($conn,$sql_l);
+    $row_l = mysqli_fetch_assoc($result_l);
+    $Late = $row_l['Total Late'];
+    echo'Total Late '.$Late ."<br>";
+
+    $sql_e = 'SELECT count(`status`)"Total Excused" FROM `ad_employee_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Excused" and `id_num` = '.$employee_id_record.' ';
+    $result_e = mysqli_query($conn,$sql_e);
+    $row_e = mysqli_fetch_assoc($result_e);
+    $Excused = $row_e['Total Excused'];
+    echo'Total Excused '.$Excused ."<br>";
+
+    echo "Number of entries ".$total_number_of_entries = $present + $Absent + $Late + $Excused ."<br>";
+// loan part 
+    $sql_loan = 'SELECT `employee_loan_id`, `user_id`, `user_date`, `employee_id`, `employee_name`, `loan_amount`, `loan_start`, `laon_installment`, `type`, `laon_installment_amount` FROM `ac_employee_loan` WHERE `employee_id`  = '.$employee_id_record.' and  `type` ="'.$_REQUEST['settype'].'"';
+    $resultloan = mysqli_query($conn,$sql_loan);
+    $rowloan = mysqli_fetch_assoc($resultloan);
+    $laon_of_this_amount = $rowloan['laon_installment_amount'];
+    echo "Loan Installment ".$laon_of_this_amount."<br>";
+
+
+
+
+
+
+
+// $d=cal_days_in_month(CAL_GREGORIAN,9,2020);
+// echo "There was $d days in sep 2020<br>";
+// $month = $_REQUEST['which_month'];
+// $y = $_REQUEST['year'];
+
+// $date_start = ''.$y.'-'.$month.'-01';
+// $date_end = ''.$y.'-'.$month.'-' . date('t', strtotime($date)); //get end date of month
+// $num_of_sunday = 0 ;
+
+// while(strtotime($date) <= strtotime($end)) {
+//         $day_num = date('d', strtotime($date));
+//         $day_name = date('l', strtotime($date));
+//         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+
+//         //echo "<td>$day_num  $day_name</td><br>";
+//         if ($day_name == "Sunday"){
+//             $num_of_sunday +=1; 
+//         }
+//     }
+echo "Number of Sunday of this month ".$num_of_sunday."<br>";
+
+echo "Number of days in this month ".$day_num."<br>";
+
+echo "Number of working days in this month ".$working_days = $day_num - $num_of_sunday."<br>";
+
+echo "Per day basic salary ".$basic_salary_per = (float)$value_salary/(float)$working_days."<br>";
+echo "Per day gross salary ".$gross_salary_per = (float)$value_gross/(float)$working_days."<br>";
+
+echo "Absent Deduction ".(float)$absent_deduction=(float)$Absent*(float)$gross_salary_per;
+echo"<br>";
+echo "Late Deduction ".(float)$late_deduction=(float)($Late/2)*(float)$gross_salary_per."<br>";
+echo "<br>";
+echo " Net Pay ".(float)$net_pay = (float)$value_gross - (float)$absent_deduction - (float)$late_deduction - (float)$loan_de;
+$a = 0 ;
+$sql = 'INSERT INTO `ac_payroll_calculation`(`payroll_id`, `user_id`, `user_date`, `gr_number`, `name`, `designation`, `attendance`, `basic_salary`, `house_ra`, `utility`, `convey_allow`, `gross_salary`, `loan`, `i_t`, `s_w_f`, `advance`, `leave_pay`, `net_pay`,`type`) VALUES (NULL,\'';
+$sql .= get_curr_user();
+$sql .= '\', CURRENT_TIMESTAMP, \''.$value_id.'\', \''.$value_name.'\', \''.$value_position.'\', \''.$present.'\', \''.$value_salary.'\', \''.$value_house.'\', \''.$value_utility.'\', \''.$value_allow.'\', \''.$value_gross.'\', \''.$loan_de.'\', \''.$absent_deduction.'\', \''.$late_deduction.'\', \''.$a.'\', \''.$a.'\', \''.$net_pay.'\', \''.$_REQUEST['settype'].'\')';
+echo "<b>".$sql."</b>";
+insert_query($sql);
+}
+
+
+
+
 }}
+
 ?>
 
-<?php if(isset($_REQUEST['settype'])){
-    if( $_REQUEST['settype']=="Staff"){
 
-    $settype = $_REQUEST['settype'];
-    echo '
-                                    <form action="Accounts-mod-payoll-calculation.php#formadd" method="post" id="submitted">';
-                                    if (isset($_REQUEST['settype']) ) echo '<input type="hidden" value="'.$_REQUEST['settype'].'" name="settype">';
-                                        dropDownConditional2("Employee ID","gr_number2","employee_record_id","name","ad_employee_record",NULL);
-                                        
-                                   echo'<div class="form-group text-right m-b-0">
-                                                
-                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
-                                                Submit
-                                            </button>
-                                        </div>
-                                   </form>';
-                               }}?>
+
+
+<!-- //////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =/////////////////////// -->
+<!-- Teacher payroll -->
 <?php
-if(isset($_REQUEST['gr_number2'])){
-    if( $settype == "Staff"){
-    $conn = connect_db();
-    $sql_s = 'SELECT `employee_record_id`, `user_id`, `user_date`, `name`, `gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `phone_number`, `address`, `comment` FROM `ad_employee_record` WHERE  `employee_record_id` = '.$_REQUEST['gr_number2'].' ';
-    $result = mysqli_query($conn,$sql_s);
-    $row = mysqli_fetch_assoc($result);
 
-    $value_id = $row['employee_record_id'];
-    $value_name =  $row['name'];
-    $value_salary =  $row['salary'];
-    $value_position =  $row['position'];
+
+
+
+if(isset($_REQUEST['submittype'])){
+    if( $_REQUEST['settype'] == "Teacher"){
+    $staff = query_to_array('SELECT `Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `house`, `utility`, `allow`, `gross`, `phone_number`, `address`, `comment` FROM `ad_teacher_records`');
+    // print_r($staff);
+
+    // $result = mysqli_query($conn,$sql_s);
+    // $row = mysqli_fetch_assoc($result);
+
+
+$month = $_REQUEST['which_month'];
+$y = $_REQUEST['year'];
+
+$date_start = ''.$y.'-'.$month.'-01';
+$date_end = ''.$y.'-'.$month.'-' . date('t', strtotime($date_start)); 
+
+$date = ''.$y.'-'.$month.'-01';
+$end = ''.$y.'-'.$month.'-' . date('t', strtotime($date)); //get end date of month
+$num_of_sunday = 0 ;
+
+
+
+
+while(strtotime($date) <= strtotime($end)) {
+        $day_num = date('d', strtotime($date));
+        $day_name = date('l', strtotime($date));
+        $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+
+        //echo "<td>$day_num  $day_name</td><br>";
+        if ($day_name == "Sunday"){
+            $num_of_sunday +=1; 
+        }
+    }
+    for($staff_number = 0;  $staff_number < count($staff);  $staff_number++)
+    { 
+
+    echo '<h1>'.$date_start.'</h1>';
+    echo '<h1>'.$date_end.'</h1>';
+
+    // $value_id = $staff[$staff_number]['Teacher_records_id'];
+    $value_name =  $staff[$staff_number]['name'];
+    $value_salary =  $staff[$staff_number]['salary'];
+    $value_position =  $staff[$staff_number]['position'];
+    $value_house = $staff[$staff_number]['house'];
+    $value_utility = $staff[$staff_number]['utility'];
+    $value_allow = $staff[$staff_number]['allow'];
+    $value_gross = $staff[$staff_number]['gross'];
+
+    $employee_id_record = $staff[$staff_number]['Teacher_records_id'];
+    echo "<h1>".$employee_id_record."</h1>";
+    echo "<h1>".$staff[$staff_number]['name']."</h1>";
+    $sql_loan = 'SELECT sum(`loan_amount`)"amount", `laon_installment_amount` FROM `ac_employee_loan` WHERE `employee_id` = '.$employee_id_record.' and `type` = "'.$_REQUEST['settype'].'"';
+    // echo $sql_loan;
+    $result_loan = mysqli_query($conn,$sql_loan);
+    $row_laon = mysqli_fetch_assoc($result_loan);
+    $sum_of_total_loan = $row_laon['amount'];
+    $installment = $row_laon['laon_installment_amount'];
+    if(gettype($sum_of_total_loan)=="NULL"){
+        $sum_of_total_loan = 0;
+    echo 'Loan Amount is Zero <br>';}else;{echo 'sum of loan amount '.$sum_of_total_loan. ' and the installment is '.$installment.'<br>';}
+
+    $sql_pay_loan = 'SELECT sum(`loan`)"pay_laon" FROM `ac_payroll_calculation` WHERE `gr_number`  = '.$employee_id_record.' and `type` = "'.$_REQUEST['settype'].'"';
+    // echo $sql_pay_loan;
+
+    $result_pay_loan = mysqli_query($conn,$sql_pay_loan);
+    $row_pay_loan = mysqli_fetch_assoc($result_pay_loan);
+    $sum_of_pay_loan = $row_pay_loan['pay_laon'];
+    echo 'sum of pay loan '.$sum_of_pay_loan.'<br>';
+
+    if(gettype($sum_of_pay_loan)  == "NULL" )
+        {
+
+            $sum_of_pay_loan = 0;
+            $balance = $sum_of_total_loan - $sum_of_pay_loan;
+            echo 'outstanding loan(not pay any installment) '.$balance.'<br>';
+        }
+    else{
+            $balance = $sum_of_total_loan - $sum_of_pay_loan;
+            echo 'outstanding loan'.$balance.'<br>';
+        }
+
+if( $balance <= $sum_of_total_loan && $balance >=$installment){
+  $loan_de = $installment;
+  echo "Loan Deduction".$loan_de."<br>";
+}else{$loan_de=$balance ; echo "Loan Deduction".$loan_de."<br>"; }
+
+    $sql_p = 'SELECT count(`status`)"Total Present" FROM `ad_teacher_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Present" and `id_num` = '.$employee_id_record.' ';
+    // echo $sql_p ;
+    $result_p = mysqli_query($conn,$sql_p);
+    $row_p = mysqli_fetch_assoc($result_p);
+    $present = $row_p['Total Present'];
+    echo'Total Present '.$present ."<br>";
+
+    $sql_a = 'SELECT count(`status`)"Total Absent" FROM `ad_teacher_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Absent" and `id_num` = '.$employee_id_record.' ';
+    $result_a = mysqli_query($conn,$sql_a);
+    $row_a = mysqli_fetch_assoc($result_a);
+    $Absent = $row_a['Total Absent'];
+    echo'Total Absent '.$Absent ."<br>";
+
+    $sql_l = 'SELECT count(`status`)"Total Late" FROM `ad_teacher_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Late" and `id_num` = '.$employee_id_record.' ';
+    $result_l = mysqli_query($conn,$sql_l);
+    $row_l = mysqli_fetch_assoc($result_l);
+    $Late = $row_l['Total Late'];
+    echo'Total Late '.$Late ."<br>";
+
+    $sql_e = 'SELECT count(`status`)"Total Excused" FROM `ad_teacher_attendance` WHERE `date` >= "'.$date_start.'" and `date` <= "'.$date_end.'" and `status` = "Excused" and `id_num` = '.$employee_id_record.' ';
+    $result_e = mysqli_query($conn,$sql_e);
+    $row_e = mysqli_fetch_assoc($result_e);
+    $Excused = $row_e['Total Excused'];
+    echo'Total Excused '.$Excused ."<br>";
+
+    echo "Number of entries ".$total_number_of_entries = $present + $Absent + $Late + $Excused ."<br>";
+// loan part 
+    $sql_loan = 'SELECT `employee_loan_id`, `user_id`, `user_date`, `employee_id`, `employee_name`, `loan_amount`, `loan_start`, `laon_installment`, `type`, `laon_installment_amount` FROM `ac_employee_loan` WHERE `employee_id`  = '.$employee_id_record.' and  `type` ="'.$_REQUEST['settype'].'"';
+    // echo $sql_loan;
+    $resultloan = mysqli_query($conn,$sql_loan);
+    $rowloan = mysqli_fetch_assoc($resultloan);
+    $laon_of_this_amount = $rowloan['laon_installment_amount'];
+    echo "Loan Installment ".$laon_of_this_amount."<br>";
+
+
+
+
+
+
+
+// $d=cal_days_in_month(CAL_GREGORIAN,9,2020);
+// echo "There was $d days in sep 2020<br>";
+// $month = $_REQUEST['which_month'];
+// $y = $_REQUEST['year'];
+
+// $date_start = ''.$y.'-'.$month.'-01';
+// $date_end = ''.$y.'-'.$month.'-' . date('t', strtotime($date)); //get end date of month
+// $num_of_sunday = 0 ;
+
+// while(strtotime($date) <= strtotime($end)) {
+//         $day_num = date('d', strtotime($date));
+//         $day_name = date('l', strtotime($date));
+//         $date = date("Y-m-d", strtotime("+1 day", strtotime($date)));
+
+//         //echo "<td>$day_num  $day_name</td><br>";
+//         if ($day_name == "Sunday"){
+//             $num_of_sunday +=1; 
+//         }
+//     }
+echo "Number of Sunday of this month ".$num_of_sunday."<br>";
+
+echo "Number of days in this month ".$day_num."<br>";
+
+echo "Number of working days in this month ".$working_days = $day_num - $num_of_sunday."<br>";
+
+echo "Per day basic salary ".$basic_salary_per = (float)$value_salary/(float)$working_days."<br>";
+echo "Per day gross salary ".$gross_salary_per = (float)$value_gross/(float)$working_days."<br>";
+
+echo "Absent Deduction ".(float)$absent_deduction=(float)$Absent*(float)$gross_salary_per;
+echo"<br>";
+echo "Late Deduction ".(float)$late_deduction=(float)($Late/2)*(float)$gross_salary_per."<br>";
+
+echo "Net Pay ".(float)$net_pay = (float)$value_gross - (float)$absent_deduction - (float)$late_deduction - (float)$loan_de; }
+
+
 }}
+
 ?>
 
 
-
+<!-- 
                                         <form action="Accounts-mod-payoll-calculation.php" method="post">
                                             <input type="hidden" <?php if(isset($_REQUEST['settype']))echo 'value="'.$_REQUEST['settype'].'" readonly' ; else { if(isset($_REQUEST['type'])) echo "readonly value = ".$_REQUEST['type'];} ?> name="type">
 
 
                                             <div class="form-group">
                                                 <label for="prID">Employee code  </label>
-                                                <input type="text" name="gr_number" required="" placeholder="Enter employee code" class="form-control" id="prID" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$value_id.'" readonly' ; else { if(isset($_REQUEST['gr_number'])) echo "readonly value = ".$_REQUEST['gr_number'];} ?>>
+                                                <input type="text" name="gr_number" required="" placeholder="Enter employee code" class="form-control" id="prID" <?php if(isset($employee_id_record))echo 'value="'.$value_id.'" readonly' ; else { if(isset($_REQUEST['gr_number'])) echo "readonly value = ".$_REQUEST['gr_number'];} ?>>
                                             </div>
                                         
                                    
@@ -238,7 +586,7 @@ if(isset($_REQUEST['gr_number2'])){
 
                                             <div class="form-group">
                                                 <label for="prVacation">Attendance</label>
-                                                <input type="number" name="attendance" parsley-trigger="change" required="" placeholder="Enter attendance" class="form-control" id="prVacation" data-parsley-id="6" value="<?php if(isset($_REQUEST['attendance'])) echo $_REQUEST['attendance'] ?>">
+                                                <input type="number" name="attendance" parsley-trigger="change" required="" placeholder="Enter attendance" class="form-control" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$present.'" readonly' ; else { if(isset($_REQUEST['attendance'])) echo "readonly value = ".$_REQUEST['attendance'];} ?>>
                                             </div>
 
                                             <div class="form-group">
@@ -248,68 +596,61 @@ if(isset($_REQUEST['gr_number2'])){
 
                                             <div class="form-group">
                                                 <label for="zaClass">House R/A </label>
-                                                <input type="number" name="house_ra" required="" placeholder="Enter house R/A" class="form-control" id="prOvertime"  value="<?php if(isset($_REQUEST['house_ra'])) echo $_REQUEST['house_ra'] ?>">
+                                                <input type="number" name="house_ra" required="" placeholder="Enter house R/A" class="form-control" id="prOvertime"  <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$value_house.'" readonly' ; else { if(isset($_REQUEST['house_ra'])) echo "readonly value = ".$_REQUEST['house_ra'];} ?> >
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="prGross">Utility</label>
-                                                <input type="number" name="utility" required="" placeholder="Enter utility" class="form-control" id="prGross" value="<?php if(isset($_REQUEST['utility'])) echo $_REQUEST['utility'] ?>">
+                                                <input type="number" name="utility" required="" placeholder="Enter utility" class="form-control" id="prGross"  <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$value_utility.'" readonly' ; else { if(isset($_REQUEST['utility'])) echo "readonly value = ".$_REQUEST['utility'];} ?> >
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="prTaxes">Convey Allow </label>
-                                                <input type="number" name="convey_allow" required="" placeholder="Enter convey allow" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['convey_allow'])) echo $_REQUEST['convey_allow'] ?>">
+                                                <label for="prTaxes">Convey Allowance</label>
+                                                <input type="number" name="convey_allow" required="" placeholder="Enter convey allow" class="form-control" id="prTaxes" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$value_allow.'" readonly' ; else { if(isset($_REQUEST['convey_allow'])) echo "readonly value = ".$_REQUEST['convey_allow'];} ?> >
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="prTaxes">Gross Salary</label>
-                                                <input type="number" name="gross_salary" required="" placeholder="Enter gross salay" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['gross_salary'])) echo $_REQUEST['gross_salary'] ?>">
+                                                <input type="number" name="gross_salary" required="" placeholder="Enter gross salay" class="form-control" id="prTaxes" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$value_gross.'" readonly' ; else { if(isset($_REQUEST['gross_salary'])) echo "readonly value = ".$_REQUEST['gross_salary'];} ?> >
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-lg-5"></div>
-                                                <div class="col-lg-2">
+                                                <div class="col-sm-5"></div>
+                                                <div class="col-sm-2">
                                                     <label>Deductions</label>
                                                 </div>
-                                                <div class="col-lg-5"></div>   
+                                                <div class="col-sm-5"></div>   
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-lg-3">
+                                                <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="prTaxes">Loan</label>
-                                                        <input type="number" name="loan" required="" placeholder="Enter loan" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['loan'])) echo $_REQUEST['loan'] ?>">
+                                                        <input type="number" name="loan" required="" placeholder="Enter loan" class="form-control" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$loan_de.'" readonly' ; else { if(isset($_REQUEST['loan'])) echo "readonly value = ".$_REQUEST['loan'];} ?>>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3">
+                                                <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="prTaxes">I.T</label>
                                                         <input type="number" name="i_t" required="" placeholder="Enter I.T" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['i_t'])) echo $_REQUEST['i_t'] ?>">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-3">
+                                                <div class="col-sm-4">
                                                     <div class="form-group">
                                                         <label for="prTaxes">S.W.F</label>
                                                         <input type="number" name="s_w_f" required="" placeholder="Enter S.W.F" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['s_w_f'])) echo $_REQUEST['s_w_f'] ?>">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label for="prTaxes">Advance</label>
-                                                        <input type="number" name="advance"  required="" placeholder="Enter advance" class="form-control" id="prTaxes"  value="<?php if(isset($_REQUEST['advance'])) echo $_REQUEST['advance'] ?>">
-                                                    </div>
-                                                </div>
-                                            </div>
 
                                             <div class="form-group">
                                                 <label for="prTaxes">Leave W/O pay</label>
-                                                <input type="number" name="leave_pay" required="" placeholder="Enter leave W/O pay" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['leave_pay'])) echo $_REQUEST['leave_pay'] ?>">
+                                                <input type="number" name="leave_pay" required="" placeholder="Enter leave W/O pay" class="form-control" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$absent_deduction.'" readonly' ; else { if(isset($_REQUEST['leave_pay'])) echo "readonly value = ".$_REQUEST['leave_pay'];} ?>>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="prTaxes">Net pay</label>
-                                                <input type="number" name="net_pay" required="" placeholder="Enter net pay" class="form-control" id="prTaxes" value="<?php if(isset($_REQUEST['net_pay'])) echo $_REQUEST['net_pay'] ?>">
+                                                <input type="number" name="net_pay" required="" placeholder="Enter net pay" class="form-control" id="prTaxes" <?php if(isset($_REQUEST['gr_number2']))echo 'value="'.$net_pay.'" readonly' ; else { if(isset($_REQUEST['net_pay'])) echo "readonly value = ".$_REQUEST['net_pay'];} ?>>
                                             </div>
 
                                             <div class="form-group text-right m-b-0">
@@ -319,8 +660,8 @@ if(isset($_REQUEST['gr_number2'])){
                                                 <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
                                                     Cancel
                                                 </button>
-                                            </div>
-                                        </form>
+                                            </div> 
+                                        </form> -->
                                     </div>
                                 </div>
                             </div>

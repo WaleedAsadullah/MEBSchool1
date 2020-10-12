@@ -1,0 +1,30 @@
+salary calculations
+user id
+user name 
+
+days_month = number of days in current month //eg 30
+number of days present // 
+number of days absent//
+number of days excused // 
+number of days holiday // count sundays -count saturdays
+number of days late
+number of leaves //
+total number of entries // (present+absent+excused+holidays +late)
+number of days not inputted  // number of days in month - total numbe rof entries
+ give link for more entries
+
+ salary / days_month = daily salary
+ deductions
+ absent_deduction = number of days absent * daily salary
+ late_deduction = number of days late/2 * daily salary
+ loan deduction //get monthly loan deduction
+ IT deduction //ask later
+ add all deductions
+
+ salary - dedcutions = this month salary
+
+comments
+
+
+$d=cal_days_in_month(CAL_GREGORIAN,10,2005);
+echo "There was $d days in October 2005";

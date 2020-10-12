@@ -21,10 +21,6 @@ include_once('session_end.php');
         <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
 
-
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/core.css" rel="stylesheet" type="text/css" />
@@ -164,7 +160,7 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
         $gr_no2 = $_REQUEST['student_id'];
     }
 
-    $sql_s = 'SELECT `ad_admission`.`addmission_id`"ID",`ad_admission`.`name_of_student`"name",`ad_assign_student_class`.`assign_class`"assign_class",`ad_class`.`class_name`,`ad_class`.`section` FROM `ad_admission`, `ad_assign_student_class`,`ad_class` WHERE `ad_assign_student_class`.`gr_no` ='.$gr_no2.' AND `ad_admission`.`addmission_id` = '.$gr_no2.' AND `ad_class`.`class_id` = `ad_assign_student_class`.`assign_class` ' ;
+    $sql_s = 'SELECT `ad_admission`.`memon`"cast",`ad_admission`.`which_memon`"which_cast",`ad_admission`.`addmission_id`"ID",`ad_admission`.`name_of_student`"name",`ad_assign_student_class`.`assign_class`"assign_class",`ad_class`.`class_name`,`ad_class`.`section` FROM `ad_admission`, `ad_assign_student_class`,`ad_class` WHERE `ad_assign_student_class`.`gr_no` ='.$gr_no2.' AND `ad_admission`.`addmission_id` = '.$gr_no2.' AND `ad_class`.`class_id` = `ad_assign_student_class`.`assign_class` ' ;
     $result = mysqli_query($conn,$sql_s);
     $row = mysqli_fetch_assoc($result);
 
@@ -173,6 +169,8 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
     $value_id = $row['ID'];
     $value_name =  $row['name'];
     $value_class =  $row['class_name'];
+    $value_cast =  $row['cast'];
+    $value_which_cast =  $row['which_cast'];
 
     $sql = 'SELECT `class_fee_id`,`monthly_fee`, `admission_fee`, `exam`, `misc`, `special`, `annual`, `class_id` FROM `ad_class_fee` WHERE `class_id` = '.$row['assign_class'].'' ;
     $result2 = mysqli_query($conn,$sql);
@@ -190,7 +188,7 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
 ?>
                             <div class="row">
                                 <form>
-                                <div class="col-sm-6" style="padding-top: 226px ">
+                                <div class="col-sm-6" style="padding-top: 380px ">
                                     <div class="form-group">
                                             <label for="">Monthly Fee</label>
                                             <input type="number" name="monthly_fee" required="" placeholder="Enter monthly fee" class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_month.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_month.'" readonly';} ?>>
@@ -238,6 +236,18 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
                                             <label for="">Student Name</label>
                                             <input type="text" name="student_name" placeholder="Enter student name" class="form-control"
                                         <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_name.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_name.'" readonly';} ?>>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="">Memon</label>
+                                            <input type="text" name="cast" placeholder="Yes or No" class="form-control"
+                                        <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_cast.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_cast.'" readonly';} ?>>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="">Cast</label>
+                                            <input type="text" name="which_cast" placeholder="Enter cast" class="form-control"
+                                        <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_which_cast.'" readonly' ;else { if(isset($_REQUEST['student_id']))echo'value="'.$value_which_cast.'" readonly';} ?>>
                                         </div>
 
                                         <div class="form-group">
@@ -356,9 +366,6 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
         <![endif]-->
         <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
 
-        <!--Morris Chart-->
-        <script src="assets/plugins/morris/morris.min.js"></script>
-        <script src="assets/plugins/raphael/raphael-min.js"></script>
 
         <!-- Dashboard init -->
         <script src="assets/pages/jquery.dashboard.js"></script>
@@ -385,9 +392,6 @@ if(isset($_REQUEST['gr_no2']) || isset($_REQUEST['student_id'])){
         <!-- Datatable init js -->
         <script src="assets/pages/datatables.init.js"></script>
 
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function() {

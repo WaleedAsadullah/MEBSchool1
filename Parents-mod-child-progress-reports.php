@@ -14,6 +14,8 @@ include_once('session_end.php');
 
           <?php include_once("title.php") ?>
 
+        <!--Chartist Chart CSS -->
+        <link rel="stylesheet" href="assets/plugins/chartist/dist/chartist.min.css">
         <!--Morris Chart CSS -->
         <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
@@ -67,19 +69,6 @@ include_once('session_end.php');
                             <!-- graph -->
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown"
-                                           aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Line Chart</a></li>
-                                        </ul>
-                                    </div>
 
                                     <h4 class="header-title m-t-0 m-b-30">Child progress</h4>
 
@@ -97,7 +86,7 @@ include_once('session_end.php');
                             <!-- report -->
             <div class="content-page">
                 <!-- Start content -->
-                <div class="content">
+                <div class="">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
@@ -199,10 +188,10 @@ include_once('session_end.php');
         </div>
         <div class="content-page">
             <!-- Start content -->
-            <div class="content">
+            <div class="">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="card-box">
 
                                 <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Attendance</h4>
@@ -238,6 +227,7 @@ include_once('session_end.php');
                 <!-- Chart JS -->
         <script src="assets/plugins/chart.js/chart.min.js"></script>
         <script src="assets/pages/jquery.chartjs.init.js"></script>
+
 
         <!--Chartist Chart-->
         <script src="assets/plugins/chartist/dist/chartist.min.js"></script>

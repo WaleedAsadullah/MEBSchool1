@@ -87,42 +87,6 @@ include_once('session_end.php');
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fees Card Table</h4>
                                     <div class="table-responsive">
                                         <table id="datatable2" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
-                                            <?php
-
-                                            // ----------------
-
-                                            // echo "test";
-                                            if(isset($_REQUEST['submit3'])){
-                                            // print_r($_REQUEST);
-                                            $sql3 = 'INSERT INTO `ac_fee_card` (`fee_card_id`, `user_id`, `user_date`, `from_year`, `till_year`, `name`, `father_name`, `class`, `section`, `address`, `phone`, `cell`) VALUES (NULL,\'';
-                                            $sql3 .= get_curr_user();
-                                            $sql3 .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['from_year'].'\', \''.$_REQUEST['till_year'].'\', \''.$_REQUEST['name'].'\', \''.$_REQUEST['father_name'].'\', \''.$_REQUEST['class'].'\', \''.$_REQUEST['section'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['phone'].'\', \''.$_REQUEST['cell'].'\')';
-                                            // echo $sql;
-                                            insert_query($sql3);
-                                            }
-
-
-                                            // ----------------
-
-                                            ///edit code
-                                            check_edit("ac_fee_card","fee_card_id");
-                                            edit_display("ac_fee_card","fee_card_id");
-                                            //end of edit code -shift view below delete
-
-                                            // ----------------
-
-
-                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ac_fee_card` WHERE `ac_fee_card`.`fee_card_id` = '.$_REQUEST['deleteid'];
-
-                                            insert_query($sql);
-                                            // echo "done deleting";
-                                                }
-                                            // $sql = "SELECT * FROM `ac_annual_appraisal`";
-
-                                            $sql = 'SELECT `fee_card_id`"ID", `from_year`"From year", `till_year`"Till year", `name`"Student\'s Name", `father_name`"Father\'s Name", `class`"Class", `section`"Section", `address`"Address", `phone`"Phone", `cell`"Cell" FROM `ac_fee_card';
-                                            display_query($sql);
-
-                                            ?>
                                         </table>
                                     </div>
                                 </div>
@@ -141,79 +105,94 @@ include_once('session_end.php');
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee card Form </h4>
                                     <br>
-                                    <form action="Accounts-mod-fee-card.php" method="post">
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feSno">From year </label>
-                                                    <input type="number" name="from_year" required="" placeholder="Enter start year" class="form-control" id="feSno" value="<?php if(isset($_REQUEST['from_year'])) echo $_REQUEST['from_year']?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feRollNo">Till year </label>
-                                                    <input type="number" name="till_year" required="" placeholder="Enter till valid year" class="form-control" id="feRollNo" value="<?php if(isset($_REQUEST['till_year'])) echo $_REQUEST['till_year']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feNameOfStudent">Student's Name</label>
-                                                    <input id="feNameOfStudent" name="name" type="text" placeholder="Enter name of student" required="" class="form-control"  value="<?php if(isset($_REQUEST['name'])) echo $_REQUEST['name']?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">  
-                                                <div class="form-group">
-                                                    <label for="feClass">Father's Name</label>
-                                                    <input id="feClass" name="father_name" type="text" placeholder="Enter name of father" class="form-control" value="<?php if(isset($_REQUEST['father_name'])) echo $_REQUEST['father_name']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feSno">Class </label>
-                                                    <input type="text" name="class" required="" placeholder="Enter class" class="form-control" id="feSno" value="<?php if(isset($_REQUEST['class'])) echo $_REQUEST['class']?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feRollNo">Section</label>
-                                                    <input type="text" name="section" placeholder="Enter section" class="form-control"   value="<?php if(isset($_REQUEST['section'])) echo $_REQUEST['section']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="feClass">Address</label>
-                                            <input id="feClass" type="text" name="address" placeholder="Enter address" class="form-control"  value="<?php if(isset($_REQUEST['address'])) echo $_REQUEST['address']?>">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="feNameOfStudent">Phone No.</label>
-                                                    <input id="feNameOfStudent" name="phone" type="tel" placeholder="Enter phone number"  class="form-control" value="<?php if(isset($_REQUEST['phone'])) echo $_REQUEST['phone']?>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">  
-                                                <div class="form-group">
-                                                    <label for="feClass">Cell</label>
-                                                    <input id="feClass" name="cell" type="tel" placeholder="Enter cell number" class="form-control" value="<?php if(isset($_REQUEST['cell'])) echo $_REQUEST['cell']?>">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group text-right m-b-0 m-t-10">
-                                            <?php 
-                                            code_submit3();
-                                            ?>
-                                            <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                                Cancel
+                                    <form action="Accounts-mod-fee-card.php#formadd" method="post" id="submitted">
+                                        <?php
+                                        dropDownConditional2("Student ID","gr_num2","addmission_id","name_of_student","ad_admission",NULL);
+                                        ?>
+                                        <div class="form-group text-right m-b-0">
+                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                                Submit
                                             </button>
                                         </div>
                                     </form>
+
+<?php
+if(isset($_REQUEST['gr_num2'])){
+    echo'<div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Vouchar No.</th>
+                <th>Year</th>
+                <th>Month</th>
+                <th>Month Fee</th>
+                <th>Month Consession</th>
+                <th>Admission Fee</th>
+                <th>Admission Consession</th>
+                <th>Exams and Other Activities Fee</th>
+                <th>Exams and Other Activities Consession</th>
+                <th>Misc Fee</th>
+                <th>Misc Consession</th>
+                <th>Other Charges</th>
+                <th>Other Consession</th>
+                <th>Anaual Charges</th>
+                <th>Anaual Consession</th>
+                <th>Month Fee Total</th>
+                <th>Admission Fee Total</th>
+                <th>Exams & Other Activities Total</th>
+                <th>Misc Fee Total</th>
+                <th>Other Fee Total</th>
+                <th>Annual Fee Total</th>
+                <th>Total</th>
+            </tr>
+            </thead>';
+    $conn = connect_db();
+    $sql_s = 'SELECT `fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`, `concsession_id`, `generate_id`, `balance` FROM `ac_fee_collection` WHERE `studend_id` = '.$_REQUEST['gr_num2'].' ';
+
+    echo$sql_s;
+    $result = mysqli_query($conn,$sql_s);
+    $m = 0;
+    while($row = mysqli_fetch_assoc($result)){
+        print_r($row);
+        $m++;
+
+    echo'
+            <tbody>
+                <tr>
+                    <td>'.$m.'</td>
+                    <td>'.$row['fee_collection_id'].'</td>
+                    <td>'.$row['year'].'</td>
+                    <td>'.$row['which_month'].'</td>
+                    <td>'.$row['month_fee'].'</td>
+                    <td>'.$row['month_con'].'</td>
+                    <td>'.$row['admission_fee'].'</td>
+                    <td>'.$row['admission_con'].'</td>
+                    <td>'.$row['exam_fee'].'</td>
+                    <td>'.$row['exam_con'].'</td
+                    <td>'.$row['misc_fee'].'</td>
+                    <td>'.$row['misc_con'].'</td
+                    <td>'.$row['other_fee'].'</td>
+                    <td>'.$row['other_con'].'</td
+                    <td>'.$row['annual_fee'].'</td>
+                    <td>'.$row['annual_con'].'</td
+                    <td>'.$row['monfee'].'</td>
+                    <td>'.$row['admfee'].'</td>
+                    <td>'.$row['examfee'].'</td>
+                    <td>'.$row['miscfee'].'</td>
+                    <td>'.$row['specialfee'].'</td>
+                    <td>'.$row['annualfee'].'</td>
+                    <td>'.$row['feesibdisc'].'</td>
+                    <td>'.$row['feeza'].'</td>
+                    <td>'.$row['fee'].'</td>
+                <tr>';
+    }
+    echo'
+            </tbody>
+        </table>';
+}
+?>
+                                   
                                 </div>
                             </div>
                         </div>

@@ -154,7 +154,7 @@ include_once('session_end.php');
                                         <br>
                                         <form action="Admin-mod-student-attendance.php#formadd" method="post" id="submitted">
                                         <?php
-                                        dropDownConditional2("Student ID","gr_no2","addmission_id","name_of_student","ad_admission",NULL);
+                                        dropDownConditional2("Student ID","gr_no2","gr_no","name","ad_assign_student_class",NULL);
                                         ?>
                                         <div class="form-group text-right m-b-0">
                                                 
@@ -172,13 +172,18 @@ include_once('session_end.php');
 <?php
 if(isset($_REQUEST['gr_no2'])){
     $conn = connect_db();
-    $sql_s = 'SELECT `addmission_id`,`name_of_student`,`father_name`,`class`,`surname`, `guardian_name`, `cnic_guradian`, `occupation_of_father`,`address` FROM `ad_admission` WHERE `addmission_id` = '.$_REQUEST['gr_no2'].' ';
+    $sql_s = 'SELECT `assign_student_class_id`, `user_id`, `user_date`, `gr_no`, `name`, `date`, `assign_class`, `comment` FROM `ad_assign_student_class` WHERE `gr_no` = '.$_REQUEST['gr_no2'].' ';
     $result = mysqli_query($conn,$sql_s);
     $row = mysqli_fetch_assoc($result);
 
-    $value_id = $row['addmission_id'];
-    $value_name =  $row['name_of_student'];
-    $value_class =  $row['class'];
+    $value_id = $row['gr_no'];
+    $value_name =  $row['name'];
+    $valu_class_id = $row['assign_class'];
+
+    $sql = 'SELECT `class_id`, `class_name`, `section`, `comment` FROM `ad_class` WHERE `class_id` = '.$valu_class_id.'';
+    $result2 = mysqli_query($conn,$sql);
+    $row2 = mysqli_fetch_assoc($result2);
+    $value_class = $row2['class_name'];
 }
 ?>
 
@@ -196,8 +201,14 @@ if(isset($_REQUEST['gr_no2'])){
                                             
                                             <div class="form-group">
                                                 <label for="userName">GR #</label>
-                                                <input type="text" name="gr_no" required=""placeholder="Enter Gr No." class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_class.'" readonly' ;else{ if(isset($_REQUEST['gr_no'])) echo'value="'.$_REQUEST['gr_no'].'" readonly';} ?>>
+                                                <input type="text" name="gr_no" required=""placeholder="Enter Gr No." class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_id.'" readonly' ;else{ if(isset($_REQUEST['gr_no'])) echo'value="'.$_REQUEST['gr_no'].'" readonly';} ?>>
                                             </div>
+
+                                            <div class="form-group">
+                                                <label for="userName">Subject</label>
+                                                <input type="text" name="subject" required="" placeholder="Enter subject." class="form-control" <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_id.'" readonly' ;else{ if(isset($_REQUEST['gr_no'])) echo'value="'.$_REQUEST['gr_no'].'" readonly';} ?>>
+                                            </div>
+
                                             <div class="form-group">
                                                 <label for="userName">Status</label>
                                                 <select type="text" name="status" parsley-trigger="change" required="" placeholder="Eligible or not" class="form-control" id="zaEligible">

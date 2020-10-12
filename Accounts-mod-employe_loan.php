@@ -14,9 +14,6 @@ include_once('session_end.php');
 
           <?php include_once("title.php") ?>
 
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -95,10 +92,12 @@ include_once('session_end.php');
 
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
+
+                                                $laon_installment_amount = $_REQUEST['loan_amount'] / $_REQUEST['laon_installment'] ;
                                                 // print_r($_REQUEST);
-                                                $sql = 'INSERT INTO `ac_employee_loan`(`employee_loan_id`, `user_id`, `user_date`, `employee_id`, `employee_name`, `loan_amount`, `loan_start`, `laon_installment`,`type`) VALUES (NULL,\'';
+                                                $sql = 'INSERT INTO `ac_employee_loan`(`employee_loan_id`, `user_id`, `user_date`, `employee_id`, `employee_name`, `loan_amount`, `loan_start`, `laon_installment`, `type`, `laon_installment_amount`,`outstanding`) VALUES (NULL,\'';
                                                 $sql .= get_curr_user();
-                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['employee_id'].'\', \''.$_REQUEST['employee_name'].'\', \''.$_REQUEST['loan_amount'].'\', \''.$_REQUEST['loan_start'].'\', \''.$_REQUEST['laon_installment'].'\', \''.$_REQUEST['type'].'\')';
+                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['employee_id'].'\', \''.$_REQUEST['employee_name'].'\', \''.$_REQUEST['loan_amount'].'\', \''.$_REQUEST['loan_start'].'\', \''.$_REQUEST['laon_installment'].'\', \''.$_REQUEST['type'].'\', \''.$laon_installment_amount.'\', \''.$_REQUEST['outstanding'].'\')';
                                                 // echo $sql;
                                                 insert_query($sql);
                                             }
@@ -118,7 +117,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `employee_loan_id`"ID",`type`"Type", `employee_id` "Employee ID", `employee_name`"Employee Name", `loan_amount` "Loan Amount", `loan_start` "Laon Start", `laon_installment`"Laon Installment" FROM `ac_employee_loan`';
+                                            $sql = 'SELECT `employee_loan_id`"ID",`type`"Type", `employee_id` "Employee ID", `employee_name`"Employee Name", `loan_amount` "Loan Amount", `loan_start` "Laon Start", `laon_installment`"Laon Installment",`laon_installment_amount`"Loan Installment Amount",`outstanding`"Outstanding" FROM `ac_employee_loan` order by `employee_loan_id` desc';
                                             display_query($sql);
                                             // -----------------------
 
@@ -177,6 +176,7 @@ include_once('session_end.php');
                                                 Submit
                                             </button>
                                         </div>
+
                                    </form>';
                                }} ?>
 <?php
@@ -203,7 +203,12 @@ if(isset($_REQUEST['gr_number2'])){
                                     if (isset($_REQUEST['settype']) ) echo '<input type="hidden" value="'.$_REQUEST['settype'].'" name="settype">';
                                         dropDownConditional2("Employee ID","gr_number2","employee_record_id","name","ad_employee_record",NULL);
                                         
-                                   echo' </form>';
+                                   echo' <div class="form-group text-right m-b-0">
+                                                
+                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                                Submit
+                                            </button>
+                                        </div></form>';
                                }}?>
 <?php
 if(isset($_REQUEST['gr_number2'])){
@@ -218,6 +223,26 @@ if(isset($_REQUEST['gr_number2'])){
     $value_salary =  $row['salary'];
     $value_position =  $row['position'];
 }}
+?>
+<?php
+    if(isset($_REQUEST['gr_number2'])){
+        $sql_o = 'SELECT SUM(`loan_amount`)"sum" from `ac_employee_loan` where `employee_id` = '.$_REQUEST['gr_number2'].' and `type` =  "'.$_REQUEST['settype'].'"';
+        echo $sql_o;
+        $result_o = mysqli_query($conn,$sql_o);
+        $row_o = mysqli_fetch_assoc($result_o);
+
+       echo "<h1>" .$value_loan_amount = $row_o['sum']."</h1>";
+
+       $sql_l = 'SELECT SUM(`loan`)"sum2" from `ac_payroll_calculation` where `gr_number` = '.$_REQUEST['gr_number2'].' and `type` =  "'.$_REQUEST['settype'].'"';
+        echo $sql_l;
+        $conn2 = connect_db();
+        $result_l = mysqli_query($conn2,$sql_l);
+        $row_l = mysqli_fetch_assoc($result_l);
+
+       echo "<h1>" .$value_loan_amount2 = $row_l['sum2']."</h1><p>waleed</p>";
+
+    }
+
 ?>
                                     <form action="Accounts-mod-employe_loan.php" method="post">
                                         <input type="hidden" <?php if(isset($_REQUEST['settype']))echo 'value="'.$_REQUEST['settype'].'" readonly' ; else { if(isset($_REQUEST['type'])) echo "readonly value = ".$_REQUEST['type'];} ?> name="type">
@@ -235,8 +260,8 @@ if(isset($_REQUEST['gr_number2'])){
                                     
                                
                                         <div class="form-group">
-                                            <label for="hbAddress">Loan Amount</label>
-                                            <input type="number" name="loan_amount" required="" placeholder="Enter loan amount" class="form-control" id="prName" value="<?php if(isset($_REQUEST['loan_amount'])) echo $_REQUEST['loan_amount']?>">
+                                            <label for="hbAddress">Loan Amount <?php if(isset($value_salary))echo "Max Laon :" .$value_salary * 2;  ?></label>
+                                            <input type="number" name="loan_amount" required="" placeholder="Enter loan amount" class="form-control" id="prName" value="<?php if(isset($_REQUEST['loan_amount'])) echo $_REQUEST['loan_amount']?>" max = <?php if(isset($value_salary)) {echo $value_salary * 2;}else echo 0; ?>>
                                         </div>
 
                                         <div class="form-group">
@@ -247,6 +272,11 @@ if(isset($_REQUEST['gr_number2'])){
                                         <div class="form-group">
                                             <label for="hbDateOfBooking">Loan Installment</label>
                                             <input type="number" name="laon_installment" required=""  class="form-control" id="prVacation" placeholder="Enter laon installment" value="<?php if(isset($_REQUEST['laon_installment'])) echo $_REQUEST['laon_installment']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="hbDateOfBooking">Outstanding Amount</label>
+                                            <input type="number" name="outstanding"  class="form-control" id="prVacation" placeholder="Enter outstanding amount" value="<?php if(isset($_REQUEST['laon_installment'])) echo $_REQUEST['laon_installment']?>">
                                         </div>
 
                                        

@@ -1,3 +1,20 @@
+//reports on outstanding fee amount
+
+SELECT `student_id`, `student_name`, `class_name`, `section`, sum(`fee_total`) "total fee todate" ,sum(`amount_pay`) "Total fee paid to date" , (sum(`fee_total`)-sum(`amount_pay`)) "Arrears" FROM `ac_fee_collection_done` group by `student_id` 
+
+//reports on outstanding fee amount
+
+SELECT `student_id`, `student_name`, `class_name`, `section`, sum(`fee_total`) "total fee todate" ,sum(`amount_pay`) "Total fee paid to date" , (sum(`fee_total`)-sum(`amount_pay`)) "Arrears" FROM `ac_fee_collection_done` group by `student_id`  where  `student_id` = 52
+
+SELECT count(`student_id`)"Number of students", sum(`fee_total`) "total fee todate" ,sum(`amount_pay`) "Total fee paid to date" , (sum(`fee_total`)-sum(`amount_pay`)) "Arrears" FROM `ac_fee_collection_done`
+
+
+SELECT `acfcd`.`student_id`, `acfcd`.`student_name`, `acfcd`.`class_name`, `acfcd`.`section`, sum(`acfc`.`fee_total`) "total fee todate" ,sum(`acfcd`.`amount_pay`) "Total fee paid to date" , (sum(`acfc`.`fee_total`)-sum(`acfcd`.`amount_pay`)) "Arrears" FROM `ac_fee_collection_done` `acfcd`,`ac_fee_collection` `acfc` WHERE `acfcd`.`student_id` = `acfc`.`student_id` and `acfcd`.`student_id` = 55 
+
+SELECT `acfcd`.`student_id`, `acfcd`.`student_name`, `acfcd`.`class_name`, `acfcd`.`section`, sum(`acfc`.`fee`) "total fee todate" , sum(`acfcd`.`amount_pay`) "Total fee paid to date" , (sum(`acfc`.`fee`)- sum(`acfcd`.`amount_pay`)) "Arrears" FROM `ac_fee_collection_done` acfcd  LEFT JOIN `ac_fee_collection` acfc ON `student_id` = `studend_id`
+
+SELECT count(`acfc`.`studend_id`),`acfc`.`studend_id`, `acfc`.`student_name`, `acfc`.`class_name`, `acfc`.`section`, sum(`acfc`.`fee`) "total fee due to date" , COALESCE(sum(`acfcd`.`amount_pay`),0) "Total fee paid to date" , (sum(`acfc`.`fee`)- COALESCE(sum(`acfcd`.`amount_pay`),0)) "Arrears" FROM `ac_fee_collection` acfc LEFT JOIN `ac_fee_collection_done` acfcd ON `studend_id` = `student_id` and `which_month` = `month` group by `studend_id`
+
 SELECT `which_month`, `year`, `class_id`, `class_name`, `section`, count(`class_id`) "number of records generated" FROM `ac_fee_collection` group by `class_id` , `which_month`, `year` ORDER BY `user_date` DESC
 
 //delete with run date

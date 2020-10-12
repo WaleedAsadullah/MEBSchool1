@@ -51,7 +51,10 @@
                                 <a href="Accounts-mod-chart-of-account.php" class="waves-effect"><i class="zmdi zmdi-collection-item"></i> <span> Chart Of Account
                                  </span> </a>
                             </li>
-
+                            <li>
+                                <a href="Accounts-mod-account-entry.php" class="waves-effect"><i class="zmdi zmdi-collection-item"></i> <span> Account Entry
+                                 </span> </a>
+                            </li>
                             <li>
                                 <a href="Accounts-mod-receivable-and-payables-reporting.php" class="waves-effect"><i class="zmdi zmdi-collection-item"></i> <span> Receivable and Payables Reporting
                                  </span> </a>
@@ -75,21 +78,9 @@
                             <li>
                                 <a href="Accounts-mod-zakat.php" class="waves-effect"><i class="fa fa-envira"></i> <span> Zakat</span> </a>
                             </li>
-                            
-                            <li>
-                                <a href="Accounts-mod-std-fee-detail.php" class="waves-effect"><i class="fa fa-calculator"></i> <span>Student Fee Detail</span> </a>
-                            </li>
-
-                            <li>
-                                <a href="Accounts-mod-fee-calculate.php" class="waves-effect"><i class="fa fa-calculator"></i> <span>Fee Calculate</span> </a>
-                            </li>
 
                             <li>
                                 <a href="Accounts-mod-fee-collecting.php" class="waves-effect"><i class="fa fa-vcard-o"></i> <span> Fee Collecting</span> </a>
-                            </li>
-
-                            <li>
-                                <a href="Accounts-mod-std-fee-collected.php" class="waves-effect"><i class="fa fa-address-book-o"></i> <span>Student Fee Collected</span> </a>
                             </li>
 
                             <li>
@@ -123,14 +114,14 @@
                             </li>
 
                             <li>
-                                <a href="Accounts-mod-fee-setting-for-class.php" class="waves-effect"><i class="dripicons-box"></i> <span>  Fee Settings  For Class </span> </a>
+                                <a href="Accounts-mod-fee-setting-for-class.php" class="waves-effect"><i class="zmdi zmdi-select-all"></i> <span>  Fee Settings  For Class </span> </a>
                             </li>
                             <li>
-                                <a href="Accounts-mod-fee-setting-specfic-student.php" class="waves-effect"><i class="dripicons-box"></i> <span>Fee Settings For Specific Student </span> </a>
+                                <a href="Accounts-mod-fee-setting-specfic-student.php" class="waves-effect"><i class="fa fa-user-circle-o"></i> <span>Fee Settings For Specific Student </span> </a>
                             </li>
 
                             <li>
-                                <a href="Accounts-mod-fee-generate-class.php" class="waves-effect"><i class="dripicons-box"></i> <span> Fee Generate For Class </span> </a>
+                                <a href="Accounts-mod-fee-generate-class.php" class="waves-effect"><i class="fa fa-print"></i> <span> Fee Generate For Class </span> </a>
                             </li>
 
                         </ul>

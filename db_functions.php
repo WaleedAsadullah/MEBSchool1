@@ -1,6 +1,28 @@
 <?php
 include_once('connect_db.php');
 $conn = connect_db();
+function get_student_balance($student_id)
+
+{
+
+$conn = connect_db();
+ $sql2 ='SELECT `student_id`, `student_name`, `class_id`, `class_name`, `section`, COALESCE(sum(`amount_pay`),0) "paid2date", `month`, `year` FROM `ac_fee_collection_done` where `student_id` =  '.$student_id.' group by `student_id`';
+
+
+$result2 = mysqli_query($conn,$sql2);
+$paid2date = mysqli_fetch_assoc($result2);
+
+ $sql3 ='SELECT `studend_id`, `student_name`, `class_id`, `class_name`, `section`, COALESCE(sum(`fee`),0) "fee2date" , `which_month`, `year` FROM `ac_fee_collection` where `studend_id` = '.$student_id.' group by `studend_id`';
+
+
+$result3 = mysqli_query($conn,$sql3);
+$fee2date = mysqli_fetch_assoc($result3);
+
+$balance = $fee2date['fee2date'] - $paid2date['paid2date'] ; //$balance['Arrears'];
+
+
+  return $balance; 
+}
 
 function insert_query($sql)
 {
@@ -786,6 +808,27 @@ function dropDownConditional($label,$name,$select,$from,$condition){
                 </select>
         </div>';
 }
+function user_type_Access()
+{
+  //$user_type_id, $form_location;
+$user_type_id = 1;
+$form_location = "Students-mod-video-lecture.php";
+$sql = "SELECT * FROM `rights` WHERE `user_type_id` = $user_type_id AND `form_location` LIKE '$form_location'";
+ $data = query_to_array($sql);
+
+    if(isset($data[0]))
+      $form_arr = explode("-",str_replace("school/","",get_current_form()));
+
+      if(lcfirst($form_arr[0]) == "/".ucfirst($data[0]['account']) || "Admin" == $data[0]['account'] ) {
+        // echo "Has access to ".$form_arr[0]." as ".$data[0]['account'];
+        echo '<br>';}else{
+          // echo "does not have access to ".$form_arr[0]." as ".$data[0]['account'];
+          echo '<script>
+                  location.replace(\''.$data[0]['account'].'-mod-index.php\');
+                </script>';}
+  }
+
+
 function dropDownSimple($label,$name,$select,$from,$condition){
         $conn = connect_db();
         $sql_id = 'SELECT `'.$select.'` FROM `'.$from.'`'.$condition.''; 
@@ -793,7 +836,7 @@ function dropDownSimple($label,$name,$select,$from,$condition){
         echo'
             <div class="form-group">
               <label for="">'.$label.'</label>
-              <select type="text"  name="'.$name.'"  required="" onchange="copyValue()" class="form-control">';
+              <select type="text"  name="'.$name.'"  required="" onchange="copyValue()" class="form-control select2">';
          $result_id = mysqli_query($conn ,$sql_id);
           
           while($row_id = mysqli_fetch_assoc($result_id)) {
@@ -868,7 +911,7 @@ function dropDownConditional3section($label,$name,$select,$select2,$select3,$fro
         echo'
             <div class="form-group">
               <label for="">'.$label.'</label>
-              <select id="themes" type="text"  name="'.$name.'"  required="" class="form-control">';
+              <select id="themes" type="text"  name="'.$name.'"  required="" class="form-control select2">';
          $result_id = mysqli_query($conn ,$sql_id);
           
           while($row_id = mysqli_fetch_assoc($result_id)) {
@@ -885,6 +928,59 @@ function dropDownConditional3section($label,$name,$select,$select2,$select3,$fro
         </div>';
 }
 
+function rights(){
 
+
+
+  echo' <div class="left side-menu">
+                <div class="sidebar-inner slimscrollleft">
+
+                    <!-- User -->
+                    <div class="user-box">
+                        <div class="user-img">
+                            <img src="assets/images/users/logo.jpg" alt="M.E.B School" title="M.E.B School"  class="img-circle img-thumbnail img-responsive">
+                            <div class="user-status offline"><i class="zmdi zmdi-dot-circle"></i></div>
+                        </div>
+                        <h5><a href="Accounts-mod-profile.php"> <?php echo $_SESSION[\'name\']; ?> </a> </h5>
+                        <ul class="list-inline">
+                            <li>
+                                <a href="Accounts-mod-profile.php">
+                                    <i class="zmdi zmdi-settings"></i>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="logout.php" class="text-custom">
+                                    <i class="zmdi zmdi-power"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End User -->
+
+                    <!--- Sidemenu -->
+                    <div id="sidebar-menu">
+                        <ul>
+                            <li class="text-muted menu-title">Navigation</li>';
+
+$sql='SELECT `right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form` FROM `rights` WHERE'.$_SESSION['type'].'';
+$result = mysqli_query($conn,$sql);
+while($row = mysqli_fetch_assoc($result)){
+  echo'
+                           <li>
+                                <a href="'.$row[''].'" class="waves-effect"><i class="'.$row[''].'"></i> <span> '.$row[''].'</span> </a>
+                            </li>';
+
+}
+
+
+                            
+echo'
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>';
+}
 
 ?>

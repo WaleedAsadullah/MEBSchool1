@@ -160,12 +160,14 @@ include_once('session_end.php');
 <?php
 if(isset($_REQUEST['gr_no2'])){
     $conn = connect_db();
-    $sql_s = 'SELECT `addmission_id`,`name_of_student` FROM `ad_admission` WHERE `addmission_id` = '.$_REQUEST['gr_no2'].' ';
+    $sql_s = 'SELECT `addmission_id`,`name_of_student`,`admission_saught`,`admission_granted` FROM `ad_admission` WHERE `addmission_id` = '.$_REQUEST['gr_no2'].' ';
     $result = mysqli_query($conn,$sql_s);
     $row = mysqli_fetch_assoc($result);
 
     $value_id = $row['addmission_id'];
     $value_name =  $row['name_of_student'];
+    $value_saught = $row['admission_saught'];
+    $value_granted = $row['admission_granted'];
 }
 ?>
                                     <form action="Admin-mod-assign-student-class.php" method="post">
@@ -180,6 +182,16 @@ if(isset($_REQUEST['gr_no2'])){
                                             <input type="text" name="name" required
                                                    placeholder="Enter name" class="form-control"
                                                   <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_name.'" readonly' ;else { if(isset($_REQUEST['name'])) echo 'value="'.$_REQUEST['name'].'" readonly';} ?>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Addmission saught for class</label>
+                                            <input type="text" placeholder="Enter saught for class" class="form-control"
+                                                  <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_saught.'" readonly' ;else { if(isset($_REQUEST['gr_no'])) echo 'value="NULL" ';} ?>>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">Addmission granted for class</label>
+                                            <input type="text" placeholder="Enter granted for class" class="form-control"
+                                                  <?php if(isset($_REQUEST['gr_no2']))echo 'value="'.$value_granted.'" readonly' ;else { if(isset($_REQUEST['gr_no'])) echo 'value="NULL" ';} ?>>
                                         </div>
                                         <div class="form-group">
                                             <label for="">Date</label>

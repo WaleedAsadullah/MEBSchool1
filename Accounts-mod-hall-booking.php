@@ -14,9 +14,6 @@ include_once('session_end.php');
 
           <?php include_once("title.php") ?>
 
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -89,16 +86,16 @@ include_once('session_end.php');
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table id="datatable2" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
                                             <?php
                                             // ------------------------
 
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
                                                 // print_r($_REQUEST);
-                                                $sql = 'INSERT INTO `ac_hall_booking` (`hall_booking`, `user_id`, `user_date`, `name`, `address`, `phone`, `date_booking`, `rent`, `advance`, `location`, `date_event`, `guest`, `waiter`, `female_waiter`, `is_adv_given`) VALUES (NULL,\'';
+                                                $sql = 'INSERT INTO `ac_hall_booking` (`hall_booking`, `user_id`, `user_date`, `name`, `address`, `phone`, `date_booking`, `rent`, `advance`, `location`, `date_event`, `guest`, `waiter`, `female_waiter`, `is_adv_given`,`noc`) VALUES (NULL,\'';
                                                 $sql .= get_curr_user();
-                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['phone'].'\', \''.$_REQUEST['date_booking'].'\', \''.$_REQUEST['rent'].'\', \''.$_REQUEST['advance'].'\', \''.$_REQUEST['location'].'\', \''.$_REQUEST['date_event'].'\', \''.$_REQUEST['guest'].'\', \''.$_REQUEST['waiter'].'\', \''.$_REQUEST['female_waiter'].'\', \''.$_REQUEST['is_adv_given'].'\')';
+                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['phone'].'\', \''.$_REQUEST['date_booking'].'\', \''.$_REQUEST['rent'].'\', \''.$_REQUEST['advance'].'\', \''.$_REQUEST['location'].'\', \''.$_REQUEST['date_event'].'\', \''.$_REQUEST['guest'].'\', \''.$_REQUEST['waiter'].'\', \''.$_REQUEST['female_waiter'].'\', \''.$_REQUEST['is_adv_given'].'\', \''.$_REQUEST['noc'].'\')';
                                                 // echo $sql;
                                                 insert_query($sql);
                                             }
@@ -118,7 +115,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `hall_booking`"ID", `name`"Name", `address`"Address", `phone`"Phone",`date_booking`"Date of booking", `rent`"Rent", `advance`"Advance", `location`"Location", `date_event`"Date of event", `guest`"Number of guest", `waiter`"Waiter are required ?", `female_waiter`"If female waiter required ?", `is_adv_given`"Advance that can given" FROM `ac_hall_booking';
+                                            $sql = 'SELECT `hall_booking`"ID", `name`"Name", `address`"Address", `phone`"Phone",`date_booking`"Date of booking", `rent`"Rent", `advance`"Advance", `location`"Location", `date_event`"Date of event", `guest`"Number of guest", `waiter`"Waiter are required ?", `female_waiter`"If female waiter required ?", `is_adv_given`"Advance that can given",`noc`"N.O.C Charges" FROM `ac_hall_booking';
                                             display_query($sql);
                                             // -----------------------
 
@@ -187,7 +184,7 @@ include_once('session_end.php');
 
                                         <div class="form-group">
                                             <label for="hbNumberOfGuest">Number of guest</label>
-                                            <input type="text" name="guest" required="" placeholder="Enter date of event" class="form-control" id="hbDateOfEvent" value="<?php if(isset($_REQUEST['guest'])) echo $_REQUEST['guest']?>">
+                                            <input type="text" name="guest" required="" placeholder="Enter number of guests" class="form-control" id="hbDateOfEvent" value="<?php if(isset($_REQUEST['guest'])) echo $_REQUEST['guest']?>">
                                         </div>
 
                                         <div class="form-group">
@@ -212,6 +209,10 @@ include_once('session_end.php');
                                                 <option value="yes" <?php if(isset($_REQUEST['is_adv_given']) && $_REQUEST['is_adv_given'] == 'yes') echo "selected" ?> >Yes</option>
                                                 <option value="no" <?php if(isset($_REQUEST['is_adv_given']) && $_REQUEST['is_adv_given'] == 'no') echo "selected" ?> >No</option>
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="">N.O.C Charges</label>
+                                            <input type="number" name="noc"  placeholder="Enter noc charges" class="form-control" value="<?php if(isset($_REQUEST['noc'])) echo $_REQUEST['noc']?>">
                                         </div>
 
                                         <div class="form-group text-right m-b-0">
@@ -263,17 +264,14 @@ include_once('session_end.php');
         <![endif]-->
         <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
 
-        <!--Morris Chart-->
-        <script src="assets/plugins/morris/morris.min.js"></script>
-        <script src="assets/plugins/raphael/raphael-min.js"></script>
-
         <!-- Dashboard init -->
         <script src="assets/pages/jquery.dashboard.js"></script>
 
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
-           <!-- Datatables-->
+
+        <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
@@ -289,13 +287,6 @@ include_once('session_end.php');
         <script src="assets/plugins/datatables/responsive.bootstrap.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.scroller.min.js"></script>
 
-        <!-- Datatable init js -->
-        <script src="assets/pages/datatables.init.js"></script>
-
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
-
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#datatable').dataTable();
@@ -307,17 +298,7 @@ include_once('session_end.php');
             TableManageButtons.init();
 
         </script>
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $('#datatable2').dataTable();
-                $('#datatable2-keytable').DataTable( { keys: true } );
-                $('#datatable2-responsive').DataTable();
-                $('#datatable2-scroller').DataTable( { ajax: "assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
-                var table = $('#datatabl2e-fixed-header').DataTable( { fixedHeader: true } );
-            } );
-            TableManageButtons.init();
 
-        </script>
         <?php include_once('script.php') ?>
 </body>
 </html>

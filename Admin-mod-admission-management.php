@@ -16,9 +16,7 @@ include_once('session_end.php');
         <!-- form Uploads -->
         <link href="assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
 
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-                <!-- DataTables -->
+        <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -80,7 +78,7 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
 <?php
 $con = connect_db();
@@ -155,7 +153,7 @@ $filename=$_FILES["file"]["tmp_name"];
 
 
                             <!-- input form -->
-                                <div class="col-lg-12">
+                                <div class="col-sm-12">
                                     <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px;"> Addmission Sheet </h4>
                                     <br>
@@ -167,7 +165,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                             // echo "test";
   if(isset($_FILES['profile_picture'])){
 
-print_r($_FILES);
+// print_r($_FILES);
 
 ///file upload code
 $target_dir = "uploads/".rand(10,1000000)."_";
@@ -236,9 +234,9 @@ if( $uploadedok) {
     
                                             // print_r($_REQUEST);
 
-                                            $sql = 'INSERT INTO `ad_admission` (`addmission_id`, `user_id`, `user_time`, `class`, `GR_No`, `name_of_student`, `father_name`, `surname`, `guardian_name`, `relationship`, `religion`, `address`, `phone`, `cell_no`, `e_mail`, `ice_no`, `occupation_of_father`, `monthly_income`, `cnic_guradian`, `date_of_birth`, `place_of_birth`, `date_of_birth_words`, `admission_saught`, `admission_granted`, `last_school_class`,`profile_picture`) VALUES (NULL,\'';
+                                            $sql = 'INSERT INTO `ad_admission` (`addmission_id`, `user_id`, `user_time`, `class`, `GR_No`, `name_of_student`, `father_name`, `surname`, `guardian_name`, `relationship`, `religion`, `address`, `phone`, `cell_no`, `e_mail`, `ice_no`, `occupation_of_father`, `monthly_income`, `cnic_guradian`, `date_of_birth`, `place_of_birth`, `date_of_birth_words`, `admission_saught`, `admission_granted`, `last_school_class`,`profile_picture`,`memon`, `which_memon`) VALUES (NULL,\'';
                                             $sql .= get_current_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['class']. '\',\''.$_REQUEST['GR_No'].'\', \''.$_REQUEST['name_of_student']. '\', \''.$_REQUEST['father_name']. '\', \''.$_REQUEST['surname']. '\', \''.$_REQUEST['guardian_name']. '\', \''.$_REQUEST['relationship']. '\', \''.$_REQUEST['religion']. '\', \''.$_REQUEST['address']. '\', \''.$_REQUEST['phone']. '\', \''.$_REQUEST['cell_no']. '\', \''.$_REQUEST['e_mail']. '\', \''.$_REQUEST['ice_no']. '\', \''.$_REQUEST['occupation_of_father']. '\', \''.$_REQUEST['monthly_income']. '\', \''.$_REQUEST['cnic_guradian']. '\', \''.$_REQUEST['date_of_birth']. '\', \''.$_REQUEST['place_of_birth']. '\', \''.$_REQUEST['date_of_birth_words']. '\', \''.$_REQUEST['admission_saught']. '\', \''.$_REQUEST['admission_granted']. '\', \''.$_REQUEST['last_school_class']. '\', \''.$_REQUEST['profile_picture']. '\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['class']. '\',\''.$_REQUEST['GR_No'].'\', \''.$_REQUEST['name_of_student']. '\', \''.$_REQUEST['father_name']. '\', \''.$_REQUEST['surname']. '\', \''.$_REQUEST['guardian_name']. '\', \''.$_REQUEST['relationship']. '\', \''.$_REQUEST['religion']. '\', \''.$_REQUEST['address']. '\', \''.$_REQUEST['phone']. '\', \''.$_REQUEST['cell_no']. '\', \''.$_REQUEST['e_mail']. '\', \''.$_REQUEST['ice_no']. '\', \''.$_REQUEST['occupation_of_father']. '\', \''.$_REQUEST['monthly_income']. '\', \''.$_REQUEST['cnic_guradian']. '\', \''.$_REQUEST['date_of_birth']. '\', \''.$_REQUEST['place_of_birth']. '\', \''.$_REQUEST['date_of_birth_words']. '\', \''.$_REQUEST['admission_saught']. '\', \''.$_REQUEST['admission_granted']. '\', \''.$_REQUEST['last_school_class']. '\', \''.$_REQUEST['profile_picture']. '\', \''.$_REQUEST['memon']. '\',\''.$_REQUEST['which_memon'].'\')';
                                             // echo $sql;
                                             insert_query($sql);
 
@@ -278,7 +276,7 @@ if( $uploadedok) {
                                             // echo "done deleting";
                                                 }
 
-                                            $sql = 'SELECT `addmission_id`"ID", `class` "Class", `GR_No` "Gr No.", `name_of_student`"Name Of Student", `father_name`"Father\'s Name", `surname`"Surname", `guardian_name`"Guardian Name", `relationship` "Relationship", `religion` "Religion", `address`"Address", `phone`"Phone", `cell_no`"Cell No.", `e_mail` "E-mail", `ice_no`"In case of Emergency", `occupation_of_father` "Occupation of Father", `monthly_income` "Monthly Income", `cnic_guradian`"CNIC Guardian", `date_of_birth`"Date of Birth", `place_of_birth`"Place of Birth", `date_of_birth_words` "Date of Birth (in words)", `admission_saught` "Admission saught for class", `admission_granted` "Admission granted for class", `last_school_class` "Last School and Class Attended " FROM `ad_admission`';
+                                            $sql = 'SELECT `addmission_id`"ID", `class` "Class", `GR_No` "Gr No.", `name_of_student`"Name Of Student", `father_name`"Father\'s Name", `surname`"Surname", `guardian_name`"Guardian Name", `relationship` "Relationship", `religion` "Religion", `address`"Address", `phone`"Phone", `cell_no`"Cell No.", `e_mail` "E-mail", `ice_no`"In case of Emergency", `occupation_of_father` "Occupation of Father", `monthly_income` "Monthly Income", `cnic_guradian`"CNIC Guardian", `date_of_birth`"Date of Birth", `place_of_birth`"Place of Birth", `date_of_birth_words` "Date of Birth (in words)", `admission_saught` "Admission saught for class", `admission_granted` "Admission granted for class", `last_school_class` "Last School and Class Attended ",`memon`"Memon" ,`which_memon`"Cast"FROM `ad_admission`order by `addmission_id` desc ';
                                             display_query($sql);
 
                                             
@@ -291,11 +289,8 @@ if( $uploadedok) {
                             </div>
                         </div>
                     </div>
-                            
-                    </div>
                 </div>
-        <br>
-        <br>
+            </div>
 
                     <!-- attendance form -->
 
@@ -303,7 +298,7 @@ if( $uploadedok) {
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-12">
                                 <div class="card-box">
 
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Admission Form</h4>
@@ -318,16 +313,13 @@ if( $uploadedok) {
                                                 $gr_no[] = $row_gr['addmission_id'];}
                                                 $gr_no_create = max($gr_no) + 1;
                                                 echo $gr_no_create ;
-                                            
-                                                
-                                        
                                     ?>
-                                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" enctype="multipart/form-data" >
+                                    <form action="Admin-mod-admission-management.php" method="post" enctype="multipart/form-data" >
 
                                         <div class="row ">
-                                            <div class="col-md-8" style="padding-top: 6%;">
+                                            <div class="col-sm-8" style="padding-top: 6%;">
                                                 <div class="row" >
-                                                    <div class="col-md-12" >
+                                                    <div class="col-sm-12" >
                                                         <div>
                                                             <div class="form-group">
                                                                 <?php
@@ -341,7 +333,7 @@ if( $uploadedok) {
                                                                 <label for="G.RNo">G.R No.</label>
                                                                 <input type="text" name="GR_No" required
                                                                        placeholder="Enter G.R No." class="form-control" id="adG.RNo"
-                                                                       <?php if(isset($_REQUEST['GR_No']))echo'value="'.$_REQUEST['GR_No'].'" readonly';else echo'value="ST'.$gr_no_create.'" readonly'; ?>>
+                                                                       <?php if(isset($_REQUEST['GR_No']))echo'value="'.$_REQUEST['GR_No'].'" readonly';else echo'value='.$gr_no_create.' readonly'; ?>>
                                                             </div>
                                                         </div>
                                                         
@@ -357,22 +349,6 @@ if( $uploadedok) {
                                             </div>
                                         </div>
 
-<!--                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="class">Class</label>
-                                                    <input type="text" name="nick" parsley-trigger="change" required
-                                                           placeholder="Enter class" class="form-control" id="class">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="G.RNo">G.R No.</label>
-                                                    <input type="email" name="number" parsley-trigger="change" required
-                                                           placeholder="Enter G.R No." class="form-control" id="G.RNo">
-                                                </div>
-                                            </div>
-                                        </div> -->
                                         <div class="form-group">
                                             <label for="nameofthestudent">Name of the Student</label>
                                             <input type="text" name="name_of_student" required
@@ -381,7 +357,7 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="father_name">Father's Name</label>
                                                     <input type="text" name="father_name" required
@@ -389,7 +365,7 @@ if( $uploadedok) {
                                                            value="<?php if (isset($_REQUEST['father_name'])) echo $_REQUEST['father_name'];  ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="surname">Surname</label>
                                                     <input type="text" name="surname" placeholder="Enter surname" class="form-control"
@@ -399,14 +375,14 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="guardian'sname">Guardian's Name</label>
                                                     <input type="text" name="guardian_name" required placeholder="Enter guardian's name" class="form-control"
                                                     value="<?php if (isset($_REQUEST['guardian_name'])) echo $_REQUEST['guardian_name'];  ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="guardian'sname">Relationship</label>
                                                     <input type="text" name="relationship" required placeholder="Enter relationship" class="form-control"
@@ -427,14 +403,14 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="phone">Phone(Res.)</label>
                                                     <input type="tel" name="phone" required placeholder="Enter phone" class="form-control" id="adphone"
                                                     value="<?php if(isset($_REQUEST['phone'])) echo $_REQUEST['phone'] ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="cellno">Cell No.</label>
                                                     <input type="tel" name="cell_no" required placeholder="Enter cell no." class="form-control" id="adcellno" value="<?php if(isset($_REQUEST['cell_no'])) echo $_REQUEST['cell_no'] ?>">
@@ -443,14 +419,14 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="e-mail">E-mail</label>
                                                     <input type="email" name="e_mail" placeholder="Enter e-mail" class="form-control"
                                                      value="<?php if(isset($_REQUEST['e_mail'])) echo $_REQUEST['e_mail'] ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="ice">ICE (In case Emergency) No.</label>
                                                     <input type="tel" name="ice_no" required placeholder="Enter ICE." class="form-control" id="adice"
@@ -460,13 +436,13 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="Occupation">Occupation of Father/Guardian</label>
                                                     <input type="text" name="occupation_of_father" placeholder="Enter occupation" class="form-control" id="adoccupation"  value="<?php if(isset($_REQUEST['occupation_of_father'])) echo $_REQUEST['occupation_of_father'] ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="income">Monthly Income Rs.</label>
                                                     <input type="number" name="monthly_income" placeholder="Enter income." class="form-control" id="adincome" value="<?php if(isset($_REQUEST['monthly_income'])) echo $_REQUEST['monthly_income'] ?>" >
@@ -481,14 +457,14 @@ if( $uploadedok) {
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="dateofbirth">Date of Birth (In figures)</label>
                                                     <input type="date" name="date_of_birth" required placeholder="Enter date of birth" class="form-control" id="addateofbirth"
                                                     value="<?php if(isset($_REQUEST['date_of_birth'])) echo $_REQUEST['date_of_birth'] ?>">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6">
+                                            <div class="col-sm-6">
                                                 <div class="form-group">
                                                     <label for="placofbirth">Place of Birth</label>
                                                     <input type="text" name="place_of_birth" placeholder="Enter place of birth" class="form-control" id="adplaceofbirth"
@@ -503,22 +479,28 @@ if( $uploadedok) {
                                             value="<?php if(isset($_REQUEST['date_of_birth_words'])) echo $_REQUEST['date_of_birth_words']?>">
                                         </div>
 
+                                     
+                                        <?php
+                                        dropDownSimple("Addmission saught for class","admission_saught","class_name","ad_class",NULL);
+                                        dropDownSimple("Addmission granted for class","admission_granted","class_name","ad_class",NULL);
+                                        ?>
                                         <div class="form-group">
-                                            <label for="addmissionsaught">Addmission saught for class</label>
-                                            <input type="text" name="admission_saught" required placeholder="Enter saught for class" class="form-control" id="adaddmissionsaught"
-                                            value="<?php if(isset($_REQUEST['admission_saught'])) echo $_REQUEST['admission_saught']?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="addmissiongranted">Addmission granted for class</label>
-                                            <input type="text" name="admission_granted" required placeholder="Enter admission granted for class" class="form-control" id="adaddmissiongranted"
-                                            value="<?php if(isset($_REQUEST['admission_granted'])) echo $_REQUEST['admission_granted']?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="lastclass">Last School & Class Attended</label>
+                                            <label for="lastclass">Last School and Class Attended</label>
                                             <input type="text" name="last_school_class" required placeholder="Enter occupation" class="form-control" id="adlastclass"
                                             value="<?php if(isset($_REQUEST['last_school_class'])) echo $_REQUEST['last_school_class']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="lastclass">Cast Memon</label>
+                                            <select type="text" name="memon" required placeholder="Enter occupation" class="form-control" >
+                                                <option value="no" <?php if (isset($_REQUEST['memon']) && $_REQUEST['memon']== "no" ) echo "selected";  ?>>No</option>
+                                                <option value="yes" <?php if(isset($_REQUEST['memon']) && $_REQUEST['memon'] == 'yes') echo "selected" ?>>Yes</option>
+                                            </select>
+                                           
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="lastclass">Which Memon</label>
+                                            <input type="text" name="which_memon"  placeholder="Enter cast" class="form-control" />
                                         </div>
 
                                         <div class="form-group text-right m-b-0">
@@ -537,107 +519,6 @@ if( $uploadedok) {
                     </div>
                 </div>
             </div>
-                <!-- for office use only -->
-            <!-- <div class="">
-                <div class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> For Office Use Only </h4>
-
-                                    <form action="#" >
-
-                                        <div class="form-group">
-                                            <label for="adAdmittedClass">Admitted Class</label>
-                                            <input type="text" name="name" parsley-trigger="change" required
-                                                   placeholder="Enter admitted class" class="form-control" id="adAdmittedClass">
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="adAdmissionFeeRs">Admission Fee Rs</label>
-                                                    <input type="number" name="father'sname" parsley-trigger="change" required
-                                                           placeholder="Enter admission fee" class="form-control" id="adAdmissionFeeRs">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <label for="adRNo">R No.</label>
-                                                    <input id="adRNo" type="text" placeholder="Enter r no." required
-                                                           class="form-control">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="adExamFee">Activities & Examination Fee Rs.</label>
-                                            <input  type="text" required
-                                                           placeholder="Enter activities & xamination fee" class="form-control" id="adExamFee">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="adTutionFee">Tution Fee Rs.</label>
-                                            <input  type="number" required
-                                                           placeholder="Enter activities & xamination fee" class="form-control" id="adTutionFee">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="adTotalFee">Total Rs.</label>
-                                            <input  type="text" required
-                                                           placeholder="Enter activities & xamination fee" class="form-control" id="adTotalFee">
-                                        </div>
-                                        <br>
-                                        <label><strong>Document Submitted</strong></label>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="checkbox checkbox-info">
-                                                    <input id="adBirthCertificate" type="checkbox">
-                                                    <label for="adBirthCertificate">1. Birth Certificate</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="checkbox checkbox-info">
-                                                    <input id="adPhotographs" type="checkbox">
-                                                    <label for="adPhotographs">2. Six Passport Size Photographs of Student (in school uniform)</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="checkbox checkbox-info">
-                                                    <input id="adTC" type="checkbox">
-                                                    <label for="adTC">3. School Leaving Certificate</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="checkbox checkbox-info">
-                                                    <input id="adCnicCopy" type="checkbox">
-                                                    <label for="adCnicCopy">4. CNIC Photo Copy of Parents</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="checkbox checkbox-info">
-                                            <input id="adNadra" type="checkbox">
-                                            <label for="adNadra">5. NADRA Regisration Certificate</label>
-                                        </div>
-
-                                        <div class="form-group text-right m-b-0">
-                                            <button class="btn btn-primary waves-effect waves-light"  id="adsubmit" onclick ="addmissionFormAdd()">
-                                                Submit
-                                            </button>
-                                            <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                                Cancel
-                                            </button>
-                                        </div>
-
-                                    </form>
-                                </div>
-                            </divend col -->
-                       <!--  </div>
-
-                    </div>
-                </div>
-                 for office use only
-            </div> --> --> -->
 
 
 
@@ -656,7 +537,7 @@ if( $uploadedok) {
         <script src="assets/js/jquery.nicescroll.js"></script>
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
-                <!-- Datatables-->
+        <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
@@ -697,9 +578,7 @@ if( $uploadedok) {
         <![endif]-->
         <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
 
-        <!--Morris Chart-->
-        <script src="assets/plugins/morris/morris.min.js"></script>
-        <script src="assets/plugins/raphael/raphael-min.js"></script>
+
 
         <!-- Dashboard init -->
         <script src="assets/pages/jquery.dashboard.js"></script>
@@ -709,13 +588,11 @@ if( $uploadedok) {
         <script src="assets/js/jquery.app.js"></script>
 
 
-    <!-- for checking form -->
+
             <!-- file uploads js -->
         <script src="assets/plugins/fileuploads/js/dropify.min.js"></script>
 
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
+
 
         <script type="text/javascript">
             $('.dropify').dropify({

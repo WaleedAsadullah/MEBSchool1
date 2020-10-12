@@ -162,8 +162,8 @@ $miscfee = $print_data[$i]['miscfee'] ;
 $specialfee = $print_data[$i]['specialfee'] ;
 $annualfee = $print_data[$i]['annualfee'] ;
 
-$feesibdisc = $print_data[$i]['feesibdisc'] ;
-$feeza = $print_data[$i]['feeza'] ;
+$feesibdisc = (int)$print_data[$i]['feesibdisc'] ;
+$feeza = (int)$print_data[$i]['feeza'] ;
 
 $fee = $print_data[$i]['fee'] ;
 
@@ -218,15 +218,20 @@ $fee = $print_data[$i]['fee'] ;
                         <p>Exams & Activities</p>
                         <p>Misc</p>
                         <p>Other Charges</p>
-                        <p>Annual Charges</p>
+                        <p>Annual Charges</p>';
+                        if($feeza > 0) $echo_string .='<p>Zakat</p>';
+                        if($feesibdisc > 0) $echo_string .='<p>Sibling Discount</p>';
+                        $echo_string .='
                         <p>Total</p>
                     </div>
                     <div class= "col-sm-6 text-right p-r-0">
                          <table >
                             <thead>
                                 <tr>
+                                    <th>Act.</th>'; if($concession_id) $echo_string .='
+                                    <th>Con.</th>'; $echo_string .='
+
                                     <th>Rs.</th>
-                                    <th>Ps.</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -263,7 +268,9 @@ $fee = $print_data[$i]['fee'] ;
                                     <th>'.$annual_fee.'</th>'; if($concession_id) $echo_string .='
                                     <th>'.$annual_con.'</th>
   '; $echo_string .='                                  <th>'.$annualfee.'</th>
-                                </tr>
+                                </tr>';if($feeza > 0) $echo_string .='<tr><th></th><th>'.$feeza.'</th><th>-'.$feeza.'</th></tr>';
+                                if($feesibdisc > 0) $echo_string .='<tr><th></th><th>'.$feesibdisc.'</th><th>-'.$feesibdisc.'</th></tr>';
+                                $echo_string .='
 
                                 <tr>
                                     <th></th>'; if($concession_id) $echo_string .='

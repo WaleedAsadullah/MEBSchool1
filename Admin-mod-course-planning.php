@@ -12,7 +12,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
+        <?php include_once("title.php") ?>
 
 
         <!-- DataTables -->
@@ -21,10 +21,6 @@ include_once('session_end.php');
         <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-
-
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -175,7 +171,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `course_planning_id`"ID", `class`"Class", `subject`"Subject", `date`"Date", `title`"Title", `details`"Details" FROM `ad_course_planning`';
+                                            $sql = 'SELECT `ad_course_planning`.`course_planning_id`"ID", `ad_class`.`class_name`"Class",`ad_class`.`section`"Section", `ad_course_planning`.`subject`"Subject",`ad_course_planning`.`date`"Date", `ad_course_planning`.`title`"Title", `ad_course_planning`.`details`"Details" FROM `ad_course_planning`,`ad_class` WHERE `ad_class`.`class_id` =  `ad_course_planning`.`class`';
                                             display_query($sql);
 
                                             ?>
@@ -201,23 +197,26 @@ $filename=$_FILES["file"]["tmp_name"];
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px;">Course planning</h4>
                                     <form action="Admin-mod-course-planning.php" method="post">
 
+                                         <?php
+                                        dropDownConditional3section("Class", "class","class_id","class_name","section","ad_class",Null);
+                                        dropDownConditionalUnsumit("Subject","subject","subject_id","subject_name","ad_subject",NULL)
+                                        ?>
                                         <div class="form-group">
-                                            <label for="cpClass">Class</label>
-                                            <input type="text" name="class" required placeholder="Enter class" class="form-control" id="cpClass"
-                                            value="<?php if(isset($_REQUEST['class'])) echo $_REQUEST['class']?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="cpSubject">Subject</label>
-                                            <input type="text" name="subject" required
-                                                   placeholder="Enter subject" class="form-control" id="cpSubject"
-                                                   value="<?php if(isset($_REQUEST['subject'])) echo $_REQUEST['subject']?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="cpDate">Date</label>
-                                            <input id="cpDate" type="date" name="date" placeholder="Enter date" required
-                                                   class="form-control"
-                                                   value="<?php if (isset($_REQUEST['date'])) echo $_REQUEST['date']; else echo (date("Y-m-d")); ?>">
+                                            <label for="zaEligible">Week</label>
+                                            <select type="text" name="date" required="" class="form-control">
+                                                <option value="Week 1" <?php if(isset($_REQUEST['date']) && $_REQUEST['date'] == 'Week 1') echo "selected" ?>>Week 1</option>
+                                                <option value="Week 2" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 2" ) echo "selected";  ?>>Week 2</option>
+                                                <option value="Week 3" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 3" ) echo "selected";  ?>>Week 3</option>
+                                                <option value="Week 4" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 4" ) echo "selected";  ?>>Week 4</option>
+                                                <option value="Week 5" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 5" ) echo "selected";  ?>>Week 5</option>
+                                                <option value="Week 6" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 6" ) echo "selected";  ?>>Week 6</option>
+                                                <option value="Week 7" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 7" ) echo "selected";  ?>>Week 7</option>
+                                                <option value="Week 8" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 8" ) echo "selected";  ?>>Week 8</option>
+                                                <option value="Week 9" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 9" ) echo "selected";  ?>>Week 9</option>
+                                                <option value="Week 10" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 10" ) echo "selected";  ?>>Week 10</option>
+                                                <option value="Week 11" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 11" ) echo "selected";  ?>>Week 11</option>
+                                                <option value="Week 12" <?php if (isset($_REQUEST['date']) && $_REQUEST['date']== "Week 12" ) echo "selected";  ?>>Week 12</option>
+                                            </select>
                                         </div>
 
                                         <div class="form-group">

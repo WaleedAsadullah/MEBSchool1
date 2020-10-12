@@ -150,9 +150,11 @@ $filename=$_FILES["file"]["tmp_name"];
                                             <?php
                                             if (isset($_POST['submit'])){
 
-                                            $sql = 'INSERT INTO `ad_employee_record`(`employee_record_id`, `user_id`, `user_date`, `name`,`gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `phone_number`, `address`, `comment`) VALUES (NULL,\'';
+                                                $gross = $_REQUEST['salary'] + $_REQUEST['house'] + $_REQUEST['utility'] + $_REQUEST['allow'];
+
+                                            $sql = 'INSERT INTO `ad_employee_record`(`employee_record_id`, `user_id`, `user_date`, `name`, `gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `house`, `utility`, `allow`, `gross`, `phone_number`, `address`, `comment`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['gr_no'].'\', \''.$_REQUEST['cnic'].'\', \''.$_REQUEST['position'].'\', \''.$_REQUEST['assigned_section'].'\', \''.$_REQUEST['age'].'\', \''.$_REQUEST['start'].'\', \''.$_REQUEST['salary'].'\', \''.$_REQUEST['phone_number'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['comment'].'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['gr_no'].'\', \''.$_REQUEST['cnic'].'\', \''.$_REQUEST['position'].'\', \''.$_REQUEST['assigned_section'].'\', \''.$_REQUEST['age'].'\', \''.$_REQUEST['start'].'\', \''.$_REQUEST['salary'].'\', \''.$_REQUEST['house'].'\', \''.$_REQUEST['utility'].'\', \''.$_REQUEST['allow'].'\', \''.$gross.'\', \''.$_REQUEST['phone_number'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
                                             insert_query($sql);
                                                 }
@@ -189,7 +191,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 }
                                                // $sql = "SELECT * FROM `ad_annual_appraisal`";
 
-                                            $sql = 'SELECT  `employee_record_id` "ID",`name`"Name",gr_no "Gr No.", `cnic` "CNIC", `position`"Position",`assigned_section`"Assigned Section", `age`"Age", `start`, `salary`"Salary", `phone_number`"Phone", `address` "Address", `comment` "Comment" FROM `ad_employee_record`';
+                                            $sql = 'SELECT  `employee_record_id` "ID",`name`"Name",gr_no "Gr No.", `cnic` "CNIC", `position`"Position",`assigned_section`"Assigned Section", `age`"Age", `start`, `salary`"Basic Salary",`house`"House R/A",`utility`"Utility",`allow`"Convey Allow",`gross`"Gross Salary", `phone_number`"Phone", `address` "Address", `comment` "Comment" FROM `ad_employee_record` order by `employee_record_id` desc';
                                             display_query($sql);
 
                                             // --------------------------
@@ -286,9 +288,27 @@ $filename=$_FILES["file"]["tmp_name"];
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="salary">Salary</label>
+                                                <label for="salary">Basic Salary</label>
                                                 <input type="number" name="salary" required="" placeholder="Enter salary" class="form-control" 
                                                 value="<?php if(isset($_REQUEST['salary'])) echo $_REQUEST['salary']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">House R/A</label>
+                                                <input type="number" name="house" required="" placeholder="Enter house r/a" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['house'])) echo $_REQUEST['house']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">Utility</label>
+                                                <input type="number" name="utility" required="" placeholder="Enter utility" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['utility'])) echo $_REQUEST['utility']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">Convey Allowance</label>
+                                                <input type="number" name="allow" required="" placeholder="Enter convey allow" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['allow'])) echo $_REQUEST['allow']?>">
                                             </div>
 
                                             <div class="form-group">

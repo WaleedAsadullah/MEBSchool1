@@ -214,16 +214,36 @@ echo "Sibling discount fee(actual)=".($feesibdisc =$student_fee[0]['sibling_dis'
 echo "<br>";
 echo "Zakat adjustment (actual)=".($feeza =$student_fee[0]['zakat_adj']);
 echo "<br>";
+
+/*$sql2 ='SELECT count(`acfc`.`studend_id`),`acfc`.`studend_id`, `acfc`.`student_name`, `acfc`.`class_name`, `acfc`.`section`, sum(`acfc`.`fee`) "total fee due to date" , COALESCE(sum(`acfcd`.`amount_pay`),0) "Total fee paid to date" , (sum(`acfc`.`fee`)- COALESCE(sum(`acfcd`.`amount_pay`),0)) "Arrears" FROM `ac_fee_collection` acfc LEFT JOIN `ac_fee_collection_done` acfcd ON `studend_id` = `student_id` and `which_month` = `month` where `acfc`.`studend_id` = '.$students[$students_count]['gr_no'].' group by `studend_id`';
+
+ $sql2 ='SELECT `student_id`, `student_name`, `class_id`, `class_name`, `section`, COALESCE(sum(`amount_pay`),0) "paid2date", `month`, `year` FROM `ac_fee_collection_done` where `student_id` =  '.$students[$students_count]['gr_no'].' group by `student_id`';
+
+
+$result2 = mysqli_query($conn,$sql2);
+$paid2date = mysqli_fetch_assoc($result2);
+
+ $sql3 ='SELECT `studend_id`, `student_name`, `class_id`, `class_name`, `section`, COALESCE(sum(`fee`),0) "fee2date" , `which_month`, `year` FROM `ac_fee_collection` where `studend_id` = '.$students[$students_count]['gr_no'].' group by `studend_id`';
+
+
+$result3 = mysqli_query($conn,$sql3);
+$fee2date = mysqli_fetch_assoc($result3);
+
+$balance = $fee2date['fee2date'] - $paid2date['paid2date'] ; //$balance['Arrears'];
+*/
+
+$balance =  get_student_balance($students[$students_count]['gr_no']);
+
 $fee = $monfee + $admfee +$examfee +$miscfee +$specialfee +$annualfee -$feesibdisc -$feeza ;
 echo "Net total fee for month =". $fee;
 echo "<br>";
     
 
-$sql = 'INSERT INTO `ac_fee_collection`(`fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`,`concsession_id`,`generate_id`) VALUES (NULL,\'';
+$sql = 'INSERT INTO `ac_fee_collection`(`fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`,`concsession_id`,`generate_id`,`balance`) VALUES (NULL,\'';
 
 $sql .= get_curr_user();
 
-$sql .= '\',\''. $time_now.'\',\''.$generate_fee_for_month.'\', \''.$generate_fee_for_year.'\', \''.$class_id.'\', \''.$class_fee[0]['class_name'].'\', \''.$class_fee[0]['section_name'].'\', \''.$students[$students_count]['gr_no'].'\', \''.$students[$students_count]['name'].'\', \''.$class_fee[0]['monthly_fee'].'\', \''.$student_fee[0]['monthly_con'].'\', \''.$class_fee[0]['admission_fee'].'\', \''.$student_fee[0]['admission_con'].'\', \''.$class_fee[0]['exam'].'\', \''.$student_fee[0]['exam_con'].'\', \''.$class_fee[0]['misc'].'\', \''.$student_fee[0]['misc_con'].'\', \''.$class_fee[0]['special'].'\', \''.$student_fee[0]['special_con'].'\', \''.$class_fee[0]['annual'].'\', \''.$student_fee[0]['annual_con'].'\', \''.$monfee.'\', \''.$admfee.'\', \''.$examfee.'\', \''.$miscfee.'\', \''.$specialfee.'\', \''.$annualfee.'\', \''.$feesibdisc.'\', \''.$feeza.'\', \''.$fee.'\', \''.$student_fee[0]['fee_concession_id'].'\', \''.$generate_fee[0]['generate_fee_class_id'].'\')';
+$sql .= '\',\''. $time_now.'\',\''.$generate_fee_for_month.'\', \''.$generate_fee_for_year.'\', \''.$class_id.'\', \''.$class_fee[0]['class_name'].'\', \''.$class_fee[0]['section_name'].'\', \''.$students[$students_count]['gr_no'].'\', \''.$students[$students_count]['name'].'\', \''.$class_fee[0]['monthly_fee'].'\', \''.$student_fee[0]['monthly_con'].'\', \''.$class_fee[0]['admission_fee'].'\', \''.$student_fee[0]['admission_con'].'\', \''.$class_fee[0]['exam'].'\', \''.$student_fee[0]['exam_con'].'\', \''.$class_fee[0]['misc'].'\', \''.$student_fee[0]['misc_con'].'\', \''.$class_fee[0]['special'].'\', \''.$student_fee[0]['special_con'].'\', \''.$class_fee[0]['annual'].'\', \''.$student_fee[0]['annual_con'].'\', \''.$monfee.'\', \''.$admfee.'\', \''.$examfee.'\', \''.$miscfee.'\', \''.$specialfee.'\', \''.$annualfee.'\', \''.$feesibdisc.'\', \''.$feeza.'\', \''.$fee.'\', \''.$student_fee[0]['fee_concession_id'].'\', \''.$generate_fee[0]['generate_fee_class_id'].'\', \''.$balance.'\')';
 
 insert_query($sql);
 

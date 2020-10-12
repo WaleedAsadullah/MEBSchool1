@@ -63,21 +63,23 @@ include_once('session_end.php');
 
 <!-- date -->
             <div class="content-page">
-                <div class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card-box">
                                     <?php
 
                                     if(isset($_REQUEST['submit'])){
                                         $start = $_REQUEST['s_date'];
                                         $end = $_REQUEST['e_date'];
                                     }else{
+
                                         $start = "2019-08-20";
-                                        $end = "2021-08-20";
+                                        $end = date("Y-m-d");
                                     }
                                     ?>
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-30 text-center"><?php echo $start ." to ".$end ?></h4>
 
                                     <form action="Accounts-mod-balance-sheet.php" method="post">
                                         <div class="row" >
@@ -118,6 +120,7 @@ include_once('session_end.php');
                 <div class="">
                     <div class="container">
                         <div class="row">
+
                             <div class="col-lg-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-30">Assets Statement</h4>
@@ -222,7 +225,7 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30">Liabilities Statement</h4>
+                                    <h4 class="header-title m-t-0 m-b-30">Equities Statement</h4>
 
                                     <div class="table-responsive">
                                         <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">

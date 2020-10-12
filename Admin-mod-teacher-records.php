@@ -149,11 +149,13 @@ $filename=$_FILES["file"]["tmp_name"];
 
                                             <?php
                                             if (isset($_POST['submit'])){
+
+                                            // $gross = $_REQUEST['salary'] + $_REQUEST['house'] + $_REQUEST['utility'] + $_REQUEST['allow'];
         
 
-                                            $sql = 'INSERT INTO `ad_teacher_records`(`Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `phone_number`, `address`, `comment`) VALUES (NULL,\'';
+                                            $sql = 'INSERT INTO `ad_teacher_records`(`Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `house`, `utility`, `allow`,`gross`, `phone_number`, `address`, `comment`) VALUES  (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['cnic'].'\', \''.$_REQUEST['position'].'\', \''.$_REQUEST['office'].'\', \''.$_REQUEST['age'].'\', \''.$_REQUEST['start'].'\', \''.$_REQUEST['salary'].'\', \''.$_REQUEST['phone_number'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['comment'].'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['cnic'].'\', \''.$_REQUEST['position'].'\', \''.$_REQUEST['office'].'\', \''.$_REQUEST['age'].'\', \''.$_REQUEST['start'].'\', \''.$_REQUEST['salary'].'\', \''.$_REQUEST['house'].'\', \''.$_REQUEST['utility'].'\', \''.$_REQUEST['allow'].'\', \''.$_REQUEST['gross'].'\', \''.$_REQUEST['phone_number'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
                                             insert_query($sql);
                                                 }
@@ -173,7 +175,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 }
                                                // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT  `teacher_records_id` "ID",`name`"Name", `cnic` "CNIC", `position`"Position", `office`"Office", `age`"Age", `start`, `salary`"Salary", `phone_number`"Phone", `address` "Address", `comment` "Comment" FROM `ad_teacher_records`';
+                                            $sql = 'SELECT  `teacher_records_id` "ID",`name`"Name", `cnic` "CNIC", `position`"Position", `office`"Office", `age`"Age", `start`, `salary`"Basic Salary",`house`"House R/A",`utility`"Utility",`allow`"Convey Allowance",`gross`"Gross Salary", `phone_number`"Phone", `address` "Address", `comment` "Comment" FROM `ad_teacher_records` order by `teacher_records_id` desc ';
                                             display_query($sql);
 
                                             // --------------------------
@@ -247,11 +249,11 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 <input type="tel" name="phone_number" required="" placeholder="Enter phone number" class="form-control"
                                                 value="<?php if(isset($_REQUEST['phone_number'])) echo $_REQUEST['phone_number']?>">
                                             </div>
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="">E-mail </label>
                                                 <input type="e-mail" name="e_mail" required="" placeholder="Enter e-mail" class="form-control"
                                                 value="<?php if(isset($_REQUEST['e_mail'])) echo $_REQUEST['e_mail']?>">
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
                                                 <label for="position">Position</label>
@@ -264,7 +266,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 <input type="text" name="office" placeholder="Enter office" class="form-control" id="prVacation"
                                                 value="<?php if(isset($_REQUEST['office'])) echo $_REQUEST['office']?>">
                                             </div>
-
+<!-- 
                                             <div class="form-group">
                                                 <label for="office">Assigned Section</label>
                                                 <input type="text" name="assigned_section" placeholder="Enter assigned section" class="form-control" id="prVacation"
@@ -275,7 +277,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 <label for="office">Assigned Class</label>
                                                 <input type="text" name="assigned_class" placeholder="Enter assigned class" class="form-control" id="prVacation"
                                                 value="<?php if(isset($_REQUEST['assigned_class'])) echo $_REQUEST['assigned_class']?>">
-                                            </div>
+                                            </div> -->
 
                                             <div class="form-group">
                                                 <label for="age">Age</label>
@@ -290,9 +292,33 @@ $filename=$_FILES["file"]["tmp_name"];
                                             </div>
 
                                             <div class="form-group">
-                                                <label for="salary">Salary</label>
+                                                <label for="salary">Basic Salary</label>
                                                 <input type="number" name="salary" required="" placeholder="Enter salary" class="form-control" 
                                                 value="<?php if(isset($_REQUEST['salary'])) echo $_REQUEST['salary']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">House R/A</label>
+                                                <input type="number" name="house" required="" placeholder="Enter house r/a" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['house'])) echo $_REQUEST['house']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">Utility</label>
+                                                <input type="number" name="utility" required="" placeholder="Enter utility" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['utility'])) echo $_REQUEST['utility']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">Convey Allowance</label>
+                                                <input type="number" name="allow" required="" placeholder="Enter convey allow" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['allow'])) echo $_REQUEST['allow']?>">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="salary">Gross Salary</label>
+                                                <input type="number" name="gross" required="" placeholder="Enter gross salary" class="form-control" 
+                                                value="<?php if(isset($_REQUEST['allow'])) echo $_REQUEST['allow']?>">
                                             </div>
 
                                             <div class="form-group">
@@ -305,7 +331,12 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 <label for="comment">Comment</label>
                                                 <input type="text"  name="comment" rows="4" placeholder="comments........." class="form-control" value="<?php if(isset($_REQUEST['comment'])) echo $_REQUEST['comment']?>">
                                             </div>
-                                       
+                                             <!-- $gross = ; -->
+
+                                              
+                                                
+                                               
+                                            
 
                                             <div class="form-group text-right m-b-0">
                                                 <?php 

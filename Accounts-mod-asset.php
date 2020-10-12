@@ -203,7 +203,7 @@ if(isset($_REQUEST['account2'])){
                                         
                                    
                                             <div class="form-group">
-                                                <label for="prName">Account ID</label>
+                                                <label for="prName">Account Number</label>
                                                 <input type="text" name="account_id" required="" placeholder="Enter account id" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_account.'" readonly' ; else { if(isset($_REQUEST['account_id'])) echo " readonly value = ".$_REQUEST['account_id'];} ?> >
                                             </div>
 

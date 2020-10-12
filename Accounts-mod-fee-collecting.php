@@ -12,7 +12,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
+        <?php include_once("title.php") ?>
 
         <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
@@ -67,8 +67,6 @@ include_once('session_end.php');
                                 </div>
                             </div>
 
-                            <!-- input form -->
-
 
                             <!-- input form -->
                                 <div class="col-lg-12">
@@ -84,30 +82,32 @@ include_once('session_end.php');
 
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
+
+                                            $balance = $_REQUEST['fee_total'] - $_REQUEST['amount_pay'];
                                             // print_r($_REQUEST);
                                             $sql = 'INSERT INTO `ac_fee_collection_done`(`fee_collection_done_id`, `user_id`, `user_date`, `student_id`, `student_name`, `class_id`, `class_name`, `section`, `fee_total`,`amount_pay`, `balance`, `date`, `voucher_no`,`month`,`year`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['student_name'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['class_name'].'\', \''.$_REQUEST['section'].'\', \''.$_REQUEST['fee_total'].'\', \''.$_REQUEST['amount_pay'].'\', \''.$_REQUEST['balance'].'\', \''.$_REQUEST['date'].'\', \''.$_REQUEST['voucher_no'].'\', \''.$_REQUEST['month'].'\', \''.$_REQUEST['year'].'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['student_id'].'\', \''.$_REQUEST['student_name'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['class_name'].'\', \''.$_REQUEST['section'].'\', \''.$_REQUEST['fee_total'].'\', \''.$_REQUEST['amount_pay'].'\', \''.$balance.'\', \''.$_REQUEST['date'].'\', \''.$_REQUEST['voucher_no'].'\', \''.$_REQUEST['month'].'\', \''.$_REQUEST['year'].'\')';
                                                 // echo $sql;
                                             insert_query($sql);
                                                 }
                                             //----------------------
 
                                             ///edit code
-                                            check_edit("ac_fee_collection_done","fee_collection_done_id");
-                                            edit_display("ac_fee_collection_done","fee_collection_done_id");
+                                            // check_edit("ac_fee_collection_done","fee_collection_done_id");
+                                            // edit_display("ac_fee_collection_done","fee_collection_done_id");
                                             //end of edit code -shift view below delete
 
                                             // ---------------------
 
-                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ac_fee_collection_done` WHERE `ac_fee_collection_done`.`fee_collection_done_id` = '.$_REQUEST['deleteid'];
+                                            // if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ac_fee_collection_done` WHERE `ac_fee_collection_done`.`fee_collection_done_id` = '.$_REQUEST['deleteid'];
 
-                                            insert_query($sql);
+                                            // insert_query($sql);
                                             // echo "done deleting";
-                                                }
+                                                // }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `fee_collection_done_id`"Transaction ID",`voucher_no`"Voucher No.", `user_id`"Cashier", `student_id`"Student ID", `student_name`"Student Name", `class_id`"Class ID", `class_name`"Class Name", `section`"Section", `fee_total`"Total Fee",`amount_pay`"Amount Pay", `balance`"Balance", `date`"Date Of Payment", `month`"Fee For Month",`year`"Year" FROM `ac_fee_collection_done`';
+                                            $sql = 'SELECT `fee_collection_done_id`"Transaction ID",`voucher_no`"Voucher No.", `user_id`"Cashier", `student_id`"Student ID", `student_name`"Student Name", `class_id`"Class ID", `class_name`"Class Name", `section`"Section", `fee_total`"Total Fee",`amount_pay`"Amount Pay", `balance`"Balance", `date`"Date Of Payment", `month`"Fee For Month",`year`"Year" FROM `ac_fee_collection_done` order by `fee_collection_done_id` desc';
                                             display_query($sql);
 
                                             ?>
@@ -136,7 +136,7 @@ include_once('session_end.php');
                                     <br>
                                     <form action="Accounts-mod-fee-collecting.php#formadd" method="post" id="submitted">
                                         <?php
-                                        dropDownConditional2("Student ID","gr_num2","studend_id","student_name","ac_fee_collection",NULL);
+                                        dropDownConditional2("Student ID","gr_num2","studend_id","student_name","ac_fee_collection","group by `studend_id` ORDER BY `user_date` DESC");
                                         ?>
                                         <div class="form-group text-right m-b-0">
                                             <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
@@ -149,7 +149,8 @@ include_once('session_end.php');
 if(isset($_REQUEST['gr_num2'])){
     $conn = connect_db();
 
-    $sql = 'SELECT `fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`,`concsession_id`,`generate_id` from `ac_fee_collection` where `studend_id` = '.$_REQUEST['gr_num2'].' ';
+    $sql = 'SELECT `fee_collection_id`, `user_id`, `user_date`, `which_month`, `year`, `class_id`, `class_name`, `section`, `studend_id`, `student_name`, `month_fee`, `month_con`, `admission_fee`, `admission_con`, `exam_fee`, `exam_con`, `misc_fee`, `misc_con`, `other_fee`, `other_con`, `annual_fee`, `annual_con`, `monfee`, `admfee`, `examfee`, `miscfee`, `specialfee`, `annualfee`, `feesibdisc`, `feeza`, `fee`,`concsession_id`,`generate_id`,`balance` from `ac_fee_collection` where `studend_id` = '.$_REQUEST['gr_num2'].' order by `user_date` DESC limit 0,1';
+
 
     $result = mysqli_query($conn,$sql);
 
@@ -164,6 +165,7 @@ if(isset($_REQUEST['gr_num2'])){
     $value_studend_id =  $row['studend_id'];
     $value_student_name =  $row['student_name'];
     $value_fee =  $row['fee'];
+    $balance = $row['balance'];
 }
 ?>
                                     <form action="Accounts-mod-fee-collecting.php" method="post">
@@ -229,6 +231,35 @@ if(isset($_REQUEST['gr_num2'])){
                                         <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
+                                                    <label>Arrears</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4"></div>
+                                            <div class="col-sm-4">  
+                                                <div class="form-group">
+                                                    <input  type="text" name="balance" placeholder="Arrears remaining as per voucher" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2']))echo 'value="'.$balance.'" readonly' ; else {if(isset($_REQUEST['balance'])) echo'value="'.$_REQUEST['balance'].'" readonly';} ?>>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                           <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
+                                                    <label>Latest Arears</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4"></div>
+                                            <div class="col-sm-4">  
+                                                <div class="form-group">
+                                                    <input  type="text" name="latest_balance" placeholder="Latest Arears" required="" class="form-control"  <?php if(isset($_REQUEST['gr_num2'])) echo 'value="'.get_student_balance($_REQUEST['gr_num2']).'" readonly' ; else { 
+                                                        if(isset($_REQUEST['student_id'])) echo'value="'.get_student_balance($_REQUEST['student_id']).'" readonly';} ?>>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                           <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="form-group">
                                                     <label>Total Fee</label>
                                                 </div>
                                             </div>
@@ -252,7 +283,7 @@ if(isset($_REQUEST['gr_num2'])){
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-sm-4">
                                                 <div class="form-group">
                                                     <label>Balance</label>
@@ -264,7 +295,7 @@ if(isset($_REQUEST['gr_num2'])){
                                                     <input  type="number" name="balance" placeholder="Enter balance"  class="form-control"  value="<?php if(isset($_REQUEST['balance'])) echo $_REQUEST['balance']?>">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">

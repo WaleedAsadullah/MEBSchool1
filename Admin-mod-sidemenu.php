@@ -86,10 +86,6 @@
                             </li>
 
                             <li>
-                                <a href="Admin-mod-student-teacher-ratio.php" class="waves-effect"><i class="zmdi zmdi-format-underlined"></i> <span> Student Teacher ratio </span> </a>
-                            </li>
-
-                            <li>
                                 <a href="Admin-mod-school-leaving-certificate.php" class="waves-effect"><i class="zmdi zmdi-assignment-returned"></i> <span> School leaving certificate </span> </a>
                             </li>
 
@@ -109,9 +105,6 @@
                             <li>
                                 <a href="Admin-mod-subject.php" class="waves-effect"><i class="zmdi zmdi-format-subject"></i> <span>Subject</span> </a>
                             </li>
-                            <li>
-                                <a href="Admin-mod-teacher-class.php" class="waves-effect"><i class="dripicons-view-list-large"></i> <span>Teacher Class</span> </a>
-                            </li>
 
                             <li>
                                 <a href="Admin-mod-procurement.php" class="waves-effect"><i class="dripicons-box"></i> <span> Procurement </span> </a>
@@ -129,6 +122,9 @@
 
                             <li>
                                 <a href="Admin-mod-fee-concession.php" class="waves-effect"><i class="zmdi zmdi-money-off"></i> <span> Fee Concession </span> </a>
+                            </li>
+                            <li>
+                                <a href="Admin-mod-annual-appraisal-for-bonus-and-increment.php" class="waves-effect"><i class="fa fa-calendar-check-o"></i> <span> Annual Appraisal for Bonus and Increment </span> </a>
                             </li>
                             
                         <div class="clearfix"></div>
