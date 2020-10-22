@@ -114,7 +114,7 @@ include_once('session_end.php');
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
                                             $sql = 'SELECT `feedback_id`"ID", `feedback_for_user_id`"User", `feedback_by_user_id`"For", `rating`"Rating", `date`"Date", `text`"Feedback" FROM `feedback`';
-                                            display_query($sql);
+                                            display_query_rights($sql);
 
                                             ?>
                                         </table>
@@ -126,7 +126,18 @@ include_once('session_end.php');
                     </div>
                 </div>
             </div>
+<?php 
 
+function form_insert($form){
+  $x = explode("/",$_SERVER['PHP_SELF']);
+  $k = count($x);
+  $x = $x[$k-1];
+  $sql_rights = 'SELECT `right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form` FROM `rights` where `form_location` = "'.$x.'" and `user_type_id` = 2';
+  $rights_data = query_to_array($sql_rights);
+  if ($rights_data[0]['insert_form']==1){
+    echo $form;}}
+
+?>
             <!-- Form teacher -->
             <div class="content-page" id="formadd">
                 <div class="content">

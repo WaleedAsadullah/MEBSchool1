@@ -139,7 +139,7 @@ include_once('session_end.php');
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Account Entry </h4>
                                     <br>
                                     
-                                    <form action="Accounts-mod-account-entry.php#formadd" method="post" id="submitted">
+<!--                                     <form action="Accounts-mod-account-entry.php#formadd" method="post" id="submitted">
                                       <?php  
                                         dropDownConditional2("Account ID","account2","account","acount_name","ac_receivable_chart_of_account",NULL);
                                         ?>
@@ -148,8 +148,8 @@ include_once('session_end.php');
                                                 Submit
                                             </button>
                                         </div>
-                                   </form>
-<?php
+                                   </form> -->
+<!-- <?php
 if(isset($_REQUEST['account2'])){
     $conn = connect_db();
     $sql_s = 'SELECT `char_of_account_id`, `user_id`, `user_date`, `account`, `acount_name`, `type`, `detail`, `report_data` FROM `ac_receivable_chart_of_account` WHERE  `account` = '.$_REQUEST['account2'].' ';
@@ -161,7 +161,7 @@ if(isset($_REQUEST['account2'])){
     $value_name =  $row['acount_name'];
     $value_type =  $row['type'];
 }
-?>
+?> -->
 
                                         <form action="Accounts-mod-account-entry.php" method="post">
 
@@ -172,30 +172,25 @@ if(isset($_REQUEST['account2'])){
                                             </div>
                                         
                                    
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="prName">Account Number</label>
                                                 <input type="text" name="account_id" required="" placeholder="Enter account id" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_account.'" readonly' ; else { if(isset($_REQUEST['account_id'])) echo " readonly value = ".$_REQUEST['account_id'];} ?> >
-                                            </div>
+                                            </div> -->
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="prName">Account Title</label>
                                                 <input type="text" name="account_title" required="" placeholder="Enter account title" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_name.'" readonly' ; else {if(isset($_REQUEST['account_title'])) echo " readonly value = ".$_REQUEST['account_title'];} ?> >
-                                            </div>
+                                            </div> -->
 
-                                            <div class="form-group">
+                                            <!-- <div class="form-group">
                                                 <label for="prName">Account Type</label>
                                                 <input type="text" name="type" required="" placeholder="Enter account type" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_type.'" readonly' ; else {if(isset($_REQUEST['type'])) echo " readonly value = ".$_REQUEST['type'];} ?> >
-                                            </div>
+                                            </div> -->
 
-                                            <div class="form-group">
-                                                <label for="prName">Debit Account Title</label>
-                                                <input type="text" name="debit_account_title" required="" placeholder="Enter debit account title" class="form-control" id="prName" value="<?php if(isset($_REQUEST['debit_account_title'])) echo $_REQUEST['debit_account_title'] ?>" >
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="prName">Credit Account Title</label>
-                                                <input type="text" name="credit_account_title" required="" placeholder="Enter credit account title" class="form-control" id="prName" value="<?php if(isset($_REQUEST['Credit_account_title'])) echo $_REQUEST['Credit_account_title'] ?>" >
-                                            </div>
+                                            <?php
+                                             dropDownConditional2("Debit Account Title","debit_account_title","account","acount_name","ac_receivable_chart_of_account",NULL);
+                                             dropDownConditional2("Credit Account Title","credit_account_title","account","acount_name","ac_receivable_chart_of_account",NULL);
+                                            ?>
 
                                             <div class="form-group">
                                                 <label for="prName">Debit Amount</label>

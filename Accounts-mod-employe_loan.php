@@ -147,8 +147,8 @@ include_once('session_end.php');
                                             <label for="">Type</label>
                                             <select id="settype" name="settype" required="" class="form-control" >
                                                 <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "" ) echo "selected";  ?>  value="">-Select</option>
-                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "Staff" ) echo "selected";  ?>  value="Staff">Staff</option>
-                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "Teacher" ) echo "selected";  ?> value="Teacher">Teacher</option>
+                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "staff" ) echo "selected";  ?>  value="staff">Staff</option>
+                                                <option <?php if (isset($_REQUEST['settype']) && $_REQUEST['settype']== "teacher" ) echo "selected";  ?> value="teacher">Teacher</option>
                                                 
                                             </select>
                                         </div>
@@ -161,7 +161,7 @@ include_once('session_end.php');
                                     </form>
 
 <?php if(isset($_REQUEST['settype'])){
-    if( $_REQUEST['settype']=="Teacher"){
+    if( $_REQUEST['settype']=="teacher"){
 
     $settype = $_REQUEST['settype'];
     echo '
@@ -181,7 +181,7 @@ include_once('session_end.php');
                                }} ?>
 <?php
 if(isset($_REQUEST['gr_number2'])){
-    if($_REQUEST['settype'] == "Teacher"){
+    if($_REQUEST['settype'] == "teacher"){
     $conn = connect_db();
     $sql_s = 'SELECT `Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `phone_number`, `address`, `comment` FROM `ad_teacher_records` WHERE  `Teacher_records_id` = '.$_REQUEST['gr_number2'].' ';
     $result = mysqli_query($conn,$sql_s);
@@ -195,7 +195,7 @@ if(isset($_REQUEST['gr_number2'])){
 ?>
 
 <?php if(isset($_REQUEST['settype'])){
-    if( $_REQUEST['settype']=="Staff"){
+    if( $_REQUEST['settype']=="staff"){
 
     $settype = $_REQUEST['settype'];
     echo '
@@ -212,7 +212,7 @@ if(isset($_REQUEST['gr_number2'])){
                                }}?>
 <?php
 if(isset($_REQUEST['gr_number2'])){
-    if( $settype == "Staff"){
+    if( $settype == "staff"){
     $conn = connect_db();
     $sql_s = 'SELECT `employee_record_id`, `user_id`, `user_date`, `name`, `gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `phone_number`, `address`, `comment` FROM `ad_employee_record` WHERE  `employee_record_id` = '.$_REQUEST['gr_number2'].' ';
     $result = mysqli_query($conn,$sql_s);
@@ -230,16 +230,23 @@ if(isset($_REQUEST['gr_number2'])){
         echo $sql_o;
         $result_o = mysqli_query($conn,$sql_o);
         $row_o = mysqli_fetch_assoc($result_o);
+        $value_loan_amount = $row_o['sum'];
+        $value_loan_amount = (int)$value_loan_amount;
+        echo gettype($value_loan_amount);
 
-       echo "<h1>" .$value_loan_amount = $row_o['sum']."</h1>";
+       echo "<h1>" .$value_loan_amount."</h1><p>hello</p>";
 
        $sql_l = 'SELECT SUM(`loan`)"sum2" from `ac_payroll_calculation` where `gr_number` = '.$_REQUEST['gr_number2'].' and `type` =  "'.$_REQUEST['settype'].'"';
         echo $sql_l;
         $conn2 = connect_db();
         $result_l = mysqli_query($conn2,$sql_l);
         $row_l = mysqli_fetch_assoc($result_l);
-
-       echo "<h1>" .$value_loan_amount2 = $row_l['sum2']."</h1><p>waleed</p>";
+        $value_loan_amount2 = $row_l['sum2'];
+        echo gettype($value_loan_amount2);
+        $balance = $value_loan_amount - $value_loan_amount2;
+        echo "<h1>".$value_loan_amount2."</h1>";
+        $max_laon = ($value_salary * 2) - $balance;
+        echo "<h1>".$balance."</h1>";
 
     }
 
@@ -260,8 +267,8 @@ if(isset($_REQUEST['gr_number2'])){
                                     
                                
                                         <div class="form-group">
-                                            <label for="hbAddress">Loan Amount <?php if(isset($value_salary))echo "Max Laon :" .$value_salary * 2;  ?></label>
-                                            <input type="number" name="loan_amount" required="" placeholder="Enter loan amount" class="form-control" id="prName" value="<?php if(isset($_REQUEST['loan_amount'])) echo $_REQUEST['loan_amount']?>" max = <?php if(isset($value_salary)) {echo $value_salary * 2;}else echo 0; ?>>
+                                            <label for="hbAddress">Loan Amount <?php if(isset($value_salary))echo "Max Laon :" .$max_laon;  ?></label>
+                                            <input type="number" name="loan_amount" required="" placeholder="Enter loan amount" class="form-control" id="prName" value="<?php if(isset($_REQUEST['loan_amount'])) echo $_REQUEST['loan_amount']?>" max = <?php if(isset($value_salary)) {echo$max_laon;}else echo 0; ?>>
                                         </div>
 
                                         <div class="form-group">

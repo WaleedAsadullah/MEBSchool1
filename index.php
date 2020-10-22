@@ -64,9 +64,10 @@ session_start();
             $email_pass = mysqli_fetch_assoc($query);
             $db_pass =  $email_pass['pass']; 
             $_SESSION['id'] = $email_pass['gr_no'];
-            $_SESSION['account'] = $email_pass['account'];
             $_SESSION['add_user_id'] = $email_pass['add_user_id'];
             $_SESSION['e_mail'] = $email_pass['e_mail'];
+            // $_SESSION['type'] = $email_pass['account'];
+            $_SESSION['type'] = "student";
 
             $db_account = $email_pass['account'];
             $pass_decode = password_verify($password, $db_pass);
@@ -74,38 +75,13 @@ session_start();
             if($pass_decode){
 
                 $_SESSION['name'] = $email_pass['name'];
+                echo '
+                <script>
+                    location.replace(\'home.php\');
+                </script>';
 
-                if($db_account == 'Student'){
-                ?>
-                <script>
-                    location.replace('Students-mod-index.php');
-                </script>
-                <?php
-                }elseif($db_account == 'Parent'){
-                ?>
-                <script>
-                    location.replace('Parents-index.php');
-                </script>
-                <?php
-                }elseif($db_account == 'Account'){
-                ?>
-                <script>
-                    location.replace('Accounts-mod-index.php');
-                </script>
-                <?php
-                }elseif($db_account == 'Teacher'){
-                ?>
-                <script>
-                    location.replace('Teacher-mod-index.php');
-                </script>
-                <?php
-                }else{
-                ?>
-                <script>
-                    location.replace('Admin-mod-index.php');
-                </script>
-                <?php
-                }
+
+            
             }else{
             echo '<script>
             alert("Password is incorrect")

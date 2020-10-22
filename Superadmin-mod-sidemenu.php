@@ -33,6 +33,18 @@
                                 <a href="Superadmin-mod-logo-and-name.php" class="waves-effect"><i class="zmdi zmdi-edit"></i> <span>Logo / Name</span> </a>
                             </li>
 
+                            <li class="active">
+                                <a href="Superadmin-mod-rights.php" class="waves-effect"><i class="zmdi zmdi-format-indent-increase"></i> <span>Rights</span> </a>
+                            </li>
+                            <li class="active">
+                                <a href="Superadmin-mod-type.php" class="waves-effect"><i class="fa fa-code-fork"></i> <span>Type</span> </a>
+                            </li>
+
+
+                            <li class="active">
+                                <a href="Superadmin-mod-add-user.php" class="waves-effect"><i class="zmdi zmdi-account-add"></i> <span>Add User</span> </a>
+                            </li>
+
                             <!-- <li class="active">
                                 <a href="Admin-mod-student-attendance.php" class="waves-effect"><i class="zmdi zmdi-view-dashboard"></i> <span>  Students Attendance </span> </a>
                             </li>

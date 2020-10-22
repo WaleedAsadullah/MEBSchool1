@@ -196,17 +196,17 @@ if(isset($_REQUEST['account2'])){
                                    
                                             <div class="form-group">
                                                 <label for="prName">Account ID</label>
-                                                <input type="text" name="account" required="" placeholder="Enter account id" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_account.'" readonly' ; else {if(isset($_REQUEST['account'])) echo " readonly value = ".$_REQUEST['account'];} ?> >
+                                                <input type="text" name="account" required="" placeholder="Enter account id" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_account.'" readonly' ; else {if(isset($_REQUEST['account'])) echo'value="'.$_REQUEST['account'].'" readonly' ;} ?>>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="">Account Title</label>
-                                                <input type="text" name="account_title" required="" placeholder="Enter account title" class="form-control"  <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_name.'" readonly' ; else {if(isset($_REQUEST['account_title'])) echo " readonly value = ".$_REQUEST['account_title'];} ?> >
+                                                <input type="text" name="account_title" required="" placeholder="Enter account title" class="form-control"  <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_name.'" readonly' ; else {if(isset($_REQUEST['account_title'])) echo'value="'.$_REQUEST['account_title'].'" readonly' ;} ?>>
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="prName">Account Type</label>
-                                                <input type="text" name="type" required="" placeholder="Enter account title" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_type.'" readonly' ; else {if(isset($_REQUEST['type'])) echo " readonly value = ".$_REQUEST['type'];} ?> >
+                                                <input type="text" name="type" required="" placeholder="Enter account title" class="form-control" id="prName" <?php if(isset($_REQUEST['account2']))echo 'value="'.$value_type.'" readonly' ; else {if(isset($_REQUEST['type']))echo'value="'.$_REQUEST['type'].'" readonly' ;} ?>>
                                             </div>
 
                                             <?php

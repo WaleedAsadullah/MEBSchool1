@@ -121,7 +121,6 @@ include_once('session_end.php');
                                                 </a>
                                             </span>
                                         </div>
-                <!-- <h5 class="text-muted m-t-0 font-600">Responsive Admin Dashboard</h5> -->
                                     </div>
                                 </div>
                             </div>

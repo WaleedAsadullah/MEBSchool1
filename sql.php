@@ -1,4 +1,22 @@
+SELECT `fee_collection_id`,`studend_id`, `student_name`,`which_month`,`year`,`feeza`, `from_zakat_account_id` FROM `ac_fee_collection`,`ad_fee_concession` WHERE `studend_id` = `student_id` group by `fee_collection_id`
+
+//zakat calculation by zakat account id
+SELECT `fee_collection_id`,`studend_id`, `student_name`,`which_month`,`year`,`feeza`, `from_zakat_account_id` FROM `ac_fee_collection`,`ad_fee_concession` WHERE `student_id` = `studend_id` and `from_zakat_account_id` = 1 group by `fee_collection_id`
+
+//zakat balance
+SELECT sum(`ac_zakat`.`amount`) - sum(`ac_fee_collection`.`feeza`) FROM `ac_zakat`,`ac_fee_collection`
+
+
+/// installment data
+SELECT `employee_id`, `employee_name`, `loan_amount`,`laon_installment`, month(current_date())- month(`loan_start`) "installments paid",`laon_installment`-(month(current_date())- month(`loan_start`)) "installments Left" , `type`, `laon_installment_amount`, `outstanding` FROM `ac_employee_loan` WHERE `employee_id` = 6
 //reports on outstanding fee amount
+
+
+//individual sum fo rloan amount
+SELECT `employee_id`, `employee_name`, count(`employee_id`) "Number of loans" , sum(if(`laon_installment`-(month(current_date())- month(`loan_start`))<0,1,0)) "repaid loans", sum(`loan_amount`) "total loan amount", month(current_date())- month(`loan_start`) "installments paid",`laon_installment`-(month(current_date())- month(`loan_start`)) "installments_Left" , `type`,sum( (`laon_installment_amount`)*if(`laon_installment`-(month(current_date())- month(`loan_start`))>0,1,0)) "collect amount" , `outstanding` FROM `ac_employee_loan` WHERE `employee_id` = 6
+/////individual detailed
+
+SELECT `employee_id`, `employee_name`, (`employee_id`) "Number of loans" , (if(`laon_installment`-(month(current_date())- month(`loan_start`))<0,1,0)) "repaid loans", (`loan_amount`) "total loan amount", month(current_date())- month(`loan_start`) "installments paid",`laon_installment`-(month(current_date())- month(`loan_start`)) "installments_Left" , `type`,( (`laon_installment_amount`)*if(`laon_installment`-(month(current_date())- month(`loan_start`))>0,1,0)) "collect amount" , `outstanding` FROM `ac_employee_loan` WHERE `employee_id` = 6
 
 SELECT `student_id`, `student_name`, `class_name`, `section`, sum(`fee_total`) "total fee todate" ,sum(`amount_pay`) "Total fee paid to date" , (sum(`fee_total`)-sum(`amount_pay`)) "Arrears" FROM `ac_fee_collection_done` group by `student_id` 
 

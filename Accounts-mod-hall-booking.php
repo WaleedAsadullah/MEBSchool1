@@ -116,7 +116,7 @@ include_once('session_end.php');
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
                                             $sql = 'SELECT `hall_booking`"ID", `name`"Name", `address`"Address", `phone`"Phone",`date_booking`"Date of booking", `rent`"Rent", `advance`"Advance", `location`"Location", `date_event`"Date of event", `guest`"Number of guest", `waiter`"Waiter are required ?", `female_waiter`"If female waiter required ?", `is_adv_given`"Advance that can given",`noc`"N.O.C Charges" FROM `ac_hall_booking';
-                                            display_query($sql);
+                                            display_query_conditional($sql);
                                             // -----------------------
 
                                             ?>

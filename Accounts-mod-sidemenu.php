@@ -52,11 +52,11 @@
                                  </span> </a>
                             </li>
                             <li>
-                                <a href="Accounts-mod-account-entry.php" class="waves-effect"><i class="zmdi zmdi-collection-item"></i> <span> Account Entry
+                                <a href="Accounts-mod-account-entry.php" class="waves-effect"><i class="fa fa-cc-amex"></i> <span> Account Entry
                                  </span> </a>
                             </li>
                             <li>
-                                <a href="Accounts-mod-receivable-and-payables-reporting.php" class="waves-effect"><i class="zmdi zmdi-collection-item"></i> <span> Receivable and Payables Reporting
+                                <a href="Accounts-mod-receivable-and-payables-reporting.php" class="waves-effect"><i class="fa fa-exchange"></i> <span> Receivable and Payables Reporting
                                  </span> </a>
                             </li>
 
@@ -68,15 +68,25 @@
                                 <a href="Accounts-mod-payoll-calculation.php" class="waves-effect"><i class="fa fa-calculator"></i> <span> Payroll Calculation </span> </a>
                             </li>
 
+                            <li>
+                                <a href="Accounts-mod-salary-paid.php" class="waves-effect"><i class="fa fa-paypal"></i> <span> Salary Paid </span> </a>
+                            </li>
+
 
                             
 
                             <li>
                                 <a href="Accounts-mod-zakat-form.php" class="waves-effect"><i class="fa fa-pagelines"></i> <span> Zakat Form</span> </a>
+                            </li>                          
+                            <li>
+                                <a href="Accounts-mod-zakat-donor.php" class="waves-effect"><i class="zmdi zmdi-accounts-list"></i> <span> Zakat Donor Entry</span> </a>
+                            </li>
+                            <li>
+                                <a href="Accounts-mod-zakat.php" class="waves-effect"><i class="fa fa-envira"></i> <span> Zakat Donate</span> </a>
                             </li>
 
                             <li>
-                                <a href="Accounts-mod-zakat.php" class="waves-effect"><i class="fa fa-envira"></i> <span> Zakat</span> </a>
+                                <a href="Accounts-mod-zakat-amount.php" class="waves-effect"><i class="fa fa-reorder"></i> <span> Zakat Detail</span> </a>
                             </li>
 
                             <li>

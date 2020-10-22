@@ -81,7 +81,7 @@ include_once('session_end.php');
 
 
 
-            <div class="content-page">
+<!--             <div class="content-page">
                 <div class="content">
                     <div class="container">
                         <div class="row">
@@ -93,7 +93,11 @@ include_once('session_end.php');
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-12">
+                        </div>
+
+                    </div>
+                </div> -->
+<!--                             <div class="col-sm-12">
                                 <div class="card-box">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Parent Child </h4>
                                     <br>
@@ -140,10 +144,10 @@ include_once('session_end.php');
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Form -->
-            <div class="content-page" id="formadd">
+  <!--           <div class="content-page" id="formadd">
                 <div class="content">
                     <div class="container">
                         <div class="row">
@@ -224,7 +228,7 @@ if(isset($_REQUEST['child_id2'])){
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- Form end -->
 
                 <!-- footer -->

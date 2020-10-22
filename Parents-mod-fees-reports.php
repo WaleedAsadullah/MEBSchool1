@@ -14,6 +14,15 @@ include_once('session_end.php');
 
           <?php include_once("title.php") ?>
 
+
+        <!-- DataTables -->
+        <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
         <!--Morris Chart CSS -->
         <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
@@ -34,18 +43,15 @@ include_once('session_end.php');
         <![endif]-->
 
         <script src="assets/js/modernizr.min.js"></script>
-
-    </head>
-
-
-
-<body class="fixed-left">
+</head>
+<body class="smallscreen fixed-left-void">
     <div id="wrapper" class="enlarged">
 
 
                     <!--- header -->
                     <?php 
-                            include_once("header.php")
+                            include_once("header.php");
+                            include_once("db_functions.php");
                     ?>
 
                     <!-- header -->
@@ -58,80 +64,66 @@ include_once('session_end.php');
                     ?>
 
                     <!-- Sidebar -->
-            <!-- table -->
+
+
+
+
+
             <div class="content-page">
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                                <div class="col-lg-12">
+                            <!-- <div class="col-lg-12">
                                 <div class="card-box">
-                                    <div class="dropdown pull-right">
-                                        <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                            <i class="zmdi zmdi-more-vert"></i>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
+                                     <div class="m-t-5 m-b-5" style="text-align: center" >
+                                         <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
+                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
                                     </div>
-
-                                    <h4 class="header-title m-t-0 m-b-30">Attendance Sheet</h4>
+                                </div>
+                            </div> -->
+                            <div class="col-lg-12">
+                                <div class="card-box table-responsive">
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Fee Reports </h4>
+                                    <br>
 
                                     <div class="table-responsive">
-                                        <table class="tablesaw table m-b-0 tablesaw-columntoggle">
-                                            <thead>
-                                            <tr>
-                                                <th>Month</th>
-                                                <th>Fee</th>
-                                                <th>Due date</th>
-                                                <th>Status</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>January</td>
-                                                    <td>3000/-</td>
-                                                    <td>26/01/2020</td>
-                                                    <td><span class="label label-success">Paid</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>February</td>
-                                                    <td>3000/-</td>
-                                                    <td>15/02/2020</td>
-                                                    <td><span class="label label-success">Paid</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>March</td>
-                                                    <td>3000/-</td>
-                                                    <td>10/03/2020</td>
-                                                    <td><span class="label label-success">Paid</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>April</td>
-                                                    <td>3000/-</td>
-                                                    <td>06/04/2020</td>
-                                                    <td><span class="label label-danger">Pending</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>May</td>
-                                                    <td>3000/-</td>
-                                                    <td>- - - - - - - - - - </td>
-                                                    <td><span class="label label-primary">Up coming</span></td>
-                                                </tr>
+                                        <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
+                                            <?php
+                                            
+                                            // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            </tbody>
+                                            $sql = 'SELECT `fee_collection_id`"Voucher No.", `which_month`"Month", `year`"Year", `studend_id`"Student ID", `student_name`"Student Name",`balance`"Balance" FROM `ac_fee_collection`';
+                                            display_query_without_btn($sql);
+
+                                            ?>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                       
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+
+
+
+            <!-- Form end -->
+
+
+                <!-- footer -->
+                <?php 
+                    include_once("footer.php")
+                ?>
+                   
+
+
+                               
+    </div>
 
     </div>
+
         <script>
             var resizefunc = [];
         </script>
@@ -145,25 +137,44 @@ include_once('session_end.php');
         <script src="assets/js/jquery.blockUI.js"></script>
         <script src="assets/js/waves.js"></script>
         <script src="assets/js/jquery.nicescroll.js"></script>
-        <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
-        <!-- KNOB JS -->
-        <!--[if IE]>
-        <script type="text/javascript" src="assets/plugins/jquery-knob/excanvas.js"></script>
-        <![endif]-->
-        <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
+        <!-- Datatables-->
+        <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
+        <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
+        <script src="assets/plugins/datatables/buttons.bootstrap.min.js"></script>
+        <script src="assets/plugins/datatables/jszip.min.js"></script>
+        <script src="assets/plugins/datatables/pdfmake.min.js"></script>
+        <script src="assets/plugins/datatables/vfs_fonts.js"></script>
+        <script src="assets/plugins/datatables/buttons.html5.min.js"></script>
+        <script src="assets/plugins/datatables/buttons.print.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.fixedHeader.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.keyTable.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.responsive.min.js"></script>
+        <script src="assets/plugins/datatables/responsive.bootstrap.min.js"></script>
+        <script src="assets/plugins/datatables/dataTables.scroller.min.js"></script>
 
-        <!--Morris Chart-->
-        <script src="assets/plugins/morris/morris.min.js"></script>
-        <script src="assets/plugins/raphael/raphael-min.js"></script>
-
-        <!-- Dashboard init -->
-        <script src="assets/pages/jquery.dashboard.js"></script>
+        <!-- Datatable init js -->
+        <script src="assets/pages/datatables.init.js"></script>
 
         <!-- App js -->
         <script src="assets/js/jquery.core.js"></script>
         <script src="assets/js/jquery.app.js"></script>
 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('#datatable').dataTable();
+                $('#datatable-keytable').DataTable( { keys: true } );
+                $('#datatable-responsive').DataTable();
+                $('#datatable-scroller').DataTable( { ajax: "assets/plugins/datatables/json/scroller-demo.json", deferRender: true, scrollY: 380, scrollCollapse: true, scroller: true } );
+                var table = $('#datatable-fixed-header').DataTable( { fixedHeader: true } );
+            } );
+            TableManageButtons.init();
+
+        </script>
+        <?php include_once('script.php') ?>
+
 </body>
 </html>
+<!--  -->

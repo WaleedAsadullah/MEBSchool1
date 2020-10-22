@@ -75,20 +75,23 @@ include_once('session_end.php');
                             </div>
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Zakat Doner</h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Zakat Donate</h4>
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table id="datatable2" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
+                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
                                             <?php
                                             // ------------------------
 
                                             // echo "test";
                                             if(isset($_REQUEST['submit'])){
+                                                $year = $_REQUEST['date_of_donation'];
+                                                $year = explode("-",$year);
+                                                $year = $year[0];
                                                 // print_r($_REQUEST);
-                                                $sql = 'INSERT INTO `ac_zakat`(`zakat_id`, `user_id`, `user_date`, `period`, `doner`, `amount`, `purpose`, `comment`) VALUES (NULL,\'';
+                                                $sql = 'INSERT INTO `ac_zakat`(`zakat_id`, `user_id`, `user_date`, `period`, `doner_gr`, `doner`, `amount`, `purpose`, `date_of_donation`,`year`, `comment`) VALUES (NULL,\'';
                                                 $sql .= get_curr_user();
-                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['period'].'\', \''.$_REQUEST['doner'].'\', \''.$_REQUEST['amount'].'\', \''.$_REQUEST['purpose'].'\', \''.$_REQUEST['comment'].'\')';
+                                                $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['period'].'\', \''.$_REQUEST['doner_gr'].'\', \''.$_REQUEST['doner'].'\', \''.$_REQUEST['amount'].'\', \''.$_REQUEST['purpose'].'\', \''.$_REQUEST['date_of_donation'].'\', \''.$year.'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
                                                 insert_query($sql);
                                             }
@@ -108,7 +111,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `zakat_id`"ID", `period`"Period", `doner`"Doner", `amount`"Amount", `purpose`"Purpose", `comment`"Comments" FROM `ac_zakat` order by `zakat_id` desc ';
+                                            $sql = 'SELECT `zakat_id`"ID",`period`"Period", `doner_gr`"Doner ID", `doner`"Doner Name", `amount`"Amount", `purpose`"Purpose", `date_of_donation`"Date Of Donation", `comment` "Comments"FROM `ac_zakat`order by `zakat_id` desc ';
                                             display_query($sql);
                                             // -----------------------
 
@@ -129,9 +132,36 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Zakat Doner</h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Zakat Donate</h4>
                                     <br>
-                                    <form action="Accounts-mod-zakat.php" method="post">
+
+
+                                    <form action="Accounts-mod-zakat.php#formadd" method="post">
+                                        <?php 
+                                        dropDownConditional2("Donor ID","donor_id2","doner_id","doner_name","doner_zakat",NULL);
+                                        ?>
+                                            
+
+                                            
+                                            <div class="form-group text-right m-b-0">
+                                                <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                                    Submit
+                                                </button>
+                                            </div>
+                                        </form>
+<?php
+if(isset($_REQUEST['donor_id2'])){
+    $sql = 'SELECT `doner_id`, `doner_name`, `Donar_number`, `Doner_address`, `Doner_preferences`, `comments` FROM `doner_zakat` WHERE `doner_id` = '.$_REQUEST['donor_id2'].'';
+    $donors = query_to_array($sql);
+    $value_id = $donors[0]['doner_id'];
+    $value_name = $donors[0]['doner_name'];
+
+
+}
+?>
+
+                                    <form action="Accounts-mod-zakat.php" method="post" id="submitted">
+
 
 
                                         <div class="form-group">
@@ -141,8 +171,13 @@ include_once('session_end.php');
                                     
                                
                                         <div class="form-group">
-                                            <label for="hbAddress">Zakat Doner</label>
-                                            <input type="text" name="doner" required="" placeholder="Enter zakat doner" class="form-control" id="prName" value="<?php if(isset($_REQUEST['doner'])) echo $_REQUEST['doner']?>">
+                                            <label for="hbAddress">Doner ID</label>
+                                            <input type="text" name="doner_gr" required="" placeholder="Enter zakat doner" class="form-control" id="prName"  <?php if(isset($_REQUEST['donor_id2']))echo 'value="'.$value_id.'" readonly' ; else { if(isset($_REQUEST['doner_gr'])) echo'value="'.$_REQUEST['doner_gr'].'" readonly' ;} ?>>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="hbAddress">Doner Name</label>
+                                            <input type="text" name="doner" required="" placeholder="Enter zakat doner" class="form-control" id="prName"  <?php if(isset($_REQUEST['donor_id2']))echo 'value="'.$value_name.'" readonly' ; else { if(isset($_REQUEST['doner']))echo'value="'.$_REQUEST['doner'].'" readonly' ;} ?>>
                                         </div>
 
                                         <div class="form-group">
@@ -153,6 +188,11 @@ include_once('session_end.php');
                                         <div class="form-group">
                                             <label for="hbDateOfBooking">Purpose</label>
                                             <input type="text" name="purpose" placeholder="Enter purpose" class="form-control" id="prVacation" value="<?php if(isset($_REQUEST['purpose'])) echo $_REQUEST['purpose']?>">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="hbDateOfBooking">Date Of Donation</label>
+                                            <input type="date" name="date_of_donation" placeholder="Enter date_of_donation" class="form-control" id="prVacation" value="<?php if (isset($_REQUEST['date_of_donation'])) echo $_REQUEST['date_of_donation']; else echo (date("Y-m-d")); ?>">
                                         </div>
 
                                         <div class="form-group">

@@ -119,7 +119,6 @@ include_once('session_end.php');
                     </div>
                 </div>
             </div>
-        </div>
 
 
 

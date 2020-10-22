@@ -104,7 +104,7 @@ return $newdata;
 
 // ----------------------------------
 
- function display_query($sql)
+ function display_query_rights($sql)
 {
 
  $conn = connect_db();
@@ -120,6 +120,81 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
   	if($i==0)
   	{
+echo '
+                <thead>
+                  <tr>
+                    <th>S.No</th>';
+              $x = explode("/",$_SERVER['PHP_SELF']);
+              $k = count($x);
+              $x = $x[$k-1];
+              $sql_rights = 'SELECT `right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form` FROM `rights` where `form_location` = "'.$x.'" and `user_type_id` = 2';
+              $rights_data = query_to_array($sql_rights);
+              if ($rights_data[0]['edit_form']==1){
+              echo'    <th></th>';}
+              if ($rights_data[0]['delete_form']==1){
+              echo'    <th></th>';}
+              echo'
+                    <th></th>
+
+                    
+                    <th></th>';
+$row_data = array_keys($row);
+$id_column = "";
+for($j=0;$j<count($row_data);$j++){
+
+  if($j==0) $id_column = $row_data[$j];
+
+    echo  "<th>".$row_data[$j]."</th>"; }
+                                                   
+    echo   '</tr>
+         </thead>
+      <tbody>';
+  	}
+  $i++;
+
+    echo '<tr>
+              <td>'.$i.'</td>';
+              if ($rights_data[0]['edit_form']==1){
+              echo'
+              <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>';}
+              if ($rights_data[0]['delete_form']==1){
+              echo'
+            
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>';}
+              echo'
+              <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
+
+
+for($k=0;$k<count($row_data);$k++){ echo  '<td>'.$row[$row_data[$k]].'</td>';}
+
+   echo  '</tr>';
+  }
+
+    echo '   </tbody>';
+} else {
+  echo "0 results";
+}
+    
+
+}
+
+function display_query($sql)
+{
+
+ $conn = connect_db();
+  $result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+
+  
+//get_current_form();
+                                               
+   $i = 0;                                     
+  while($row = $result->fetch_assoc()) {
+    if($i==0)
+    {
 echo '
                 <thead>
                   <tr>
@@ -148,9 +223,9 @@ for($j=0;$j<count($row_data);$j++){
 
 
 
-  	}
+    }
   $i++;
-  //	`increment_form_id`, `user_id`, `user_date`, `gr_number`, `salary_increment`, `new_salary`, `comment`
+  //  `increment_form_id`, `user_id`, `user_date`, `gr_number`, `salary_increment`, `new_salary`, `comment`
     //echo "id: " . $row["increment_form_id"]. " - user_id: " . $row["user_id"]. " " . $row["gr_number"]." - salary_increment: " . $row["salary_increment"]. " - new_salary: " . $row["new_salary"]. "  - comment: " . $row["comment"]. "<br>";
 
   
@@ -161,6 +236,160 @@ for($j=0;$j<count($row_data);$j++){
               <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
+
+
+for($k=0;$k<count($row_data);$k++){ echo  '<td>'.$row[$row_data[$k]].'</td>';}
+
+   echo  '</tr>';
+  }
+
+    echo '   </tbody>';
+} else {
+  echo "0 results";
+}
+    
+
+}
+
+
+
+ function display_query_without_btn($sql)
+{
+
+ $conn = connect_db();
+  $result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+
+  
+//get_current_form();
+                                               
+   $i = 0;                                     
+  while($row = $result->fetch_assoc()) {
+    if($i==0)
+    {
+echo '
+                <thead>
+                  <tr>
+                    <th>S.No</th>';
+$row_data = array_keys($row);
+$id_column = "";
+for($j=0;$j<count($row_data);$j++){
+
+  if($j==0) $id_column = $row_data[$j];
+
+    echo  "<th>".$row_data[$j]."</th>"; }
+                                                   
+    echo   '</tr>
+         </thead>
+      <tbody>';
+
+ //echo '';
+
+
+
+//print_r($row);
+
+
+
+    }
+  $i++;
+  //  `increment_form_id`, `user_id`, `user_date`, `gr_number`, `salary_increment`, `new_salary`, `comment`
+    //echo "id: " . $row["increment_form_id"]. " - user_id: " . $row["user_id"]. " " . $row["gr_number"]." - salary_increment: " . $row["salary_increment"]. " - new_salary: " . $row["new_salary"]. "  - comment: " . $row["comment"]. "<br>";
+
+  
+    echo '<tr>
+              <td>'.$i.'</td>
+              ';
+
+
+for($k=0;$k<count($row_data);$k++){ echo  '<td>'.$row[$row_data[$k]].'</td>';}
+
+   echo  '</tr>';
+  }
+
+    echo '   </tbody>';
+} else {
+  echo "0 results";
+}
+    
+
+}
+
+
+
+
+ function display_query_conditional($sql)
+{
+
+ $conn = connect_db();
+  $result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+  // output data of each row
+
+  
+//get_current_form();
+                                               
+   $i = 0;                                     
+  while($row = $result->fetch_assoc()) {
+    if($i==0)
+    {
+echo '
+                <thead>
+                  <tr>
+                    <th>S.No</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>';
+$row_data = array_keys($row);
+$id_column = "";
+for($j=0;$j<count($row_data);$j++){
+
+  if($j==0) $id_column = $row_data[$j];
+
+    echo  "<th>".$row_data[$j]."</th>"; }
+                                                   
+    echo   '</tr>
+         </thead>
+      <tbody>';
+
+ //echo '';
+
+
+
+//print_r($row);
+
+
+
+    }
+  $i++;
+  //  `increment_form_id`, `user_id`, `user_date`, `gr_number`, `salary_increment`, `new_salary`, `comment`
+    //echo "id: " . $row["increment_form_id"]. " - user_id: " . $row["user_id"]. " " . $row["gr_number"]." - salary_increment: " . $row["salary_increment"]. " - new_salary: " . $row["new_salary"]. "  - comment: " . $row["comment"]. "<br>";
+
+  
+    echo '<tr>
+              <td>'.$i.'</td>';
+$_SESSION['type'] = 'account';
+$link = $_SERVER['PHP_SELF'];
+$link = substr($link,8);
+$conn = connect_db();
+$sql_e = 'SELECT `right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form` FROM `rights` WHERE `form_location` = "'.$link.'" and `user_type` = "'.$_SESSION['type'].'" ';
+// echo $sql_e;
+$result_e = mysqli_query($conn,$sql_e);
+$row_e = mysqli_fetch_assoc($result_e);
+// print_r($row_e);
+if($row_e['edit_form'] == 1){
+  echo'<td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>';
+  }
+if($row_e['delete_form'] == 1){
+  echo'<td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>';
+  }
+
+  echo'<td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
+    <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
 
 for($k=0;$k<count($row_data);$k++){ echo  '<td>'.$row[$row_data[$k]].'</td>';}
@@ -856,6 +1085,7 @@ function dropDownSimple($label,$name,$select,$from,$condition){
 function dropDownConditional2($label,$name,$select,$select2,$from,$condition){
         $conn = connect_db();
         $sql_id = 'SELECT `'.$select.'`,`'.$select2.'` FROM `'.$from.'`'.$condition.''; 
+        // echo $sql_id;
 
         echo'
             <div class="form-group">

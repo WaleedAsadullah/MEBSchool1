@@ -153,7 +153,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                             // $gross = $_REQUEST['salary'] + $_REQUEST['house'] + $_REQUEST['utility'] + $_REQUEST['allow'];
         
 
-                                            $sql = 'INSERT INTO `ad_teacher_records`(`Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `house`, `utility`, `allow`,`gross`, `phone_number`, `address`, `comment`) VALUES  (NULL,\'';
+                                            $sql = 'INSERT INTO `ad_teacher_records`(`Teacher_records_id`, `user_id`, `user_date`, `name`, `cnic`, `position`, `office`, `age`, `start`, `salary`, `house`, `utility`, `allow`,`gross`, `phone_number`, `address`, `comment`) VALUES  ( NULL,\'';
                                             $sql .= get_curr_user();
                                             $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['cnic'].'\', \''.$_REQUEST['position'].'\', \''.$_REQUEST['office'].'\', \''.$_REQUEST['age'].'\', \''.$_REQUEST['start'].'\', \''.$_REQUEST['salary'].'\', \''.$_REQUEST['house'].'\', \''.$_REQUEST['utility'].'\', \''.$_REQUEST['allow'].'\', \''.$_REQUEST['gross'].'\', \''.$_REQUEST['phone_number'].'\', \''.$_REQUEST['address'].'\', \''.$_REQUEST['comment'].'\')';
                                                 // echo $sql;
