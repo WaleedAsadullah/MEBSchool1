@@ -2,12 +2,7 @@
 
                 <!-- LOGO -->
                 <div class="topbar-left">
-                    <?php  $index =  $_SERVER['PHP_SELF'];
-                            $index = explode("-", $index);
-                           $index = $index[0];
-
-                    ?>
-                    <a href="<?php echo $index;  ?>-mod-index.php" class="logo"><span>M.E.B <span>School</span></span><i class="zmdi zmdi-layers"></i></a>
+                    <a href="home.php" class="logo"><span>M.E.B <span>School</span></span><i class="zmdi zmdi-layers"></i></a>
                 </div>
 
                 <!-- Button mobile view to collapse sidebar menu -->

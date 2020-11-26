@@ -95,7 +95,13 @@ include_once('session_end.php');
                                             $sql .= get_curr_user();
                                             $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['type'].'\', \''.$_REQUEST['date_of_rev_exp'].'\', \''.$_REQUEST['account'].'\', \''.$_REQUEST['account_title'].'\', \''.$_REQUEST['exp_by_scction'].'\', \''.$_REQUEST['exp_amount'].'\', \''.$_REQUEST['check_by'].'\', \''.$_REQUEST['paid_using'].'\', \''.$_REQUEST['paid_amount'].'\', \''.$_REQUEST['comments'].'\', \''.$_REQUEST['check_date'].'\')';
                                             insert_query($sql);
-                                                }
+
+
+                                            $sql = 'INSERT INTO `ac_asset_liab`(`ac_asset_liab_id`, `user_id`, `user_date`, `date_of_ac_asset_liab`, `account_id`, `account_title`,`type`, `ac_asset_liab_by_scction`, `ac_asset_liab_amount`, `check_by`, `paid_using`, `paid_amount`, `comments`, `check_date`) VALUES (NULL,\'';
+                                            $sql .= get_curr_user();
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['date_of_ac_asset_liab'].'\', \''.$_REQUEST['account_id'].'\', \''.$_REQUEST['account_title'].'\', \''.$_REQUEST['type'].'\', \''.$_REQUEST['ac_asset_liab_by_scction'].'\', \''.$_REQUEST['ac_asset_liab_amount'].'\', \''.$_REQUEST['check_by'].'\', \''.$_REQUEST['paid_using'].'\', \''.$_REQUEST['paid_amount'].'\', \''.$_REQUEST['comments'].'\', \''.$_REQUEST['check_date'].'\')';
+                                            insert_query($sql);
+                                                }    
                                             // -------------------
 
                                             ///edit code

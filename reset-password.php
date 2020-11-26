@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,55 +49,54 @@
                 <div class="text-center">
                     <h4 class="text-uppercase font-bold m-b-0">Reset Password</h4>
 
-					<p class="text-muted m-b-0 font-13 m-t-20">Enter your email address and we'll send you an email with instructions to reset your password.  </p>
+					<!-- <p class="text-muted m-b-0 font-13 m-t-20"> </p> -->
                 </div>
                 <div class="panel-body">
                     <?php
+                   $token = $_GET['token'];
                     include_once('db_functions.php');
                     $conn = connect_db();
                     if(isset($_REQUEST['submit'])){
-                        $email = mysqli_real_escape_string($conn,$_REQUEST['email']);
+                        $pass = mysqli_real_escape_string(connect_db(), $_POST['pass']);
+                        $cpass = mysqli_real_escape_string(connect_db(), $_POST['cpass']);
+                        $pas = password_hash($pass, PASSWORD_BCRYPT);
+                        $cpas = password_hash($cpass, PASSWORD_BCRYPT);
+                            if( $pass ==  $cpass){
 
-                        $e_mailquary = "select * from ad_add_user where e_mail='$email'";
-                        $query = mysqli_query(connect_db(),$e_mailquary);
-                        $e_mailcount = mysqli_num_rows($query);
-                        
-                        if($e_mailcount){
-
-                            $userdata = mysqli_fetch_assoc($query);
-                            $username = $userdata['name'];
-                            $token = $userdata['token'];
-
-                            $subject = "Password Reset";
-                            $message = "localhost\school\\reset-password.php?token=".$token."";
-                            $sender = "From : waleedasad27@gmail.com";
-                            if (mail($email, $subject, $message,$sender)) {
+                            $sql = "UPDATE `ad_add_user` SET `pass`='".$pas."',`cpass`='".$cpas."' where `token` = '".$token."'";
+                            if (mysqli_query(connect_db(),$sql)) {
                                 echo '<script>
-                                        alert("Check Your E-mail To Reset Password")
-                                        </script>';
+                                        alert("Password Update Successfully")
+                                    </script>';
                                 echo '
                                     <script>
                                         location.replace(\'index.php\');
                                     </script>';
                             }
-                    }else{
+
+                            }else{
                                 echo '<script>
-                                        alert("E-mail Does Not Exist")
-                                        </script>';
-                    }
-                    }
+                                        alert("Password Are Not Same")
+                                    </script>';
+                            }
+                        }
                     ?>
-                    <form class="form-horizontal m-t-20" method="post" action="page-recoverpw.php">
+                    <form class="form-horizontal m-t-20" method="post" action="">
 
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <input class="form-control" type="email" name="email" required="" placeholder="Enter email">
+                                <input class="form-control" type="password" name="pass" required="" placeholder="Enter New Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input class="form-control" type="password" name="cpass" required="" placeholder="Enter Confirm Password">
                             </div>
                         </div>
 
                         <div class="form-group text-center m-t-20 m-b-0">
                             <div class="col-xs-12">
-                                <button class="btn btn-custom btn-bordred btn-block waves-effect waves-light" name="submit" type="submit">Send Email</button>
+                                <button class="btn btn-custom btn-bordred btn-block waves-effect waves-light" name="submit" type="submit">Reset Password</button>
                             </div>
                         </div>
 

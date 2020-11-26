@@ -1,7 +1,13 @@
 <?php
 session_start();
-?>
+if (isset($_SESSION['name']) && $_SERVER['PHP_SELF']=='/school/index.php'){
+    
+    echo '<script>
+        location.replace(\'home.php\');
+    </script>';
 
+} 
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -48,6 +54,7 @@ session_start();
     </head>
     <body> 
         <?php
+
         include_once('db_functions.php');
 
     
@@ -67,7 +74,8 @@ session_start();
             $_SESSION['add_user_id'] = $email_pass['add_user_id'];
             $_SESSION['e_mail'] = $email_pass['e_mail'];
             // $_SESSION['type'] = $email_pass['account'];
-            $_SESSION['type'] = "student";
+            $_SESSION['type'] = $email_pass['account'];
+
 
             $db_account = $email_pass['account'];
             $pass_decode = password_verify($password, $db_pass);
@@ -108,6 +116,7 @@ session_start();
         	<div class="m-t-40 card-box">
                 <div class="text-center">
                     <h4 class="text-uppercase font-bold m-b-0">Sign In</h4>
+
                     <div style="margin-top: 8px">
                         <span><a class="click" href="Superadmin-mod-index.php">Super Admin</a></span>
                         <span><a class="click" href="Admin-mod-index.php">Admin</a></span>
@@ -134,7 +143,7 @@ session_start();
                             </div>
                         </div>
 
-                        <div class="form-group ">
+                        <!-- <div class="form-group ">
                             <div class="col-xs-12">
                                 <div class="checkbox checkbox-custom">
                                     <input id="checkbox-signup" type="checkbox">
@@ -144,7 +153,7 @@ session_start();
                                 </div>
 
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="form-group text-center m-t-30">
                             <div class="col-xs-12">
@@ -163,13 +172,13 @@ session_start();
             </div>
             <!-- end card-box-->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-12 text-center">
                     <p class="text-muted">Don't have an account? <a href="page-register.php" class="text-primary m-l-5"><b>Sign Up</b></a></p>
                 </div>
             </div>
             
-        </div>
+        </div> -->
         <!-- end wrapper page -->
         
 

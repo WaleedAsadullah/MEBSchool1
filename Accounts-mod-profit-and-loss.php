@@ -119,6 +119,76 @@ include_once('session_end.php');
                     </div>
                 </div>
             </div>
+            <div class="content-page">
+                <div class="">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">Profit & Loss</h4>
+
+                                    <div class="table-responsive">
+                                        <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">
+                                            <thead>
+                                                <th>Revenue</th>
+                                                <th>Revenue By Fees</th>
+                                                <th>Revenue By Hall</th>
+                                                <th>Expenses</th>
+                                                <th>Total</th>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                                $conn = connect_db();
+                                                $sql = 'SELECT SUM(`exp_amount`) FROM `ac_rev_exp` WHERE `type` = "Revenue" AND `date_of_rev_exp` <= "'.$end.'" AND `date_of_rev_exp` >= "'.$start.'"';
+                                                $result = mysqli_query($conn,$sql);
+                                                while($row = mysqli_fetch_assoc($result)){
+                                                    $p=$row['SUM(`exp_amount`)'];
+                                                    echo'<tr>
+                                                        <td>'.$row['SUM(`exp_amount`)'].'</td>';
+                                            }
+                                            ?>
+                                            <?php
+                                                $conn = connect_db();
+                                                $sql3 = 'SELECT sum(`amount_pay`) FROM `ac_fee_collection_done`  where `date` <= "'.$end.'" AND `date` >= "'.$start.'"';
+                                                $result3 = mysqli_query($conn,$sql3);
+                                                while($row3 = mysqli_fetch_assoc($result3)){
+                                                    $f = $row3['sum(`amount_pay`)'];
+                                                    echo'
+                                                        <td>'.$row3['sum(`amount_pay`)'].'</td>';
+                                            }
+                                            ?>
+                                             <?php
+                                                $conn = connect_db();
+                                                $sql4 = 'SELECT sum(`rent`) FROM `ac_hall_booking`  where `date_event` <= "'.$end.'" AND `date_event` >= "'.$start.'"';
+                                                $result4 = mysqli_query($conn,$sql4);
+                                                while($row4 = mysqli_fetch_assoc($result4)){
+                                                    $f = $row4['sum(`rent`)'];
+                                                    echo'
+                                                        <td>'.$row4['sum(`rent`)'].'</td>';
+                                            }
+                                            ?>
+                                            <?php
+                                                $conn2 = connect_db();
+                                                $sql2 = 'SELECT  SUM(`exp_amount`) FROM `ac_rev_exp` WHERE `type` = "Expenses" AND `date_of_rev_exp` <= "'.$end.'" AND `date_of_rev_exp` >= "'.$start.'"';
+                                                $result2 = mysqli_query($conn2,$sql2);
+                                                while($row2 = mysqli_fetch_assoc($result2)){
+                                                    $l=$row2['SUM(`exp_amount`)'];
+                                                    $pl = $f+$p-$l;                    
+                                                    echo'
+                                                        <td>'.$row2['SUM(`exp_amount`)'].'</td>
+                                                        <td>'.$pl.'</td>
+                                                        </tr>';
+                                            }
+                                            ?> 
+                                            </thaed>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="content-page">
                 <div class="">

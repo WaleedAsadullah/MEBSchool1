@@ -4,19 +4,15 @@ include_once('session_end.php');
 <!DOCTYPE html>
 <html>
 <head>
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
         <meta name="author" content="Coderthemes">
 
+
         <link rel="shortcut icon" href="assets/images/favicon.png">
-
-          <?php include_once("title.php") ?>
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
-                <!-- form Uploads -->
-        <link href="assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
-
+         <?php include_once("title.php") ?>
                 <!-- DataTables -->
         <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -33,16 +29,9 @@ include_once('session_end.php');
         <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
 
         <script src="assets/js/modernizr.min.js"></script>
-
-    </head>
+</head>
 <body class="fixed-left-void">
     <div id="wrapper" class="enlarged">
 
@@ -86,15 +75,22 @@ include_once('session_end.php');
                                     <br>
 
                                     <div class="table-responsive">
-                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered " id="adadmissiontable">
+                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered" >
                                             <?php
                                             if(isset($_REQUEST['submit'])){
+                                                $data =  $_REQUEST['data'];
+                                                $data = explode("|", $data);
+                                                print_r($data);
+                                                $id_link = $data[0];
+                                                $title = $data[1];
+                                                $class = $data[2];
+                                                $link = $data[3];
     
                                             // print_r($_REQUEST);
 
                                             $sql = 'INSERT INTO `rights`(`right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', \''.$_REQUEST['user_type']. '\', \''.$_REQUEST['form_name']. '\', \''.$_REQUEST['icon']. '\', \''.$_REQUEST['form_prioirty']. '\', \''.$_REQUEST['form_location']. '\', \''.$_REQUEST['insert_form']. '\', \''.$_REQUEST['edit_form']. '\', \''.$_REQUEST['delete_form']. '\')';
+                                            $sql .= '\', \''.$_REQUEST['user_type']. '\', \''.$title. '\', \''.$class. '\', \''.$_REQUEST['form_prioirty']. '\', \''.$link. '\', \''.$_REQUEST['insert_form']. '\', \''.$_REQUEST['edit_form']. '\', \''.$_REQUEST['delete_form']. '\')';
                                             // echo $sql;
                                             insert_query($sql);
                                         }
@@ -140,26 +136,29 @@ include_once('session_end.php');
 
                                         <?php
                                         dropDownSimple("User Type","user_type","type_name","type",NULL);
+
+$conn = connect_db();
+$sql_id = 'SELECT `link_id`, `name`, `class`, `link` FROM `link`'; 
+
+echo'
+    <div class="form-group">
+      <label for="">Title</label>
+      <select type="text"  name="data" class="form-control select2">';
+ $result_id = mysqli_query($conn ,$sql_id);
+  
+  while($row_id = mysqli_fetch_assoc($result_id)) {
+    echo'
+            <option 
+            value="'.$row_id['link_id'].'|'.$row_id['name'].'|'.$row_id['class'].'|'.$row_id['link'].'">'.$row_id['name'].' Link('.$row_id['link'].')</option>';
+  }
+            echo'
+        </select>
+</div>';
+
                                         ?>
-                               
-                                        <div class="form-group">
-                                            <label for="hbAddress">Title</label>
-                                            <input type="text" name="form_name" required="" placeholder="Enter title" class="form-control" id="prName" value="<?php if(isset($_REQUEST['form_name'])) echo $_REQUEST['form_name']?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Icon</label>
-                                            <input type="text" name="icon" required="" placeholder="Enter icon class" class="form-control" id="prRegular" value="<?php if(isset($_REQUEST['icon'])) echo $_REQUEST['icon']?>">
-                                        </div>
-
                                         <div class="form-group">
                                             <label for="hbRentAmount">Prioirty(Ordering Sidemenu)</label>
                                             <input type="number" name="form_prioirty" required="" placeholder="Enter prioirty" class="form-control" id="hbRentAmount"value="<?php if(isset($_REQUEST['form_prioirty'])) echo $_REQUEST['form_prioirty']?>">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="">Form Location(Link)</label>
-                                            <input type="text" name="form_location" required=""  class="form-control" placeholder="Enter Link" value="<?php if(isset($_REQUEST['form_location'])) echo $_REQUEST['form_location']?>">
                                         </div>
 
                                          <div class="form-group">
@@ -232,20 +231,9 @@ include_once('session_end.php');
         <script src="assets/js/jquery.slimscroll.js"></script>
         <script src="assets/js/jquery.scrollTo.min.js"></script>
 
-        <!-- KNOB JS -->
-        <!--[if IE]>
-        <script type="text/javascript" src="assets/plugins/jquery-knob/excanvas.js"></script>
-        <![endif]-->
         <script src="assets/plugins/jquery-knob/jquery.knob.js"></script>
-
-        <!-- Dashboard init -->
-        <script src="assets/pages/jquery.dashboard.js"></script>
-
-        <!-- App js -->
-        <script src="assets/js/jquery.core.js"></script>
-        <script src="assets/js/jquery.app.js"></script>
-
-        <!-- Datatables-->
+        
+         <!-- Datatables-->
         <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.bootstrap.js"></script>
         <script src="assets/plugins/datatables/dataTables.buttons.min.js"></script>
@@ -261,6 +249,13 @@ include_once('session_end.php');
         <script src="assets/plugins/datatables/responsive.bootstrap.min.js"></script>
         <script src="assets/plugins/datatables/dataTables.scroller.min.js"></script>
 
+        <!-- Datatable init js -->
+        <script src="assets/pages/datatables.init.js"></script>
+
+        <!-- App js -->
+        <script src="assets/js/jquery.core.js"></script>
+        <script src="assets/js/jquery.app.js"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
                 $('#datatable').dataTable();
@@ -272,7 +267,6 @@ include_once('session_end.php');
             TableManageButtons.init();
 
         </script>
-
         <?php include_once('script.php') ?>
 </body>
 </html>

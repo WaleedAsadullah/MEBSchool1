@@ -91,11 +91,11 @@ include_once('session_end.php');
 <!--                 <div><img src="assets/images/favicon2.png"></div> -->
 
                                         <h1 class="logo"  style="font-size: 3em; padding-top: 5%; padding-bottom: 3% ; color: white !important"><span style="font-size: 2em;">Welcome<span></span></span></h1>
-                                        <h1 class="logo"><span><span style="font-size: 2em"><?php echo $_SESSION['name']?></span></span></h1>
+                                        <h1 class="logo"><span><span style="font-size: 2em"><?php echo $_SESSION['name'];?></span></span></h1>
                                         <br>
                                         <div>
 <?php
-$_SESSION['type'] = "student";
+
 include_once("db_functions.php");
 $conn = connect_db();
 

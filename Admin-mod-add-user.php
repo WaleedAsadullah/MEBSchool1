@@ -84,6 +84,7 @@ include_once('session_end.php');
 
                                         $pas = password_hash($pass, PASSWORD_BCRYPT);
                                         $cpas = password_hash($cpass, PASSWORD_BCRYPT);
+                                        $token = bin2hex(random_bytes(15));
 
                                         $e_mailquary = " select * from ad_add_user where e_mail='$e_mail'";
                                         $query = mysqli_query(connect_db(),$e_mailquary);
@@ -94,9 +95,9 @@ include_once('session_end.php');
                                                     </script>';
                                         }else{
                                             if( $pass ==  $cpass){
-                                            $sql = 'INSERT INTO `ad_add_user`(`add_user_id`, `user_id`, `user_date`, `name`, `e_mail`, `gr_no`, `account`, `pass`, `cpass`) VALUES (NULL,\'';
+                                            $sql = 'INSERT INTO `ad_add_user`(`add_user_id`, `user_id`, `user_date`, `name`, `e_mail`, `gr_no`, `account`, `pass`, `cpass`, `token`) VALUES (NULL,\'';
                                             $sql .= get_curr_user();
-                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['e_mail'].'\', \''.$_REQUEST['gr_no'].'\', \''.$_REQUEST['account'].'\', \''.$pas.'\', \''.$cpas.'\')';
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['name'].'\', \''.$_REQUEST['e_mail'].'\', \''.$_REQUEST['gr_no'].'\', \''.$_REQUEST['account'].'\', \''.$pas.'\', \''.$cpas.'\', \''.$token.'\')';
                                                 $iquery = insert_query($sql);
                                                     echo '<script>
                                                     alert("Account created")

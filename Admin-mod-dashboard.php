@@ -204,7 +204,7 @@ include_once('session_end.php');
                                 </div>
                             </div><!-- end col-->
 
-                        </div> -->
+                        <!-- </div>  -->
                         <!-- end row -->
 
                         <div class="row">
@@ -257,7 +257,7 @@ include_once('session_end.php');
         <!-- flot init -->
         <script src="assets/pages/jquery.flot.init.js"></script>
 
-                <!--Morris Chart-->
+        <!--Morris Chart-->
         <script src="assets/plugins/morris/morris.min.js"></script>
         <script src="assets/plugins/raphael/raphael-min.js"></script>
 

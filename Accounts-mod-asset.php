@@ -95,6 +95,17 @@ include_once('session_end.php');
                                             $sql .= get_curr_user();
                                             $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['date_of_ac_asset_liab'].'\', \''.$_REQUEST['account_id'].'\', \''.$_REQUEST['account_title'].'\', \''.$_REQUEST['type'].'\', \''.$_REQUEST['ac_asset_liab_by_scction'].'\', \''.$_REQUEST['ac_asset_liab_amount'].'\', \''.$_REQUEST['check_by'].'\', \''.$_REQUEST['paid_using'].'\', \''.$_REQUEST['paid_amount'].'\', \''.$_REQUEST['comments'].'\', \''.$_REQUEST['check_date'].'\')';
                                             insert_query($sql);
+
+                                            if ($_REQUEST['type'] == "Assets") {
+                                                $type = "Expenses";
+                                            }elseif($_REQUEST['type'] == "Liability") {
+                                                $type = "Liability";
+                                            }else $type ="Revenue" ;
+
+                                            $sql2 = 'INSERT INTO `ac_rev_exp`(`rev_exp_id`, `user_id`, `user_date`,`type`, `date_of_rev_exp`, `account`, `account_title`, `exp_by_scction`, `exp_amount`, `check_by`, `paid_using`, `paid_amount`, `comments`, `check_date`) VALUES (NULL,\'';
+                                            $sql2 .= get_curr_user();
+                                            $sql2 .= '\', CURRENT_TIMESTAMP, \''.$type.'\', \''.$_REQUEST['date_of_ac_asset_liab'].'\', \''.$_REQUEST['account_id'].'\', \''.$_REQUEST['account_title'].'\', \''.$_REQUEST['ac_asset_liab_by_scction'].'\', \''.$_REQUEST['ac_asset_liab_amount'].'\', \''.$_REQUEST['check_by'].'\', \''.$_REQUEST['paid_using'].'\', \''.$_REQUEST['paid_amount'].'\', \''.$_REQUEST['comments'].'\', \''.$_REQUEST['check_date'].'\')';
+                                            insert_query($sql2);
                                                 }
                                             // -------------------
 

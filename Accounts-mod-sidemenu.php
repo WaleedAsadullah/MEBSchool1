@@ -129,9 +129,11 @@
                             <li>
                                 <a href="Accounts-mod-fee-setting-specfic-student.php" class="waves-effect"><i class="fa fa-user-circle-o"></i> <span>Fee Settings For Specific Student </span> </a>
                             </li>
-
                             <li>
                                 <a href="Accounts-mod-fee-generate-class.php" class="waves-effect"><i class="fa fa-print"></i> <span> Fee Generate For Class </span> </a>
+                            </li>
+                            <li>
+                                <a href="Accounts-mod-final-settlement.php" class="waves-effect"><i class="fa fa-print"></i> <span> Final Settlement </span> </a>
                             </li>
 
                         </ul>

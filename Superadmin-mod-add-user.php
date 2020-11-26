@@ -197,14 +197,14 @@ if(isset($_REQUEST['gr_number2'])){
 }}
 ?>
 
-<?php if(isset($_REQUEST['settype'])){
+<!-- <?php if(isset($_REQUEST['settype'])){
     if( $_REQUEST['settype']!="parent" && $_REQUEST['settype']!="student" && $_REQUEST['settype']!="teacher" ){
 
     $settype = $_REQUEST['settype'];
     echo '
                                     <form action="Superadmin-mod-add-user.php#formadd" method="post" id="submitted">';
                                     if (isset($_REQUEST['settype']) ) echo '<input type="hidden" value="'.$_REQUEST['settype'].'" name="settype">';
-                                        dropDownConditional2("Employee ID","gr_number2","employee_record_id","name","ad_employee_record","WHERE `ad_admission`.`addmission_id` IN (SELECT `ad_admission`.`addmission_id` FROM `ad_admission`,`ad_add_user` where `ad_admission`.`addmission_id` != `ad_add_user`.`gr_no` and `ad_add_user`.`account` = 'student')");
+                                        dropDownConditional2("Employee ID2","gr_number2","employee_record_id","name","ad_employee_record","WHERE `ad_admission`.`addmission_id` IN (SELECT `ad_admission`.`addmission_id` FROM `ad_admission`,`ad_add_user` where `ad_admission`.`addmission_id` != `ad_add_user`.`gr_no` and `ad_add_user`.`account` = 'student')");
                                         
                                    echo' <div class="form-group text-right m-b-0">
                                             <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
@@ -216,7 +216,7 @@ if(isset($_REQUEST['gr_number2'])){
                                             <p class="text-muted">Can\'t Find Member? <a href="Admin-mod-employee-record.php" class="text-primary m-l-5"><b> Add a Member Here</b></a></p>
                                         </div>
                                     </div>';
-                               }}?>
+                               }}?> -->
 <?php
 if(isset($_REQUEST['gr_number2'])){
     if( $_REQUEST['settype']=="admin" || $_REQUEST['settype']=="account" ){
@@ -295,6 +295,38 @@ if(isset($_REQUEST['gr_number2'])){
 
     $value_id = $row['addmission_id'];
     $value_name =  $row['guardian_name'];
+}}
+?>
+<?php if(isset($_REQUEST['settype'])){
+    if( $_REQUEST['settype']=="admin" || $_REQUEST['settype']=="account" ){
+
+    $settype = $_REQUEST['settype'];
+    echo '
+                                    <form action="Superadmin-mod-add-user.php#formadd" method="post" id="submitted">';
+                                    if (isset($_REQUEST['settype']) ) echo '<input type="hidden" value="'.$_REQUEST['settype'].'" name="settype">';
+                                        dropDownConditional2("Employee ID","gr_number2","employee_record_id","name","ad_employee_record",NULL);
+                                        
+                                   echo' <div class="form-group text-right m-b-0">
+                                            <button type="submit" class="btn btn-default waves-effect waves-light m-l-5">
+                                            Submit
+                                            </button>
+                                        </div></form>
+                                        <div class="row">
+                                        <div class="col-sm-12 text-right">
+                                            <p class="text-muted">Can\'t Find Member? <a href="Admin-mod-employee-record.php" class="text-primary m-l-5"><b> Add a Member Here</b></a></p>
+                                        </div>
+                                    </div>';
+                               }}?>
+<?php
+if(isset($_REQUEST['gr_number2'])){
+    if( $_REQUEST['settype']=="admin" || $_REQUEST['settype']=="account" ){
+    $conn = connect_db();
+    $sql_s = 'SELECT `employee_record_id`, `user_id`, `user_date`, `name`, `gr_no`, `cnic`, `position`, `assigned_section`, `age`, `start`, `salary`, `phone_number`, `address`, `comment` FROM `ad_employee_record` WHERE  `employee_record_id` = '.$_REQUEST['gr_number2'].' ';
+    $result = mysqli_query($conn,$sql_s);
+    $row = mysqli_fetch_assoc($result);
+
+    $value_id = $row['employee_record_id'];
+    $value_name =  $row['name'];
 }}
 ?>
 
