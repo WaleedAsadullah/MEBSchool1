@@ -91,7 +91,7 @@ include_once('session_end.php');
                                             <?php
                                             // ---------------
                                             if (isset($_REQUEST['submit'])) {
-                                            $sql = 'INSERT INTO `ad_subject`(`subject_id`, `subject_name`, `class_id`, `class_name`, `comment`) VALUES (NULL,\''.$_REQUEST['subject_name'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['class_name'].'\', \''.$_REQUEST['comment'].'\')';
+                                            $sql = 'INSERT INTO `ad_subject`(`subject_id`, `subject_name`, `class_id`, `comment`) VALUES (NULL,\''.$_REQUEST['subject_name'].'\', \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['comment'].'\')';
                                             insert_query($sql);
                                                 }
                                             // -------------------
@@ -110,7 +110,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `subject_id`"ID", `subject_name`"Subject Name", `class_id`"Class ID", `class_name`"Class Name", `comment`"Commets" FROM `ad_subject';
+                                            $sql = 'SELECT `subject_id`"ID", `subject_name`"Subject Name", b.`class_name`"Class",b.`section`"Section", a.`comment`"Comment" FROM `ad_subject`a , `ad_class`b  WHERE a.`class_id` = b.`class_id` order by `subject_id`';
                                             display_query($sql);
 
                                             ?>
@@ -143,14 +143,13 @@ include_once('session_end.php');
                                                 <label for="prID">Subject Name</label>
                                                 <input type="text" name="subject_name" required="" placeholder="Enter subject name" class="form-control" id="prID" value="<?php if(isset($_REQUEST['subject_name'])) echo $_REQUEST['subject_name'] ?>" >
                                             </div>
+                                            <?php
+                                            dropDownConditional3section("Class and Section", "class_id","class_id","class_name","section","ad_class",Null);
+                                            ?><!-- 
                                             <div class="form-group">
                                                 <label for="prID">Class ID</label>
                                                 <input type="text" name="class_id" required="" placeholder="Enter class id" class="form-control" id="prID" value="<?php if(isset($_REQUEST['class_id'])) echo $_REQUEST['class_id'] ?>" >
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="prID">Class Name</label>
-                                                <input type="text" name="class_name" required="" placeholder="Enter class name" class="form-control" id="prID" value="<?php if(isset($_REQUEST['class_name'])) echo $_REQUEST['class_name'] ?>" >
-                                            </div>
+                                            </div> -->
                                         
                                    
                                             <div class="form-group">

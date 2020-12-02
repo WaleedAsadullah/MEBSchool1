@@ -110,7 +110,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `section_id`"ID" , `section_name` "Class Name", `comment` "Comments" FROM `ad_section`';
+                                            $sql = 'SELECT `section_id`"ID" , `section_name` "Section Name",`location`"Location", `comment` "Comments" FROM `ad_section`';
                                             display_query($sql);
 
                                             ?>

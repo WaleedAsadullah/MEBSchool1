@@ -74,21 +74,112 @@ include_once('session_end.php');
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <div class="card-box">
-                                     <div class="m-t-5 m-b-5" style="text-align: center" >
-                                         <a  href="#formadd" > <button  type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
-                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
+                                <div class="card-box table-responsive">
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Payables </h4>
+                                    
+
+                                    <div class="table-responsive">
+                                        <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">
+                                            <thead>
+                                                <th>Assets</th>
+                                                <th>Liability</th>
+                                                <th>Expenses</th>
+                                                <th>Fee Payables</th>
+                                                <th>Total</th>
+                                            </thead>
+                                            <tbody>
+                                    <?php 
+                                    $sql_a = 'SELECT sum(`ac_asset_liab_amount`) - sum(`paid_amount`) FROM `ac_asset_liab` WHERE `type` = "Assets"';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row = mysqli_fetch_assoc($result);
+                                    // echo"Assets";
+                                    echo "<td>".$row['sum(`ac_asset_liab_amount`) - sum(`paid_amount`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+                                    <!--  -->
+
+                                    <?php 
+                                    $sql_a = 'SELECT sum(`ac_asset_liab_amount`) - sum(`paid_amount`) FROM `ac_asset_liab` WHERE `type` = "Liability"';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row2 = mysqli_fetch_assoc($result);
+                                    // echo"Liability";
+                                    echo "<td>".$row2['sum(`ac_asset_liab_amount`) - sum(`paid_amount`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+                                    <!--  -->
+                                    
+                                    <?php 
+                                    $sql_a = 'SELECT sum(`exp_amount`)-sum(`paid_amount`) FROM `ac_rev_exp` WHERE `type` = "Expenses"';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row3 = mysqli_fetch_assoc($result);
+                                    // echo"Expenses";
+                                    echo "<td>".$row3['sum(`exp_amount`)-sum(`paid_amount`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+
+                                    <?php 
+                                    $sql_a = 'SELECT sum(`fee`) FROM `ac_fee_collection`';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row4 = mysqli_fetch_assoc($result);
+                                    // echo"Expenses";
+                                    echo "<td>".$row4['sum(`fee`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+                                    <th>
+                                        <?php echo $row['sum(`ac_asset_liab_amount`) - sum(`paid_amount`)'] + $row2['sum(`ac_asset_liab_amount`) - sum(`paid_amount`)'] +$row3['sum(`exp_amount`)-sum(`paid_amount`)'] +$row4['sum(`fee`)'] ?>
+                                    </th>
+
+                                    
+                                            </tbody>
+                                        </table>
+
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="content-page">
+                <div class="">
+                    <div class="container">
+                        <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Received and Payables </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Receivable </h4>
+                                    
 
                                     <div class="table-responsive">
-                                        <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
-                                        <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
-                                            
+                                        <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">
+                                            <thead>
+                                                <th>Revenue</th>
+                                                <th>Fee Receivable</th>
+                                                <th>Total</th>
+                                            </thead>
+                                            <tbody>
+                                   <?php 
+                                    $sql_a = 'SELECT sum(`exp_amount`)-sum(`paid_amount`) FROM `ac_rev_exp` WHERE `type` = "Revenue"';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row = mysqli_fetch_assoc($result);
+                                    // echo"Revenue";
+                                    echo "<td>".$row['sum(`exp_amount`)-sum(`paid_amount`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+
+                                    <?php 
+                                    $sql_a = 'SELECT SUM(`amount_pay`) FROM `ac_fee_collection_done`';
+                                    $result = mysqli_query($conn,$sql_a);
+                                    $row5 = mysqli_fetch_assoc($result);
+                                    // echo"Revenue";
+                                    echo "<td>".$row5['SUM(`amount_pay`)']."</td>";
+                                    // echo "<br>";
+                                    ?>
+                                    <th>
+                                        <?php echo $row['sum(`exp_amount`)-sum(`paid_amount`)'] + $row5['SUM(`amount_pay`)']  ?>
+                                    </th>
+
+                                    
+                                            </tbody>
                                         </table>
 
                                     </div>
@@ -102,37 +193,7 @@ include_once('session_end.php');
 
 
 
-            <!-- Form -->
-            <div class="content-page">
-                <div class="content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Received and Payables  </h4>
-
-                                        <form action="Accounts-mod-receivable-and-payables-reporting.php#formadd" method="post" id="submitted">
-
-
-                                            
-
-                                            <div class="form-group text-right m-b-0">
-                                                <?php 
-                                                code_submit();
-                                                ?>
-                                                <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
-                                                    Cancel
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Form end -->
+           
 
 
                 <!-- footer -->

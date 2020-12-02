@@ -160,7 +160,7 @@ for($j=0;$j<count($row_data);$j++){
               if ($rights_data[0]['delete_form']==1){
               echo'
             
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>';}
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>';}
               echo'
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
@@ -233,7 +233,7 @@ for($j=0;$j<count($row_data);$j++){
               <td>'.$i.'</td>
               <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
             
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
@@ -385,7 +385,7 @@ if($row_e['edit_form'] == 1){
   echo'<td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>';
   }
 if($row_e['delete_form'] == 1){
-  echo'<td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o"></i></a></td>';
+  echo'<td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>';
   }
 
   echo'<td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
@@ -459,7 +459,7 @@ for($j=0;$j<count($row_data);$j++){
               <td>'.$i.'</td>
               <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
             
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
@@ -547,7 +547,7 @@ for($j=0;$j<count($row_data);$j++){
   
     echo '<tr>
               <td>'.$i.'</td>
-              <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
@@ -715,7 +715,7 @@ for($j=0;$j<count($row_data);$j++){
     echo '<tr>
               <td>'.$i.'</td>
               <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o"></i></a></td>
+              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.$row[$id_column].'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
@@ -1103,7 +1103,7 @@ function dropDownConditional2($label,$name,$select,$select2,$from,$condition){
                     value="'.$row_id[$select].'">'.$row_id[$select2].' ID('.$row_id[$select].')</option>';
           }
                     echo'
-                </select><br>'
+                </select></div>'
                 
 
         ;
@@ -1211,6 +1211,37 @@ echo'
                     </div>
                 </div>
             </div>';
+}
+
+function dropDownConditional2WithoutId($label,$name,$select,$select2,$from,$condition){
+        $conn = connect_db();
+        $sql_id = 'SELECT `'.$select.'`,`'.$select2.'` FROM `'.$from.'`'.$condition.''; 
+        // echo $sql_id;
+
+        echo'
+            <div class="form-group">
+              <label for="">'.$label.'</label>
+              <select id="themes" name="'.$name.'"  class="form-control select2">';
+          echo'
+                    <option 
+                    value="0">-Select</option>';
+
+         $result_id = mysqli_query($conn ,$sql_id);
+          
+          while($row_id = mysqli_fetch_assoc($result_id)) {
+          // print_r($row_id);
+
+            if (isset($_REQUEST[$name]) && $_REQUEST[$name]==$row_id[$select]) {$selected = "selected";}else $selected = ""; 
+
+            echo'
+                    <option '.$selected.'
+                    value="'.$row_id[$select].'">'.$row_id[$select2].'</option>';
+          }
+                    echo'
+                </select></div>'
+                
+
+        ;
 }
 
 ?>

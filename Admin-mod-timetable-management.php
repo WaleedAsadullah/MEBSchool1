@@ -30,14 +30,10 @@ include_once('session_end.php');
         <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
         <script src="assets/js/modernizr.min.js"></script>
+    <style >
+         td,th{text-align: center}
+    </style>
     </head>
 <body class="fixed-left">
     <div id="wrapper" class="enlarged">
@@ -45,7 +41,8 @@ include_once('session_end.php');
 
                     <!--- header -->
                     <?php 
-                            include_once("header.php")
+                            include_once("header.php");
+                            include_once("db_functions.php")
                     ?>
 
                     <!-- header -->
@@ -64,6 +61,14 @@ include_once('session_end.php');
                 <div class="content">
                     <div class="container">
                         <div class="row">
+                             <div class="col-lg-12">
+                                <div class="card-box">
+                                     <div class="m-t-5 m-b-5" style="text-align: center" >
+                                         <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
+                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-lg-12" >
                                 <div class="card-box">
 
@@ -71,7 +76,61 @@ include_once('session_end.php');
                                     <br>
 
                                     <div class="table-responsive">
-                                        <table id="mainTable" class="table table-striped m-b-0">
+                                        <table  class="table table-striped m-b-0">
+                                                                                        <?php
+                                            // -------------------
+                                            //echo "test";
+                                            if(isset($_REQUEST['submit'])){
+
+                                            $day = explode("|", $_REQUEST['day']);
+
+                                            $day_value = $day[1];
+                                            $day = $day[0];
+
+                                            $sql = 'INSERT INTO `ad_timetable`(`time_id`, `user_id`, `user_date`, `class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `period11`, `period12`, `period13`, `period14`, `period15`, `period16`, `period17`, `period18`, `period19`, `period20`, `day`, `day_value`, `comments`) VALUES (NULL,\'';
+                                            $sql .= get_curr_user();
+                                            $sql .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['class_id'].'\', \''.$_REQUEST['period1'].'\', \''.$_REQUEST['period2'].'\', \''.$_REQUEST['period3'].'\', \''.$_REQUEST['period4'].'\', \''.$_REQUEST['period5'].'\', \''.$_REQUEST['period6'].'\', \''.$_REQUEST['period7'].'\', \''.$_REQUEST['period8'].'\', \''.$_REQUEST['period9'].'\', \''.$_REQUEST['period10'].'\', \''.$_REQUEST['period11'].'\', \''.$_REQUEST['period12'].'\', \''.$_REQUEST['period13'].'\', \''.$_REQUEST['period14'].'\', \''.$_REQUEST['period15'].'\', \''.$_REQUEST['period16'].'\', \''.$_REQUEST['period17'].'\', \''.$_REQUEST['period18'].'\', \''.$_REQUEST['period19'].'\', \''.$_REQUEST['period20'].'\', \''.$day.'\', \''.$day_value.'\', \''.$_REQUEST['comments'].'\')';
+                                            // echo $sql;
+                                            insert_query($sql);
+                                            }
+                                            // --------------------------
+                                            ///edit code
+                                            check_edit("ad_timetable","time_id");
+                                            edit_display("ad_timetable","time_id");
+                                            //end of edit code -shift view below delete
+                                            // --------------------------
+
+                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ad_timetable` WHERE `ad_timetable`.`time_id` = '.$_REQUEST['deleteid'];
+
+                                            insert_query($sql);
+                                            // echo "done deleting";
+                                                }
+                                            // $sql = "SELECT * FROM `ac_annual_appraisal`";
+
+                                            $sql = 'SELECT `time_id`, `user_id`, `user_date`, `class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `period11`, `period12`, `period13`, `period14`, `period15`, `period16`, `period17`, `period18`, `period19`, `period20`, `day`, `day_value`, `comments` FROM `ad_timetable`';
+                                            display_query($sql);
+
+                                            ?>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+            <div class="content-page">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12" >
+                                <div class="card-box">
+
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Time table </h4>
+                                    <br>
+
+                                    <div class="table-responsive">
+                                        <table  class="table table-striped m-b-0">
                                             <thead>
                                             <tr>
                                                 <th>Class | Time</th>
@@ -87,13 +146,13 @@ include_once('session_end.php');
                                             <tbody>
                                                 <tr>
                                                     <td>Class 1</td>
-                                                    <td>Maths</td>
-                                                    <td>Science</td>
-                                                    <td>English</td>
-                                                    <td>Break</td>
-                                                    <td>Islamiat</td>
-                                                    <td>Urdu</td>
-                                                    <td>Pst</td>
+                                                    <td>Maths<br>(Sir xyz)</td>
+                                                    <td>Science<br>(Sir xyz)</td>
+                                                    <td>English<br>(Sir xyz)</td>
+                                                    <td>Break<br>(Sir xyz)</td>
+                                                    <td>Islamiat<br>(Sir xyz)</td>
+                                                    <td>Urdu<br>(Sir xyz)</td>
+                                                    <td>Pst<br>(Sir xyz)</td>
 
                                                 </tr>
                                                 <tr>
@@ -150,7 +209,7 @@ include_once('session_end.php');
 
                                                 <tr>
                                                     <td>Class 7</td>
-                                                    <td>Maths</td>
+                                                    <td >Maths<br>(Sir Aslam)</td>
                                                     <td>Science</td>
                                                     <td>English</td>
                                                     <td>Break</td>
@@ -208,84 +267,174 @@ include_once('session_end.php');
                                     </div>
                                 </div>
                             </div>
-                            </div>
-                       
-                        
-                            
+                        </div>   
                     </div>
                 </div>
-            </dir>
-            <div class="side-bar right-bar">
-                <a href="javascript:void(0);" class="right-bar-toggle">
-                    <i class="zmdi zmdi-close-circle-o"></i>
-                </a>
-                <h4 class="">Notifications</h4>
-                <div class="notification-list nicescroll" tabindex="5001" style="overflow: hidden; outline: none;">
-                    <ul class="list-group list-no-border user-list">
-                        <li class="list-group-item">
-                            <a href="#" class="user-list-item">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-2.jpg" alt="">
-                                </div>
-                                <div class="user-desc">
-                                    <span class="name">Michael Zenaty</span>
-                                    <span class="desc">There are new settings available</span>
-                                    <span class="time">2 hours ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="user-list-item">
-                                <div class="icon bg-info">
-                                    <i class="zmdi zmdi-account"></i>
-                                </div>
-                                <div class="user-desc">
-                                    <span class="name">New Signup</span>
-                                    <span class="desc">There are new settings available</span>
-                                    <span class="time">5 hours ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="#" class="user-list-item">
-                                <div class="icon bg-pink">
-                                    <i class="zmdi zmdi-comment"></i>
-                                </div>
-                                <div class="user-desc">
-                                    <span class="name">New Message received</span>
-                                    <span class="desc">There are new settings available</span>
-                                    <span class="time">1 day ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item active">
-                            <a href="#" class="user-list-item">
-                                <div class="avatar">
-                                    <img src="assets/images/users/avatar-3.jpg" alt="">
-                                </div>
-                                <div class="user-desc">
-                                    <span class="name">James Anderson</span>
-                                    <span class="desc">There are new settings available</span>
-                                    <span class="time">2 days ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="list-group-item active">
-                            <a href="#" class="user-list-item">
-                                <div class="icon bg-warning">
-                                    <i class="zmdi zmdi-settings"></i>
-                                </div>
-                                <div class="user-desc">
-                                    <span class="name">Settings</span>
-                                    <span class="desc">There are new settings available</span>
-                                    <span class="time">1 day ago</span>
-                                </div>
-                            </a>
-                        </li>
+            </div>
+            <div class="content-page" id="formadd">
+                <div class="content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="card-box">
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Time Table </h4>
+                                    <br>
+                                    <form action="Admin-mod-timetable-management.php" method="post">
 
-                    </ul>
+
+                                        <?php
+                                        dropDownConditional3section("Class and Section", "class_id","class_id","class_name","section","ad_class",Null);
+
+                                         ?>
+
+                                        <div class="form-group">
+                                            <label for="">Day</label>
+                                            <select name="day" required="" class="form-control select2" >
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Monday" ) echo "selected";  ?>  value="Monday|1">Monday</option>
+
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Tuesday" ) echo "selected";  ?>  value="Tuesday|2">Tuesday</option>
+
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Wednesday" ) echo "selected";  ?>  value="Wednesday|3">Wednesday</option>
+
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Thursday" ) echo "selected";  ?>  value="Thursday|4">Thursday</option>
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Friday" ) echo "selected";  ?>  value="Friday|5">Friday</option>
+
+                                                <option <?php if (isset($_REQUEST['day']) && $_REQUEST['day']== "Saturday" ) echo "selected";  ?>  value="Saturday|6">Saturday</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 1","period1","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 2","period2","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 3","period3","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 4","period4","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 5","period5","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                            <div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 6","period6","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 7","period7","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 8","period8","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 9","period9","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 10","period10","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 11","period11","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 12","period12","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 13","period13","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 14","period14","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 15","period15","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 16","period16","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 17","period17","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 18","period18","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 19","period19","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div><div class="col-sm-2">
+                                        <?php
+
+                                        dropDownConditional2WithoutId("Period 20","period20","subject_id","subject_name","ad_subject",NULL);
+                                        ?>
+                                            </div>
+                                        </div>
+
+                                        
+                                        <div class="form-group">
+                                            <label for="lcDateOfBirthW">Comment</label>
+                                            <textarea type="textarea" name="comments" row = "2"placeholder="Enter Comments...." 
+                                            class="form-control select2" 
+                                            ><?php if(isset($_REQUEST['comments'])) echo $_REQUEST['comments']?></textarea>
+                                        </div>
+
+                                        <div class="form-group text-right m-b-0">
+                                            <?php 
+                                            code_submit();
+                                            ?>
+                                            <button type="reset" class="btn btn-default waves-effect waves-light m-l-5">
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            <div id="ascrail2001" class="nicescroll-rails" style="width: 8px; z-index: 999; cursor: default; position: absolute; top: 57px; left: 232px; height: 789px; display: none;"><div style="position: relative; top: 0px; float: right; width: 6px; height: 0px; background-color: rgb(152, 166, 173); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;"></div></div><div id="ascrail2001-hr" class="nicescroll-rails" style="height: 8px; z-index: 999; top: 838px; left: 0px; position: absolute; cursor: default; display: none;"><div style="position: relative; top: 0px; height: 6px; width: 0px; background-color: rgb(152, 166, 173); border: 1px solid rgb(255, 255, 255); background-clip: padding-box; border-radius: 5px;"></div></div></div>
+            </div>
     </div>
 
 
@@ -325,3 +474,5 @@ include_once('session_end.php');
         <?php include_once('script.php') ?>
 </body>
 </html>
+
+<!-- SELECT `time_id`, a.`user_id`, a.`user_date`, a.`class_id`,b.`class_name`,b.`section`, a.`teacher`,c.name, a.`subject`,d.`subject_name`, `timing`, `comments` FROM `ad_timetable`a,`ad_class`b,`ad_teacher_records`c,`ad_subject`d  WHERE a.`class_id` = b.`class_id`AND a.`teacher` = c.`Teacher_records_id` AND a.`subject` = d.`subject_id` -->

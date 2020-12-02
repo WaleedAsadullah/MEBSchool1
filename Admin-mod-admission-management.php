@@ -163,7 +163,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                             <?php
                                             // -------------------------
                                             // echo "test";
-  if(isset($_FILES['profile_picture'])){
+if(isset($_FILES['profile_picture'])){
 
 // print_r($_FILES);
 

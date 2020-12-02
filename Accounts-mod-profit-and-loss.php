@@ -196,7 +196,9 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30">Expenditure Statement (Detailed)</h4>
+                                    <h4 class="header-title m-t-0 m-b-30">
+                                        Income Statement (Detailed)
+                                    </h4>
 
                                     <div class="table-responsive">
                                         <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">
@@ -247,7 +249,8 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-30">Income Statement (Detailed)</h4>
+                                    <h4 class="header-title m-t-0 m-b-30">
+                                    Expenditure Statement (Detailed)</h4>
 
                                     <div class="table-responsive">
                                         <table class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered">

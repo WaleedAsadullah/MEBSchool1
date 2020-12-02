@@ -206,6 +206,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                             </div>
 
                                             <?php
+                                            // dropDownConditional2("Section","section","section_id","section_name","ad_section",NULL);
 
                                             dropDownSimple("Section","section","section_name","ad_section",Null);
 
