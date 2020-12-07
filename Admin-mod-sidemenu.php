@@ -63,6 +63,9 @@
                             </li>
 
                             <li>
+                                <a href="Admin-mod-timetable-form.php" class="waves-effect"><i class="fa fa-table"></i> <span> Timetable Form </span> </a>
+                            </li>
+                            <li>
                                 <a href="Admin-mod-annual-appraisal.php" class="waves-effect"><i class="fa fa-calendar-check-o"></i> <span> Annual Appraisal </span> </a>
                             </li>
 

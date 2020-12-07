@@ -94,7 +94,10 @@ include_once('session_end.php');
                                 <div class="card-box">
                                      <div style="text-align: center" >
                                          <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light m-b-5"  >+  Add</button></a>
-                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light m-b-5" > Export </button></a>
+                                         <form action="functions.php" method="post" name="upload_excel"   
+                                        enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-info btn w-md waves-effect waves-light m-b-5" > Export </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

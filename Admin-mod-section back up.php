@@ -1,15 +1,47 @@
-<?php include_once('session_end.php'); ?>
+<?php
+include_once('session_end.php');
+ include_once("db_functions.php");
+         
+?>
 <!DOCTYPE html>
 <html>
 <head>
-
+    <?php
+    if(isset($_POST["Export"]) && isset($_REQUEST['submit2'])){
+            $conn = connect_db();
+          header('Content-Type: text/csv; charset=utf-8');  
+          header('Content-Disposition: attachment; filename=data.csv');  
+          $output = fopen("php://output", "c+");  
+         
+          fputcsv($output, array('ID', 'Section Name', 'Location'));  
+          $query = "SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc";  
+          $result = mysqli_query($conn, $query);  
+          while($row = mysqli_fetch_assoc($result))  
+          {  
+               fputcsv($output, $row);  
+          }  
+          fclose($output);  
+     }
+    ?>
+        <!-- <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc."> -->
         <meta name="author" content="Coderthemes">
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php //include_once("title.php") ?>
+          <?php include_once("title.php") ?>
 
-        <!-- Morris Chart CSS -->
+
+        <!-- DataTables
+        <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+
+        <!--Morris Chart CSS -->
         <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
         <!-- App css -->
@@ -30,27 +62,6 @@
 
         <script src="assets/js/modernizr.min.js"></script>
 </head>
-<?php
-
- //include_once("db_functions.php");
- 
-    if(isset($_POST["Export"]) && isset($_REQUEST['submit2'])){
-            $conn = connect_db();
-          header('Content-Type: text/csv; charset=utf-8');  
-          header('Content-Disposition: attachment; filename=data.csv');  
-          $output = fopen("php://output", "w");  
-         
-          fputcsv($output, array('ID', 'Section Name', 'Location'));  
-          $query = "SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc";  
-          $result = mysqli_query($conn, $query);  
-          while($row = mysqli_fetch_assoc($result))  
-          {  
-               fputcsv($output, $row);  
-          }  
-          fclose($output);  
-     }
-    ?>
-       
 <body class="smallscreen fixed-left-void">
     <div id="wrapper" class="enlarged">
 
@@ -58,7 +69,6 @@
                     <!--- header -->
                     <?php 
                             include_once("header.php");
-                            include_once('db_functions.php')
                     ?>
 
                     <!-- header -->
@@ -86,20 +96,32 @@
                                      <div style="text-align: center" >
                                         <div class="row" >
                                          <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light m-b-5"  >+  Add</button></a>
-                                          <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
-                                        <input type="hidden" name="Export" value="SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc">
-
-                                        <input type="hidden" name="title" value="ID|Section Name|Location">
-                                        <input type="hidden" name="name_file" value="section">
-                                        <input type="hidden" name="link" value="Admin-mod-section.php">
-                                        <a> 
-                                        <!--button type="submit" name="submit2" class="btn btn-info btn w-md waves-effect waves-light m-b-5" > Export </button-->
-                                        <button type="submit" name="export" value="CSV Export" class="btn btn-success" >CSV Export </button> </a>
-                                        </form>
+                                          <span><form action="Admin-mod-section.php" method="post" name="upload_excel"   
+                                        enctype="multipart/form-data">
+                                        <input type="hidden" name="Export" value="1">
+                                        <a> <button type="submit" name="submit2" class="btn btn-info btn w-md waves-effect waves-light m-b-5" > Export </button></a>
+                                        </form></span>
                                     </div>
                                     </div>
                                 </div>
                             </div>
+                            <!-- <?php
+                                        if(isset($_POST["Export"])){
+            $conn = connect_db();
+          header('Content-Type: text/csv; charset=utf-8');  
+          header('Content-Disposition: attachment; filename=data.csv');  
+          $output = fopen("php://output", "w");  
+         
+          fputcsv($output, array('ID', 'Section Name', 'Location'));  
+          $query = "SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc";  
+          $result = mysqli_query($conn, $query);  
+          while($row = mysqli_fetch_assoc($result))  
+          {  
+               fputcsv($output, $row);  
+          }  
+          fclose($output);  
+     }
+                            ?> -->
                             <div class="col-lg-12">
                                 <div class="card-box table-responsive">
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Sections </h4>
@@ -203,11 +225,7 @@
                                
     </div>
 
-       
-        <?php //include_once('script.php') ?>
-</body>
-</html>
-<script>
+        <script>
             var resizefunc = [];
         </script>
 
@@ -256,3 +274,6 @@
             TableManageButtons.init();
 
         </script>
+        <?php include_once('script.php') ?>
+</body>
+</html>

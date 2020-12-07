@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2020 at 05:50 AM
+-- Generation Time: Dec 02, 2020 at 11:51 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -108,21 +108,14 @@ CREATE TABLE `ac_asset_liab` (
 --
 
 INSERT INTO `ac_asset_liab` (`ac_asset_liab_id`, `user_id`, `user_date`, `date_of_ac_asset_liab`, `account_id`, `account_title`, `type`, `ac_asset_liab_by_scction`, `ac_asset_liab_amount`, `check_by`, `paid_using`, `paid_amount`, `comments`, `check_date`) VALUES
-(1, '2', '2020-08-18 14:27:46', '2020-08-18', 5024, 'WALEED', '', 'A', 2000, 'Irfan', '', 0, '', '2020-08-18'),
-(2, '2', '2020-08-21 12:24:10', '2020-08-21', 2147483647, 'SARFARAZ2', '', '2112', 42342, '23423', '444', 44, '44', '2020-08-17'),
-(3, '2', '2020-08-21 12:25:57', '2020-08-21', 2147483647, 'SARFARAZ2', '', '1', 2, '12', '21', 21, '21', '2020-08-21'),
-(4, '2', '2020-08-21 12:30:46', '2020-08-21', 2147483647, 'SARFARAZ2', 'Liability', 'A', 10, '212', '123', 1231, '13231', '2020-08-21'),
-(5, '2', '2020-08-22 04:19:21', '2020-08-22', 2147483647, 'SARFARAZ2', 'Liability', 'A', 444, 'rwer', 'rwer', 34534, '345', '2020-08-22'),
 (6, '2', '2020-08-22 06:21:39', '2020-08-22', 76857, 'WALEED', 'Assets', 'Boys', 1000, 'Irfan', '', 0, '', '2020-08-22'),
 (7, '2', '2020-08-22 06:22:02', '2020-08-22', 12345678, 'ARHAM', 'Assets', 'Boys', 550, 'rwer', '', 0, '', '2020-08-22'),
 (8, '2', '2020-08-22 06:22:35', '2020-08-22', 12345678, 'ARHAM', 'Assets', 'Boys', 70, 'r', '', 0, '', '2020-08-22'),
 (9, '2', '2020-08-24 04:41:53', '2020-08-24', 76857, 'WALEED', 'Assets', 'Montessori', 1000, 'irfan', 'any 2', 1000, '345', '2020-09-02'),
 (10, '2', '2020-08-27 07:27:40', '2020-08-27', 12938333, 'SHAH', 'Equity', 'Boys', 2390, 'Irfan', '', 0, '', '2020-08-27'),
 (11, '2', '2020-08-27 07:30:01', '2020-08-27', 2147483647, 'DANISH', 'Equity', 'Boys', 2870, 'Irfan', '', 0, '', '2020-08-27'),
-(12, '2', '2020-08-27 07:30:49', '2020-08-27', 2147483647, 'SARFARAZ2', 'Liability', 'Boys', 6740, 'Irfan', '', 0, '', '2020-08-27'),
-(13, '2', '2020-08-27 07:31:27', '2020-08-27', 1234567677, 'SARFARAZ', 'Liability', 'Boys', 568, 'Irfan', '', 0, '', '2020-08-27'),
-(14, '2', '2020-08-27 09:14:34', '2020-08-27', 2147483647, 'SARFARAZ2', 'Liability', 'Boys', 1250, 'Irfan', '', 0, '', '2020-08-27'),
-(15, '2', '2020-08-27 09:15:20', '2020-08-27', 2147483647, 'WALEED', 'Assets', 'Boys', 30, 'Irfan', '', 0, '', '2020-08-27');
+(15, '2', '2020-08-27 09:15:20', '2020-08-27', 2147483647, 'WALEED', 'Assets', 'Boys', 30, 'Irfan', '', 0, '', '2020-08-27'),
+(16, '2', '2020-11-30 07:46:55', '2020-11-30', 2147483647, 'SARFARAZ2', 'Liability', 'Boys', 1000, 'Irfan', 'for school', 800, '', '2020-11-30');
 
 -- --------------------------------------------------------
 
@@ -586,9 +579,15 @@ INSERT INTO `ac_payroll_calculation` (`payroll_id`, `user_id`, `user_date`, `whi
 (275, 2, '2020-10-15 07:11:26', '12', 2020, '2', 'waledd', '', '0', '17', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
 (276, 2, '2020-10-15 07:11:26', '12', 2020, '3', 'wa', 'offoe', '0', '4', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
 (277, 2, '2020-10-15 07:11:26', '12', 2020, '4', 'Kashif', 'FOD', '0', '500000', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
-(278, 2, '2020-10-15 07:11:26', '12', 2020, '5', 'Waleed Asad', 'IT boy', '0', '15000', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(278, 2, '2020-11-26 05:23:21', '12', 2020, '5', 'Waleed Asad', 'IT boy', '0', '15000', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 1),
 (279, 2, '2020-10-15 07:43:50', '12', 2020, '6', 'Talal', 'cashier', '0', '15000', 500, 1000, 600, 17100, 1567, 0, 0, 0, 15533.3, 'staff', 1),
-(296, 2, '2020-10-16 14:56:53', '09', 2020, '6', 'Talal', 'cashier', '19', '15000', 500, 1000, 600, 17100, 1567, 2631, 658, 2631, 12244.9, 'staff', 1);
+(296, 2, '2020-10-16 14:56:53', '09', 2020, '6', 'Talal', 'cashier', '19', '15000', 500, 1000, 600, 17100, 1567, 2631, 658, 2631, 12244.9, 'staff', 1),
+(297, 2, '2020-12-02 05:46:26', '01', 2020, '1', 'waledd', '14', '0', '17', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(298, 2, '2020-12-02 05:46:26', '01', 2020, '2', 'waledd', '', '0', '17', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(299, 2, '2020-12-02 05:46:26', '01', 2020, '3', 'wa', 'offoe', '0', '4', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(300, 2, '2020-12-02 05:46:26', '01', 2020, '4', 'Kashif', 'FOD', '0', '500000', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(301, 2, '2020-12-02 05:46:27', '01', 2020, '5', 'Waleed Asad', 'IT boy', '0', '15000', 0, 0, 0, 0, 0, 0, 0, 0, 0, 'staff', 0),
+(302, 2, '2020-12-02 05:50:27', '01', 2020, '6', 'Talal', 'cashier', '0', '15000', 500, 1000, 600, 17100, 767, 0, 0, 0, 16333.3, 'staff', 1);
 
 -- --------------------------------------------------------
 
@@ -892,7 +891,8 @@ INSERT INTO `ac_rev_exp` (`rev_exp_id`, `user_id`, `user_date`, `date_of_rev_exp
 (8, '2', '2020-08-24 04:50:53', '2020-08-24', 'Revenue', 12938, 'WALEED', 'Girls College', 1000, 'irfan', 'any ', 200, '13231', '2020-08-24'),
 (9, '2', '2020-08-27 09:08:15', '2020-08-27', 'Revenue', 20120786, 'muhammad waleed asad', 'Boys', 10900, 'Irfan', '', 0, '', '2020-08-27'),
 (10, '2', '2020-08-27 09:08:42', '2020-08-27', 'Expenses', 2147483647, 'SARFARAZ3', 'Boys', 450, 'Irfan', '', 0, '', '2020-08-27'),
-(11, '2', '2020-09-12 09:22:21', '2020-09-12', 'Expenses', 121, 'hall noc charges', 'Boys', 121, 'irfan', 'cash', 21, '', '2020-09-12');
+(11, '2', '2020-09-12 09:22:21', '2020-09-12', 'Expenses', 121, 'hall noc charges', 'Boys', 121, 'irfan', 'cash', 21, '', '2020-09-12'),
+(12, '2', '2020-11-30 07:46:55', '2020-11-30', 'Liability', 2147483647, 'SARFARAZ2', 'Boys', 1000, 'Irfan', 'for school', 800, '', '2020-11-30');
 
 -- --------------------------------------------------------
 
@@ -1052,22 +1052,26 @@ CREATE TABLE `ad_add_user` (
   `gr_no` varchar(255) NOT NULL,
   `account` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
-  `cpass` varchar(255) NOT NULL
+  `cpass` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ad_add_user`
 --
 
-INSERT INTO `ad_add_user` (`add_user_id`, `user_id`, `user_date`, `name`, `e_mail`, `gr_no`, `account`, `pass`, `cpass`) VALUES
-(22, 2, '2020-10-13 10:12:29', 'Kashif', 'kashif@gmail.com', '4', 'account', '$2y$10$by4m5PE4nZhjHJxRK68Xx.kTDvmjieak5ntxPyOyM3rbm4mXN8AZy', '$2y$10$8wTSkUyrNDRIa9bVAHR5X.6aKcmRUlFjVjERlz0ShFUejRYlpc2VW'),
-(23, 2, '2020-10-13 10:12:44', 'Zain Yousuf', 'zain@gmail.com', '80', 'student', 'waleed11', '$2y$10$R7TXyCZ6JuzH4H3f1deBee4JdawL1e2XznsuRFgATBo7FvoLos5ze'),
-(24, 2, '2020-10-13 10:12:39', 'Muhammad Yousuf', 'youduf@gmail.com', '80', 'parent', '$2y$10$F7Y5.BCSLyFDrUvN40/i4.ixom0ry63CmBBEabClBp88mrA8V.zWi', '$2y$10$YS1IRBRUu/mOV.VppcNykuh5XTXMFPWyD7YcsLJteUtXbP1AAqQae'),
-(25, 2, '2020-10-13 10:12:59', 'Sir Mudassir', 'mudassir@gmail.com', '3', 'teacher', '$2y$10$tQfBWMWw35CibFK7RmVb3OIt4txu/woFFmzshz6YO0GB7opaj3.j.', '$2y$10$KAfyQSFb4w.AxnMnPN1UnOWAlJpGZGZ.8LaMMqhiv8.c.G8OLJtdK'),
-(26, 2, '2020-10-13 10:12:34', 'Waleed Asad', 'waleed@gmail.com', '5', 'admin', '$2y$10$QJskH/fzWQY2.EfYp5Ab3OXDPTnahI0osWEnx9AopuasuqLRTjcIW', '$2y$10$Dj4Wnmzpvt1IjNjCGlm.9uWyRxs9oT3BA6W.Mjl2UAR0jcHHhCmyS'),
-(27, 2, '2020-10-13 09:24:04', 'arham', 'arham@gmail.com', '38', 'teacher', '$2y$10$7.aFmWZV.LBw02MCHQGzjuRyIGBSnX0n6orjAMaBJM2f2f5y0xqvm', '$2y$10$Aw7nwRtgw4Bd3fO2RUxJHehVcQz0D0Y3Yu1XKDbygTFgxSHL0wtTS'),
-(28, 2, '2020-10-13 09:43:31', 'Kashif', 'kashif2@gmail.com', '4', 'admin', '$2y$10$ja6ssOs/Qp.TKT2BlC59I.1zVST6U/VrQtYb7M83Q4EtWrgWenHx6', '$2y$10$jIfHVhhhJcvhU7PqAVfs3.EufrUkUuG4D16NP0kxwIcMQmon1R1FG'),
-(29, 2, '2020-10-14 05:47:08', 'asdas', 'asdass@gmail.com', '78', 'student', '$2y$10$bv3ermwJWL7ZsXFaA6Xaf.t7FFfZOUvpKETu9vQuHhK5P0m5tnuD2', '$2y$10$s4.5jL9hCQbkWfDLtyysWOeIV4bmBIGmeaq1KV/dEtetD0LhO8Uui');
+INSERT INTO `ad_add_user` (`add_user_id`, `user_id`, `user_date`, `name`, `e_mail`, `gr_no`, `account`, `pass`, `cpass`, `token`) VALUES
+(22, 2, '2020-10-13 10:12:29', 'Kashif', 'kashif@gmail.com', '4', 'account', '$2y$10$by4m5PE4nZhjHJxRK68Xx.kTDvmjieak5ntxPyOyM3rbm4mXN8AZy', '$2y$10$8wTSkUyrNDRIa9bVAHR5X.6aKcmRUlFjVjERlz0ShFUejRYlpc2VW', ''),
+(23, 2, '2020-10-13 10:12:44', 'Zain Yousuf', 'zain@gmail.com', '80', 'student', 'waleed11', '$2y$10$R7TXyCZ6JuzH4H3f1deBee4JdawL1e2XznsuRFgATBo7FvoLos5ze', ''),
+(24, 2, '2020-10-13 10:12:39', 'Muhammad Yousuf', 'youduf@gmail.com', '80', 'parent', '$2y$10$F7Y5.BCSLyFDrUvN40/i4.ixom0ry63CmBBEabClBp88mrA8V.zWi', '$2y$10$YS1IRBRUu/mOV.VppcNykuh5XTXMFPWyD7YcsLJteUtXbP1AAqQae', ''),
+(25, 2, '2020-10-13 10:12:59', 'Sir Mudassir', 'mudassir@gmail.com', '3', 'teacher', '$2y$10$tQfBWMWw35CibFK7RmVb3OIt4txu/woFFmzshz6YO0GB7opaj3.j.', '$2y$10$KAfyQSFb4w.AxnMnPN1UnOWAlJpGZGZ.8LaMMqhiv8.c.G8OLJtdK', ''),
+(26, 2, '2020-10-13 10:12:34', 'Waleed Asad', 'waleed@gmail.com', '5', 'admin', '$2y$10$QJskH/fzWQY2.EfYp5Ab3OXDPTnahI0osWEnx9AopuasuqLRTjcIW', '$2y$10$Dj4Wnmzpvt1IjNjCGlm.9uWyRxs9oT3BA6W.Mjl2UAR0jcHHhCmyS', ''),
+(27, 2, '2020-10-13 09:24:04', 'arham', 'arham@gmail.com', '38', 'teacher', '$2y$10$7.aFmWZV.LBw02MCHQGzjuRyIGBSnX0n6orjAMaBJM2f2f5y0xqvm', '$2y$10$Aw7nwRtgw4Bd3fO2RUxJHehVcQz0D0Y3Yu1XKDbygTFgxSHL0wtTS', ''),
+(28, 2, '2020-10-13 09:43:31', 'Kashif', 'kashif2@gmail.com', '4', 'admin', '$2y$10$ja6ssOs/Qp.TKT2BlC59I.1zVST6U/VrQtYb7M83Q4EtWrgWenHx6', '$2y$10$jIfHVhhhJcvhU7PqAVfs3.EufrUkUuG4D16NP0kxwIcMQmon1R1FG', ''),
+(29, 2, '2020-10-14 05:47:08', 'asdas', 'asdass@gmail.com', '78', 'student', '$2y$10$bv3ermwJWL7ZsXFaA6Xaf.t7FFfZOUvpKETu9vQuHhK5P0m5tnuD2', '$2y$10$s4.5jL9hCQbkWfDLtyysWOeIV4bmBIGmeaq1KV/dEtetD0LhO8Uui', ''),
+(30, 2, '2020-11-27 05:09:49', 'Waleed Asad', 'waleedasad27@gmail.com', '55', '', '$2y$10$za1AeX8V.IUMFd2iPLkz1.N.FZLEHy8pT7ZVsIm/ulN.ajmZupM7m', '$2y$10$ViKLt2eThTu8hBAyTJCT4uAQwRYIoGVj7oRaLjJhZNuaPcj/uFDpG', '6da310844fa23e52ec373fecdc65b8'),
+(31, 2, '2020-11-26 05:16:37', 'Kashif', 'waleedasas27@gmail.com', '4', 'Account', '$2y$10$8IB6IyTmvfP1UMFlq7JAZeOjWdTXe/f/1mROJCT2PXpT1nSQLtfeC', '$2y$10$2yOXzINliDtNHzyvmHERru61cFWLSwvB1HyVT5hSNR/t5VJmLxMbS', 'bcae5c53e124d70515c0d654530635'),
+(32, 2, '2020-11-26 06:37:33', 'Waleed Asad', 'waleedasad28@gmail.com', '5', 'account', '$2y$10$tsPIEeYgdwve20.ZGnp66OtoSW0QelK24H1/REHG/7SfcBJCDtibq', '$2y$10$LR1qbb.9LxDJXpeja.i/HuGxv0SQmzYVeYB5DQvzgdSvco4keB9J.', '');
 
 -- --------------------------------------------------------
 
@@ -1149,7 +1153,9 @@ INSERT INTO `ad_admission` (`addmission_id`, `user_id`, `user_time`, `class`, `G
 (91, 0, '2020-08-31 10:48:17', 1, '89', 'Danish Khan', 'Zubair Khan', 'Yousuf', 'Zubair Khan', 'Father', 'Isalam', 'block 15', '03174721487', '03174721487', 'danishkhan@gmail.com', '11', 'Book Shop', 989, '421011111111111118', '2020-08-22', 'Karachi', 'ten oct 1999', '1111', '111', 'guid line ', 'uploads/969127_unnamed.jpg', NULL, NULL),
 (92, 0, '2020-08-31 10:48:29', 1, '89', 'Danish Khan', 'Zubair Khan', 'Yousuf', 'Zubair Khan', 'Father', 'Isalam', 'block 15', '03174721487', '03174721487', 'danishkhan@gmail.com', '11', 'Book Shop', 989, '421011111111111118', '2020-08-22', 'Karachi', 'ten oct 1999', '1111', '111', 'guid line ', 'uploads/841585_unnamed.jpg', NULL, NULL),
 (94, 0, '2020-09-12 11:18:39', 1, '93', 'Danish Khan', 'Muhammad Yousuf', 'Khan', 'Muhammad Yousuf', 'Father', 'Isalam', 'block 15', '03174721487', '03174721487', 'danishkhan@gmail.com', '03174721487', 'Book Shop', 5545, '34534', '2020-09-30', 'Karachi', 'ten oct 1999', '1111', 'df', 'guid line ', 'uploads/225578_background.JPG', NULL, NULL),
-(95, 0, '2020-09-14 08:21:41', 1, '95', 'Ameen Uddin', 'Zia Uddin', 'Syed', 'Zia Uddin', 'Father', 'Islam', 'block 14, F.B Area , karachi', '03174721487', '03174721487', 'ameen@gmail.com', '03174721487', 'driver', 30000, '4290909645645', '1999-01-14', 'Karachi', 'ten oct 1999', '4', '4 a', 'guid line ', 'uploads/106610_background.JPG', 'no', '');
+(95, 0, '2020-09-14 08:21:41', 1, '95', 'Ameen Uddin', 'Zia Uddin', 'Syed', 'Zia Uddin', 'Father', 'Islam', 'block 14, F.B Area , karachi', '03174721487', '03174721487', 'ameen@gmail.com', '03174721487', 'driver', 30000, '4290909645645', '1999-01-14', 'Karachi', 'ten oct 1999', '4', '4 a', 'guid line ', 'uploads/106610_background.JPG', 'no', ''),
+(96, 2, '2020-12-02 06:57:22', 2019, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '', '', '', '', NULL, NULL),
+(97, 2, '2020-12-02 06:57:23', 2019, '', '', '', '', '', '', '', '', '', '', '', '', '', 0, '', '0000-00-00', '', '', '', '', '', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1227,7 +1233,10 @@ INSERT INTO `ad_assign_student_class` (`assign_student_class_id`, `user_id`, `us
 (10, '2', '2020-09-08 09:41:35', '80', 'Zain Yousuf', '2020-09-08', '25', ''),
 (11, '2', '2020-09-12 08:54:09', '58', 'Waleed Asad', '2020-09-12', '25', ''),
 (12, '2', '2020-09-14 09:04:22', '95', 'Ameen Uddin', '2020-09-14', '26', ''),
-(13, '2', '2020-09-14 09:09:42', '95', 'Ameen Uddin', '2020-09-14', '25', 'testing');
+(13, '2', '2020-09-14 09:09:42', '95', 'Ameen Uddin', '2020-09-14', '25', 'testing'),
+(14, '2', '2020-11-26 08:50:44', '92', 'Danish Khan', '2020-11-26', '25', ''),
+(15, '2', '2020-12-02 06:00:00', '60', 'Waleed Asad', '2020-12-02', '26', ''),
+(16, '2', '2020-12-02 06:45:46', '60', 'Waleed Asad', '2020-12-02', '24', '');
 
 -- --------------------------------------------------------
 
@@ -1247,7 +1256,6 @@ CREATE TABLE `ad_class` (
 --
 
 INSERT INTO `ad_class` (`class_id`, `class_name`, `section`, `comment`) VALUES
-(18, '1', 'Girls', ''),
 (19, '2', 'Girls', ''),
 (20, '3', 'Girls', ''),
 (21, '4', 'Girls', ''),
@@ -1574,6 +1582,7 @@ INSERT INTO `ad_school_leaving_certificate` (`school_leaving_certificate_id`, `u
 CREATE TABLE `ad_section` (
   `section_id` int(11) NOT NULL,
   `section_name` varchar(255) NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
   `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1581,12 +1590,19 @@ CREATE TABLE `ad_section` (
 -- Dumping data for table `ad_section`
 --
 
-INSERT INTO `ad_section` (`section_id`, `section_name`, `comment`) VALUES
-(3, 'Boys', ''),
-(4, 'Girls', ''),
-(5, 'Montessori', ''),
-(6, 'Girls College', ''),
-(8, 'Boys kharaadar', '');
+INSERT INTO `ad_section` (`section_id`, `section_name`, `location`, `comment`) VALUES
+(10, 'Memon Montessori School ', 'Fedral B Area', ''),
+(11, 'Memon Boys School', 'Fedral B Area', ''),
+(12, 'Memon Girls School', 'Fedral B Area', ''),
+(13, 'Memon Girls College', 'Fedral B Area', ''),
+(14, 'Memon Degree College', 'Clifton', ''),
+(15, 'Madrassa E Islamia No. 3', 'Kharadar- Punjabi Club', ''),
+(16, 'Madrassa E Islamia No. 1', 'Khouri Garden', ''),
+(17, 'Madrassa E Islamia No. 2 Primary A (Morning)', 'Kharadar - Machi Miani Market', ''),
+(18, 'Madrassa E Islamia No. 2 Primary A (Afternoon)', 'Kharadar - Machi Miani Market', ''),
+(19, 'Madrassa E Islamia No. 2 Boys Secondary ', 'Kharadar - Machi Miani Market', ''),
+(20, 'Memon Commerce College', 'Kharadar - Machi Miani Market', ''),
+(21, 'Memon Girls Degree College', 'Kharadar - Machi Miani Market', '');
 
 -- --------------------------------------------------------
 
@@ -1601,24 +1617,26 @@ CREATE TABLE `ad_std_attendance` (
   `name` varchar(255) NOT NULL,
   `gr_no` varchar(11) NOT NULL,
   `status` varchar(255) NOT NULL,
-  `class` varchar(255) NOT NULL,
-  `date` date NOT NULL
+  `class` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `subject` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `ad_std_attendance`
 --
 
-INSERT INTO `ad_std_attendance` (`std_attendance_id`, `user_id`, `user_date`, `name`, `gr_no`, `status`, `class`, `date`) VALUES
-(17, 2, '2020-07-29 03:44:25', 'hassan', '0', 'Present', 'montessori', '2020-07-25'),
-(18, 2, '2020-07-29 03:58:42', 'Faisal', 'MP890', 'Present', '8', '2020-07-25'),
-(19, 2, '2020-07-29 03:59:01', 'Waleed Asad2', 'EP1866051', 'Absent', 'montessori', '2020-07-29'),
-(20, 2, '2020-08-04 06:57:01', 'eqqe', 'EP1866051', 'Present', 'montessori', '2020-08-04'),
-(21, 2, '2020-08-04 07:05:52', 'abc', 'MP890', 'Present', 'montessori', '2020-08-04'),
-(22, 2, '2020-08-22 09:33:42', 'Waleed Asad', '7', 'Excused', '7', '2020-08-22'),
-(23, 2, '2020-08-24 05:42:32', 'Waleed Asad', '7', 'Absent', '7', '2020-08-24'),
-(24, 2, '2020-08-24 05:44:27', 'Waleed Asad', '7', 'Absent', '7', '2020-08-24'),
-(25, 2, '2020-08-24 06:47:40', 'Waleed Asad', '7', 'Late', '7', '2020-08-24');
+INSERT INTO `ad_std_attendance` (`std_attendance_id`, `user_id`, `user_date`, `name`, `gr_no`, `status`, `class`, `date`, `subject`) VALUES
+(58, 2, '2020-12-01 06:36:09', 'Waleed Asad', '58', 'Late', 25, '2020-12-01', 1),
+(59, 2, '2020-12-01 06:25:06', 'Zain Yousuf', '80', 'Absent', 25, '2020-12-01', 1),
+(60, 2, '2020-12-01 06:25:06', 'Danish Khan', '92', 'Present', 25, '2020-12-01', 1),
+(61, 2, '2020-12-01 06:31:57', 'Ameen Uddin', '95', 'Present', 25, '2020-12-01', 1),
+(62, 2, '2020-12-02 06:46:36', 'Waleed Asad', '58', 'Late', 24, '2020-12-02', 1),
+(63, 2, '2020-12-02 06:46:36', 'Waleed Asad', '60', 'Present', 24, '2020-12-02', 1),
+(64, 2, '2020-12-02 06:49:39', 'Waleed Asad', '58', 'Excused', 24, '2020-12-02', 1),
+(65, 2, '2020-12-02 06:47:24', 'Waleed Asad', '60', 'Present', 24, '2020-12-02', 1),
+(66, 2, '2020-12-02 06:49:02', 'Waleed Asad', '58', 'Present', 24, '2020-12-02', 1),
+(67, 2, '2020-12-02 06:49:02', 'Waleed Asad', '60', 'Present', 24, '2020-12-02', 1);
 
 -- --------------------------------------------------------
 
@@ -1656,7 +1674,6 @@ CREATE TABLE `ad_subject` (
   `subject_id` int(11) NOT NULL,
   `subject_name` varchar(255) NOT NULL,
   `class_id` int(11) NOT NULL,
-  `class_name` varchar(255) NOT NULL,
   `comment` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1664,10 +1681,16 @@ CREATE TABLE `ad_subject` (
 -- Dumping data for table `ad_subject`
 --
 
-INSERT INTO `ad_subject` (`subject_id`, `subject_name`, `class_id`, `class_name`, `comment`) VALUES
-(1, 'Maths', 76, 'class name ', 'ee'),
-(2, 'Maths 2', 76, 'class name ', 'ee'),
-(3, 'Maths 3', 76, 'class name ', 'ee');
+INSERT INTO `ad_subject` (`subject_id`, `subject_name`, `class_id`, `comment`) VALUES
+(1, 'Maths', 76, 'ee'),
+(4, 'Statistics', 1, '1'),
+(5, 'Economics', 1, '1'),
+(6, 'Science', 1, '1'),
+(7, 'Physics', 1, '1'),
+(8, 'Chemistry', 1, '1'),
+(9, 'English', 0, ''),
+(10, 'English', 18, ''),
+(11, 'Physics', 25, '');
 
 -- --------------------------------------------------------
 
@@ -1796,8 +1819,39 @@ INSERT INTO `ad_teacher_records` (`Teacher_records_id`, `user_id`, `user_date`, 
 CREATE TABLE `ad_timetable` (
   `time_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `user_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `user_date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `class_id` int(11) NOT NULL,
+  `period1` varchar(255) NOT NULL,
+  `period2` varchar(255) DEFAULT NULL,
+  `period3` varchar(255) DEFAULT NULL,
+  `period4` varchar(255) DEFAULT NULL,
+  `period5` varchar(255) DEFAULT NULL,
+  `period6` varchar(255) DEFAULT NULL,
+  `period7` varchar(255) DEFAULT NULL,
+  `period8` varchar(255) DEFAULT NULL,
+  `period9` varchar(255) DEFAULT NULL,
+  `period10` varchar(255) DEFAULT NULL,
+  `period11` varchar(255) DEFAULT NULL,
+  `period12` varchar(255) DEFAULT NULL,
+  `period13` varchar(255) DEFAULT NULL,
+  `period14` varchar(255) DEFAULT NULL,
+  `period15` varchar(255) DEFAULT NULL,
+  `period16` varchar(255) DEFAULT NULL,
+  `period17` varchar(255) DEFAULT NULL,
+  `period18` varchar(255) DEFAULT NULL,
+  `period19` varchar(255) DEFAULT NULL,
+  `period20` varchar(255) DEFAULT NULL,
+  `day` varchar(255) NOT NULL,
+  `day_value` int(11) NOT NULL,
+  `comments` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ad_timetable`
+--
+
+INSERT INTO `ad_timetable` (`time_id`, `user_id`, `user_date`, `class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `period11`, `period12`, `period13`, `period14`, `period15`, `period16`, `period17`, `period18`, `period19`, `period20`, `day`, `day_value`, `comments`) VALUES
+(8, 2, '2020-11-30 05:38:56', 18, '1', '4', '5', '6', '7', '8', '1', '4', '5', '6', '7', '8', '1', '4', '5', '6', '7', '8', '7', '8', 'Monday', 1, '');
 
 -- --------------------------------------------------------
 
@@ -1848,7 +1902,8 @@ INSERT INTO `feedback` (`feedback_id`, `feedback_for_user_id`, `feedback_by_user
 (10, '2', 'Kashif', 'good boy\r\n', 'Excellent', '2020-08-25'),
 (11, '2', 'Sir Mudassir', 'jh', 'Excellent', '2020-08-25'),
 (12, '2', 'ss', '', 'Average', '2020-08-26'),
-(13, '2', 'Kashif', 'gfhgfgh', 'Average', '2020-09-12');
+(13, '2', 'Kashif', 'gfhgfgh', 'Average', '2020-09-12'),
+(14, '2', 'Sir Mudassir', 'abc', 'Good', '2020-12-23');
 
 -- --------------------------------------------------------
 
@@ -1862,6 +1917,69 @@ CREATE TABLE `link` (
   `class` varchar(255) NOT NULL,
   `link` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `link`
+--
+
+INSERT INTO `link` (`link_id`, `name`, `class`, `link`) VALUES
+(2, 'Asset  Liability', 'zmdi zmdi-money-box', 'Accounts-mod-asset.php'),
+(3, 'Asset - Liability', 'zmdi zmdi-money-box', 'Accounts-mod-asset.php'),
+(4, 'Expenses - Revenue', 'zmdi zmdi-money', 'Accounts-mod-expenses.php'),
+(5, 'Profit and Loss', 'fa fa-line-chart', 'Accounts-mod-profit-and-loss.php'),
+(6, 'Balance Sheet', 'fa fa-balance-scale', 'Accounts-mod-balance-sheet.php'),
+(7, 'Chart Of Account', 'zmdi zmdi-collection-item', 'Accounts-mod-chart-of-account.php'),
+(8, 'Account Entry', 'fa fa-cc-amex', 'Accounts-mod-account-entry.php'),
+(9, 'Receivable and Payables Reporting', 'fa fa-exchange', 'Accounts-mod-receivable-and-payables-reporting.php'),
+(10, 'Budgeting and Forecasting', 'fa fa-money', 'Accounts-mod-budgeting-and-forecasting.php'),
+(11, 'Payroll Calculation', 'fa fa-calculator', 'Accounts-mod-payoll-calculation.php'),
+(12, 'Salary Paid', 'fa fa-paypal', 'Accounts-mod-salary-paid.php'),
+(13, 'Zakat Form', 'fa fa-pagelines', 'Accounts-mod-zakat-form.php'),
+(14, 'Zakat Donor Entry', 'zmdi zmdi-accounts-list', 'Accounts-mod-zakat-donor.php'),
+(15, 'Zakat Donate', 'fa fa-envira', 'Accounts-mod-zakat.php'),
+(16, 'Zakat Detail', 'fa fa-reorder', 'Accounts-mod-zakat-amount.php'),
+(17, ' Fee Collecting', 'fa fa-vcard-o', 'Accounts-mod-fee-collecting.php'),
+(18, 'Fee Card', 'dripicons-document', 'Accounts-mod-fee-card.php'),
+(19, 'Sibling Discount on Fee', 'dripicons-to-do', 'Accounts-mod-fee-discount.php'),
+(20, 'Miscellaneous Querry Reporting', 'fa fa-database', 'Accounts-mod-miscellaneous-querry-reporting.php'),
+(21, 'Annual Appraisal for Bonus and Increment', 'fa fa-calendar-check-o', 'Accounts-mod-annual-appraisal-for-bonus-and-increment.php'),
+(22, 'Hall Booking', 'zmdi zmdi-assignmen', 'Accounts-mod-hall-booking.php'),
+(23, 'Employee Loan', 'zmdi zmdi-money-off', 'Accounts-mod-employe_loan.php'),
+(24, 'Procurement', 'dripicons-box', 'Accounts-mod-procurement.php'),
+(25, 'Fee Settings  For Class', 'zmdi zmdi-select-all', 'Accounts-mod-fee-setting-for-class.php'),
+(26, 'Fee Settings For Specific Student', 'fa fa-user-circle-o', 'Accounts-mod-fee-setting-specfic-student.php'),
+(27, 'Fee Generate For Class ', 'fa fa-print', 'Accounts-mod-fee-generate-class.php'),
+(28, 'Dashboard', 'zmdi zmdi-view-dashboard', 'Admin-mod-dashboard.php'),
+(29, 'Students Attendance', 'zmdi zmdi-view-compact', 'Admin-mod-student-attendance.php'),
+(30, 'Teachers Attendance', 'zmdi zmdi-view-quilt', 'Admin-mod-teacher-attendance.php'),
+(31, 'Staff Attendance', 'zmdi zmdi-view-quilt', 'Admin-mod-employee-attendance.php'),
+(32, 'Teacher records ', 'zmdi zmdi-view-list', 'Admin-mod-teacher-records.php'),
+(33, 'Teacher Assign', 'zmdi zmdi-assignment-returned', 'Admin-mod-teacher-assign.php'),
+(34, 'Parent Child', 'zmdi zmdi-ungroup', 'Admin-mod-parent-child.php'),
+(35, 'Feedback Forms', 'fa fa-wpforms', 'Admin-mod-Parent-Student-feedback-forms.php'),
+(36, 'Timetable management', 'fa fa-table', 'Admin-mod-timetable-management.php'),
+(37, 'Annual Appraisal', 'fa fa-calendar-check-o', 'Admin-mod-annual-appraisal.php'),
+(38, 'Admission management', 'fa fa-indent', 'Admin-mod-admission-management.php'),
+(39, 'Assign Student Class', 'zmdi zmdi-assignment-check', 'Admin-mod-assign-student-class.php'),
+(40, 'Student Fee ', 'fa fa-money', 'Admin-mod-admission-fee-set.php'),
+(41, ' Course planning', 'fa fa-book', 'Admin-mod-course-planning.php'),
+(42, 'Querry Reporting Functions', 'a fa-life-bouy', 'Admin-mod-querry-reporting-functions.php'),
+(43, 'School leaving certificate ', 'zmdi zmdi-assignment-returned', 'Admin-mod-school-leaving-certificate.php'),
+(44, 'Employee Records', 'zmdi zmdi-view-list', 'Admin-mod-employee-record.php'),
+(45, 'Add User', 'zmdi zmdi-account-add', 'Admin-mod-add-user.php'),
+(46, 'Class', 'zmdi zmdi-closed-caption', 'Admin-mod-class.php'),
+(47, 'Section', 'zmdi zmdi-format-subject', 'Admin-mod-section.php'),
+(48, 'Procurement', 'dripicons-box', 'Admin-mod-procurement.php'),
+(49, 'Inquiry', 'fa fa-user-secret', 'Admin-mod-inquiry.php'),
+(50, 'Class Fee', 'zmdi zmdi-accounts-list', 'Admin-mod-class-fee.php'),
+(51, 'Fee Concession ', 'zmdi zmdi-money-off', 'Admin-mod-fee-concession.php'),
+(52, 'Annual Appraisal for Bonus and Increment', 'fa fa-calendar-check-o', 'Admin-mod-annual-appraisal-for-bonus-and-increment.php'),
+(53, 'Video Lecture', 'fa fa-video-camera', 'Teacher-mod-video-leacture.php'),
+(54, 'Homework', 'fa fa-book', 'Teacher-mod-homework.php'),
+(55, 'Report Card', 'fa fa-vcard', 'Teacher-mod-report-card.php'),
+(56, 'Gradebook ', 'zmdi zmdi-account-box-mail', 'Teacher-mod-gradebook.php'),
+(57, 'Blog', 'zmdi zmdi-blogger', 'Teacher-mod-blog.php'),
+(58, 'Announcement', 'fa fa-comment', 'Teacher-mod-announcement.php');
 
 -- --------------------------------------------------------
 
@@ -1889,7 +2007,8 @@ CREATE TABLE `procurement` (
 --
 
 INSERT INTO `procurement` (`prourement_id`, `by_user`, `item`, `description`, `expected_price`, `item_quantity`, `date_req`, `approval_status`, `date_approved`, `done_by`, `on_date`, `status`) VALUES
-(1, '2', 'Cup', 'For tea', 4, 15, '2020-08-26', 'yes', '2020-08-26', 'anybody', '2020-08-31', 'Order Delivered');
+(1, '2', 'Cup', 'For tea', 4, 15, '2020-08-26', 'yes', '2020-08-26', 'anybody', '2020-08-31', 'Order Delivered'),
+(2, '2', '', '', 0, 0, '0000-00-00', '', '0000-00-00', '', '0000-00-00', '');
 
 -- --------------------------------------------------------
 
@@ -1907,15 +2026,19 @@ CREATE TABLE `rights` (
   `form_location` varchar(255) NOT NULL,
   `insert_form` int(11) NOT NULL,
   `edit_form` int(11) NOT NULL,
-  `delete_form` int(11) NOT NULL
+  `delete_form` int(11) NOT NULL,
+  `link_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `rights`
 --
 
-INSERT INTO `rights` (`right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form`) VALUES
-(9, 2, 'student', 'Feed Back', 'Students-mod-feedback.php', 1, 'Students-mod-feedback.php', 0, 1, 0);
+INSERT INTO `rights` (`right_id`, `user_type_id`, `user_type`, `form_name`, `icon`, `form_prioirty`, `form_location`, `insert_form`, `edit_form`, `delete_form`, `link_id`) VALUES
+(13, 2, 'admin', 'Procurement', 'dripicons-box', 1, 'Admin-mod-procurement.php', 0, 0, 0, 0),
+(14, 2, 'admin', 'Gradebook ', 'zmdi zmdi-account-box-mail', 1, 'Teacher-mod-gradebook.php', 0, 0, 0, 0),
+(15, 2, 'account', 'Expenses - Revenue', 'zmdi zmdi-money', 1, 'Accounts-mod-expenses.php', 0, 0, 0, 0),
+(16, 2, 'account', ' Course planning', 'fa fa-book', 7, 'Admin-mod-course-planning.php', 1, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2506,7 +2629,7 @@ ALTER TABLE `ac_annual_appraisal`
 -- AUTO_INCREMENT for table `ac_asset_liab`
 --
 ALTER TABLE `ac_asset_liab`
-  MODIFY `ac_asset_liab_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `ac_asset_liab_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ac_bro_sis_discount`
@@ -2578,7 +2701,7 @@ ALTER TABLE `ac_hall_booking`
 -- AUTO_INCREMENT for table `ac_payroll_calculation`
 --
 ALTER TABLE `ac_payroll_calculation`
-  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=297;
+  MODIFY `payroll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=303;
 
 --
 -- AUTO_INCREMENT for table `ac_profit_loss_expenditure`
@@ -2596,7 +2719,7 @@ ALTER TABLE `ac_receivable_chart_of_account`
 -- AUTO_INCREMENT for table `ac_rev_exp`
 --
 ALTER TABLE `ac_rev_exp`
-  MODIFY `rev_exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `rev_exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `ac_std_fee_collected`
@@ -2626,13 +2749,13 @@ ALTER TABLE `ac_zakat_form`
 -- AUTO_INCREMENT for table `ad_add_user`
 --
 ALTER TABLE `ad_add_user`
-  MODIFY `add_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `add_user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `ad_admission`
 --
 ALTER TABLE `ad_admission`
-  MODIFY `addmission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `addmission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `ad_annual_appraisal`
@@ -2644,13 +2767,13 @@ ALTER TABLE `ad_annual_appraisal`
 -- AUTO_INCREMENT for table `ad_assign_student_class`
 --
 ALTER TABLE `ad_assign_student_class`
-  MODIFY `assign_student_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `assign_student_class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `ad_class`
 --
 ALTER TABLE `ad_class`
-  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `class_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `ad_class_fee`
@@ -2710,13 +2833,13 @@ ALTER TABLE `ad_school_leaving_certificate`
 -- AUTO_INCREMENT for table `ad_section`
 --
 ALTER TABLE `ad_section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `ad_std_attendance`
 --
 ALTER TABLE `ad_std_attendance`
-  MODIFY `std_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `std_attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `ad_student_fee`
@@ -2728,7 +2851,7 @@ ALTER TABLE `ad_student_fee`
 -- AUTO_INCREMENT for table `ad_subject`
 --
 ALTER TABLE `ad_subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `ad_teacher_assign`
@@ -2758,7 +2881,7 @@ ALTER TABLE `ad_teacher_records`
 -- AUTO_INCREMENT for table `ad_timetable`
 --
 ALTER TABLE `ad_timetable`
-  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `time_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `doner_zakat`
@@ -2770,25 +2893,25 @@ ALTER TABLE `doner_zakat`
 -- AUTO_INCREMENT for table `feedback`
 --
 ALTER TABLE `feedback`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `link`
 --
 ALTER TABLE `link`
-  MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `link_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `procurement`
 --
 ALTER TABLE `procurement`
-  MODIFY `prourement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `prourement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rights`
 --
 ALTER TABLE `rights`
-  MODIFY `right_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `right_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `th_announcement`
