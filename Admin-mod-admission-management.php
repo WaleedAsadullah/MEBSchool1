@@ -73,12 +73,12 @@ include_once('session_end.php');
                             include_once("Admin-mod-sidemenu.php")
                     ?>
 
-                    <!-- Sidebar -->
+
             <div class="content-page">
                 <div class="content">
                     <div class="container">
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-lg-12">
                                 <div class="card-box">
 <?php
 $con = connect_db();
@@ -140,11 +140,32 @@ $filename=$_FILES["file"]["tmp_name"];
        fclose($file);  
  }
 }
-?>
-                                     <div class="m-t-5 m-b-5" style="text-align: center" >
-                                         <a  href="#formadd" > <button  type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
-                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
-                                        <a><button type="button" class="btn btn-purple btn w-md waves-effect waves-light"  data-toggle="modal" data-target="#con-close-modal" > Import </button></a>
+?>                                  
+                                    <div class="m-t-5 m-b-5" style="text-align: center" >
+                                        <div class="row">
+                                            <div class="col-sm-3" ></div>
+                                             <div class="col-sm-2" >
+                                                 <a  href="#formadd"><button  type="button" class="btn btn-primary btn w-md waves-effect waves-light">+ Add</button></a>
+                                                <a>
+                                            </div>
+                                            <div class="col-sm-2" >
+                                            <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                                                    <input type="hidden" name="Export" value="SELECT `class_id`, `class_name`,`ad_section`.`section_name`, `ad_class`.`comment` FROM `ad_class`,`ad_section` where `ad_section`.`section_id` = `ad_class`.`section` order by `class_id` desc">
+                                                    <input type="hidden" name="title" value="ID|Class Name|Section Name|Comment">
+                                                    <input type="hidden" name="name_file" value="Classes">
+                                                    <input type="hidden" name="link" value="Admin-mod-class.php">
+                                                    <a> 
+                                                        <button type="submit" name="export" value="CSV Export" class="btn btn-info btn w-md waves-effect waves-light"  >CSV Export </button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-2" >
+                                                <a>
+                                                    <button type="button" class="btn btn-purple btn w-md waves-effect waves-light"  data-toggle="modal" data-target="#con-close-modal" > Import </button>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-3" ></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -240,24 +261,24 @@ if( $uploadedok) {
                                             // echo $sql;
                                             insert_query($sql);
 
-                                            $conn = connect_db();
+                                            // $conn = connect_db();
 
-                                            $cnic_repeated = $_REQUEST['cnic_guradian'];
+                                            // $cnic_repeated = $_REQUEST['cnic_guradian'];
 
-                                            $cnic_serach = 'SELECT `cnic_guradian` FROM `ad_parent` WHERE `cnic_guradian` = '.$cnic_repeated.'';
-                                            $query = mysqli_query($conn,$cnic_serach);
+                                            // $cnic_serach = 'SELECT `cnic_guradian` FROM `ad_parent` WHERE `cnic_guradian` = '.$cnic_repeated.'';
+                                            // $query = mysqli_query($conn,$cnic_serach);
 
-                                            $cnic_count = mysqli_num_rows($query);
-                                            echo "<h1>".$cnic_count."</h1>";
-                                            if($cnic_count < 1){
+                                            // $cnic_count = mysqli_num_rows($query);
+                                            // echo "<h1>".$cnic_count."</h1>";
+                                            // if($cnic_count < 1){
 
 
-                                            $sql2 = 'INSERT INTO `ad_parent`(`parent_id`, `user_id`, `user_date`, `guardian_name`, `cnic_guradian`) VALUES (NULL,\'';
-                                            $sql2 .= get_current_user();
-                                            $sql2 .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['guardian_name']. '\',\''.$_REQUEST['cnic_guradian'].'\')';
-                                            // echo $sql2;
-                                            insert_query($sql2);
-                                        }
+                                            // $sql2 = 'INSERT INTO `ad_parent`(`parent_id`, `user_id`, `user_date`, `guardian_name`, `cnic_guradian`) VALUES (NULL,\'';
+                                            // $sql2 .= get_current_user();
+                                            // $sql2 .= '\', CURRENT_TIMESTAMP, \''.$_REQUEST['guardian_name']. '\',\''.$_REQUEST['cnic_guradian'].'\')';
+                                            // // echo $sql2;
+                                            // insert_query($sql2);
+                                        // }
 
                                         }
 
@@ -304,15 +325,15 @@ if( $uploadedok) {
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Admission Form</h4>
                                     
                                     <?php
-                                    $conn = connect_db();
-                                            $sql_gr = 'SELECT `addmission_id` FROM `ad_admission`';
-                                            $result_gr = mysqli_query($conn, $sql_gr); 
+                                    // $conn = connect_db();
+                                    //         $sql_gr = 'SELECT `addmission_id` FROM `ad_admission`';
+                                    //         $result_gr = mysqli_query($conn, $sql_gr); 
 
-                                            while($row_gr = mysqli_fetch_assoc($result_gr)){
+                                    //         while($row_gr = mysqli_fetch_assoc($result_gr)){
                                                 
-                                                $gr_no[] = $row_gr['addmission_id'];}
-                                                $gr_no_create = max($gr_no) + 1;
-                                                echo $gr_no_create ;
+                                    //             $gr_no[] = $row_gr['addmission_id'];}
+                                    //             $gr_no_create = max($gr_no) + 1;
+                                    //             echo $gr_no_create ;
                                     ?>
                                     <form action="Admin-mod-admission-management.php" method="post" enctype="multipart/form-data" >
 
@@ -329,12 +350,17 @@ if( $uploadedok) {
                                                         </div>
                                                         </div>
                                                         <div>
-                                                            <div class="form-group">
+                                                            <!-- <div class="form-group">
                                                                 <label for="G.RNo">G.R No.</label>
                                                                 <input type="text" name="GR_No" required
                                                                        placeholder="Enter G.R No." class="form-control" id="adG.RNo"
                                                                        <?php if(isset($_REQUEST['GR_No']))echo'value="'.$_REQUEST['GR_No'].'" readonly';else echo'value='.$gr_no_create.' readonly'; ?>>
-                                                            </div>
+                                                            </div> -->
+                                                            <?php
+                                                                dropDownSimple("Class","class","class_name","ad_class",NULL);
+                                                                dropDownClassConditional("Class and Section", "class_id","class_id","ad_class`.`class_name","ad_section`.`section_name","ad_class`,`ad_section","WHERE `ad_class`.`section` = `ad_section`.`section_id`");
+                                                            ?>
+
                                                         </div>
                                                         
                                                     </div>

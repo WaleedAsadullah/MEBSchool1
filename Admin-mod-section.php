@@ -11,6 +11,14 @@
 
         <!-- Morris Chart CSS -->
         <link rel="stylesheet" href="assets/plugins/morris/morris.css">
+                <!-- DataTables -->
+        <link href="assets/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/buttons.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <!-- X-editable css -->
+        <link type="text/css" href="assets/plugins/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet">
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -30,26 +38,6 @@
 
         <script src="assets/js/modernizr.min.js"></script>
 </head>
-<?php
-
- //include_once("db_functions.php");
- 
-    if(isset($_POST["Export"]) && isset($_REQUEST['submit2'])){
-            $conn = connect_db();
-          header('Content-Type: text/csv; charset=utf-8');  
-          header('Content-Disposition: attachment; filename=data.csv');  
-          $output = fopen("php://output", "w");  
-         
-          fputcsv($output, array('ID', 'Section Name', 'Location'));  
-          $query = "SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc";  
-          $result = mysqli_query($conn, $query);  
-          while($row = mysqli_fetch_assoc($result))  
-          {  
-               fputcsv($output, $row);  
-          }  
-          fclose($output);  
-     }
-    ?>
        
 <body class="smallscreen fixed-left-void">
     <div id="wrapper" class="enlarged">
@@ -85,18 +73,26 @@
                                 <div class="card-box">
                                      <div style="text-align: center" >
                                         <div class="row" >
-                                         <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light m-b-5"  >+  Add</button></a>
-                                          <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
-                                        <input type="hidden" name="Export" value="SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc">
-
-                                        <input type="hidden" name="title" value="ID|Section Name|Location">
-                                        <input type="hidden" name="name_file" value="section">
-                                        <input type="hidden" name="link" value="Admin-mod-section.php">
-                                        <a> 
-                                        <!--button type="submit" name="submit2" class="btn btn-info btn w-md waves-effect waves-light m-b-5" > Export </button-->
-                                        <button type="submit" name="export" value="CSV Export" class="btn btn-success" >CSV Export </button> </a>
-                                        </form>
-                                    </div>
+                                            <div class="col-sm-4" ></div>
+                                            <div class="col-sm-2">
+                                                <a href="#formadd">
+                                                    <button type="button" class="btn btn-primary btn w-md waves-effect waves-light m-b-5" style="margin-left: 33%" >+  Add
+                                                    </button>
+                                                </a>
+                                            </div>
+                                             <div class="col-sm-2" >
+                                                <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                                                    <input type="hidden" name="Export" value="SELECT `section_id`, `section_name`,`location` FROM `ad_section` order by `section_id` desc">
+                                                    <input type="hidden" name="title" value="ID|Section Name|Location">
+                                                    <input type="hidden" name="name_file" value="section">
+                                                    <input type="hidden" name="link" value="Admin-mod-section.php">
+                                                    <a> 
+                                                        <button type="submit" name="export" value="CSV Export" class="btn btn-info btn w-md waves-effect waves-light" style="margin-right: 33%" >CSV Export </button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-4"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +101,6 @@
                                     <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Sections </h4>
 
                                     <div class="table-responsive">
-                                        <!-- tablesaw table m-b-0 tablesaw-columntoggle table-bordered -->
                                         <table id="datatable" class="tablesaw table m-b-0 tablesaw-columntoggle table-bordered ">
                                             <?php
                                             // ---------------
@@ -148,7 +143,7 @@
 
             <!-- Form -->
             <div class="content-page" id="formadd">
-                <div class="content">
+                <div class="">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">

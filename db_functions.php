@@ -1244,4 +1244,27 @@ function dropDownConditional2WithoutId($label,$name,$select,$select2,$from,$cond
         ;
 }
 
+function dropDownClassConditional($label,$name,$select,$select2,$select3,$from,$condition){
+        $conn = connect_db();
+        $sql_id = 'SELECT `'.$select.'` "select",`'.$select2.'`"select2",`'.$select3.'`"select3" FROM `'.$from.'`'.$condition.'';
+        // echo $sql_id;
+        echo'
+            <div class="form-group">
+              <label for="">'.$label.'</label>
+              <select id="themes" type="text"  name="'.$name.'"  required="" class="form-control select2">';
+         $result_id = mysqli_query($conn ,$sql_id);
+          
+          while($row_id = mysqli_fetch_assoc($result_id)) {
+
+            if (isset($_REQUEST[$name]) && $_REQUEST[$name]==$row_id["select"]) {$selected = "selected";}else $selected = ""; 
+
+            echo'
+                    <option '.$selected.'
+                    value="'.$row_id["select"].'">'.$row_id["select2"].' ('.$row_id["select3"].')</option>';
+          }
+                    echo'
+                </select>
+        </div>';
+}
+
 ?>

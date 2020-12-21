@@ -12,7 +12,7 @@ include_once('session_end.php');
 
         <link rel="shortcut icon" href="assets/images/favicon.png">
 
-          <?php include_once("title.php") ?>
+        <?php include_once("title.php") ?>
 
 
         <!-- DataTables -->
@@ -21,10 +21,6 @@ include_once('session_end.php');
         <link href="assets/plugins/datatables/fixedHeader.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/responsive.bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="assets/plugins/datatables/scroller.bootstrap.min.css" rel="stylesheet" type="text/css" />
-
-
-        <!--Morris Chart CSS -->
-        <link rel="stylesheet" href="assets/plugins/morris/morris.css">
 
         <!-- App css -->
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -75,9 +71,31 @@ include_once('session_end.php');
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                     <div class="m-t-5 m-b-5" style="text-align: center" >
-                                         <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
-                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
+                                     <div style="text-align: center" >
+                                        <div class="row" >
+                                            <div class="col-sm-4" ></div>
+                                            <div class="col-sm-2">
+                                                <a href="#formadd">
+                                                    <button type="button" class="btn btn-primary btn w-md waves-effect waves-light m-b-5" style="margin-left: 33%" >+  Add
+                                                    </button>
+                                                </a>
+                                            </div>
+                                             <div class="col-sm-2" >
+                                                <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                                                    <input type="hidden" name="Export" value="SELECT `subject_id`, `subject_name`, b.`class_name`,c.`section_name`, a.`comment`FROM `ad_subject`a , `ad_class`b, `ad_section`c WHERE a.`class_id` = b.`class_id` and b.`section` = c.`section_id` order by `subject_id`">
+
+                                                    <input type="hidden" name="title" value="ID|Subject Name|Class|Section|Comment">
+
+                                                    <input type="hidden" name="name_file" value="Subjects">
+
+                                                    <input type="hidden" name="link" value="Admin-mod-subject.php">
+                                                    <a> 
+                                                        <button type="submit" name="export" value="CSV Export" class="btn btn-info btn w-md waves-effect waves-light" style="margin-right: 33%" >CSV Export </button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-4"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -110,7 +128,7 @@ include_once('session_end.php');
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `subject_id`"ID", `subject_name`"Subject Name", b.`class_name`"Class",b.`section`"Section", a.`comment`"Comment" FROM `ad_subject`a , `ad_class`b  WHERE a.`class_id` = b.`class_id` order by `subject_id`';
+                                            $sql = 'SELECT `subject_id`"ID", `subject_name`"Subject Name", b.`class_name`"Class",c.`section_name`"Section", a.`comment`"Comment" FROM `ad_subject`a , `ad_class`b, `ad_section`c WHERE a.`class_id` = b.`class_id` and b.`section` = c.`section_id` order by `subject_id`';
                                             display_query($sql);
 
                                             ?>
@@ -123,40 +141,27 @@ include_once('session_end.php');
                     </div>
                 </div>
             </div>
-
-
-
-
             <!-- Form -->
             <div class="content-page" id="formadd">
-                <div class="content">
+                <div class="">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Subject </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">Add Subject </h4>
 
                                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-
-
                                             <div class="form-group">
                                                 <label for="prID">Subject Name</label>
                                                 <input type="text" name="subject_name" required="" placeholder="Enter subject name" class="form-control" id="prID" value="<?php if(isset($_REQUEST['subject_name'])) echo $_REQUEST['subject_name'] ?>" >
                                             </div>
                                             <?php
-                                            dropDownConditional3section("Class and Section", "class_id","class_id","class_name","section","ad_class",Null);
-                                            ?><!-- 
-                                            <div class="form-group">
-                                                <label for="prID">Class ID</label>
-                                                <input type="text" name="class_id" required="" placeholder="Enter class id" class="form-control" id="prID" value="<?php if(isset($_REQUEST['class_id'])) echo $_REQUEST['class_id'] ?>" >
-                                            </div> -->
-                                        
-                                   
+                                            dropDownClassConditional("Class and Section", "class_id","class_id","ad_class`.`class_name","ad_section`.`section_name","ad_class`,`ad_section","WHERE `ad_class`.`section` = `ad_section`.`section_id`");
+                                           ?>
                                             <div class="form-group">
                                                 <label for="prName">Comments</label>
                                                 <input type="text" name="comment" placeholder="Enter comment ..... " class="form-control" id="prName" value="<?php if(isset($_REQUEST['comment'])) echo $_REQUEST['comment'] ?>" >
                                             </div>
-
                                             
                                             <div class="form-group text-right m-b-0">
                                                 <?php 
@@ -166,6 +171,7 @@ include_once('session_end.php');
                                                     Cancel
                                                 </button>
                                             </div>
+
                                         </form>
                                     </div>
                                 </div>

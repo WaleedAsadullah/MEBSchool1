@@ -114,7 +114,7 @@ $filename=$_FILES["file"]["tmp_name"];
     
       while (($getData = fgetcsv($file, 10000, ",")) !== FALSE)
        {
-         $sql = 'INSERT INTO `ad_class`(`class_id`, `class_name`, `comment`) VALUES (NULL,';
+         $sql = 'INSERT INTO `ad_class`(`class_id`, `class_name`, `section`, `comment`) VALUES ( (NULL,';
         $sql .= '"'.$getData[0].'","'.$getData[1].'")';
         $result = mysqli_query($con, $sql);
 
@@ -134,11 +134,32 @@ $filename=$_FILES["file"]["tmp_name"];
        fclose($file);  
  }
 }
-?>
-                                     <div class="m-t-5 m-b-5" style="text-align: center" >
-                                         <a  href="#formadd" > <button  type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
-                                        <a> <button type="button" class="btn btn-info btn w-md waves-effect waves-light" > Export </button></a>
-                                        <a><button type="button" class="btn btn-purple btn w-md waves-effect waves-light"  data-toggle="modal" data-target="#con-close-modal" > Import </button></a>
+?>                                  
+                                    <div class="m-t-5 m-b-5" style="text-align: center" >
+                                        <div class="row">
+                                            <div class="col-sm-3" ></div>
+                                             <div class="col-sm-2" >
+                                                 <a  href="#formadd"><button  type="button" class="btn btn-primary btn w-md waves-effect waves-light">+ Add</button></a>
+                                                <a>
+                                            </div>
+                                            <div class="col-sm-2" >
+                                            <form action="export.php" method="post" name="upload_excel" enctype="multipart/form-data">
+                                                    <input type="hidden" name="Export" value="SELECT `class_id`, `class_name`,`ad_section`.`section_name`, `ad_class`.`comment` FROM `ad_class`,`ad_section` where `ad_section`.`section_id` = `ad_class`.`section` order by `class_id` desc">
+                                                    <input type="hidden" name="title" value="ID|Class Name|Section Name|Comment">
+                                                    <input type="hidden" name="name_file" value="Classes">
+                                                    <input type="hidden" name="link" value="Admin-mod-class.php">
+                                                    <a> 
+                                                        <button type="submit" name="export" value="CSV Export" class="btn btn-info btn w-md waves-effect waves-light"  >CSV Export </button>
+                                                    </a>
+                                                </form>
+                                            </div>
+                                            <div class="col-sm-2" >
+                                                <a>
+                                                    <button type="button" class="btn btn-purple btn w-md waves-effect waves-light"  data-toggle="modal" data-target="#con-close-modal" > Import </button>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-3" ></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +192,7 @@ $filename=$_FILES["file"]["tmp_name"];
                                                 }
                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT `class_id`"ID" , `class_name` "Class Name",`section`"Section", `comment` "Comments" FROM `ad_class` order by `class_id` desc ';
+                                            $sql = 'SELECT `class_id`"ID" , `class_name` "Class Name",`ad_section`.`section_name`"Section", `ad_class`.`comment` "Comments" FROM `ad_class`,`ad_section` where `ad_section`.`section_id` = `ad_class`.`section` order by `class_id` desc ';
                                             display_query($sql);
 
                                             ?>
@@ -195,7 +216,7 @@ $filename=$_FILES["file"]["tmp_name"];
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="card-box">
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Class with Section </h4>
+                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px">Add Class </h4>
 
                                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 

@@ -66,21 +66,19 @@ include_once('session_end.php');
                              <div class="col-lg-12">
                                 <div class="card-box">
                                      <div class="m-t-5 m-b-5" style="text-align: center" >
-                                         <a  href="#formadd" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >+ Add</button></a>
+                                         <a  href="Admin-mod-timetable-management.php" > <button type="button" class="btn btn-primary btn w-md waves-effect waves-light"  >View</button></a>
                                         
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12" >
-                                <div class="card-box">
 
-                                    <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Time table </h4>
+                                    <!-- <h4 class="header-title m-t-0 m-b-5" style="text-align: center; font-size: 22px; padding: 10px"> Time table </h4> -->
                                     <br>
 
-                                    <div class="table-responsive">
+                                    <!-- <div class="table-responsive">
                                         <table   id="sample_data"
                                         class="table table-bordered table-striped"
-                                        style="width: 100%;">
+                                        style="width: 100%;"> -->
                                         <?php
                                             // -------------------
                                             //echo "test";
@@ -100,110 +98,108 @@ include_once('session_end.php');
                                             insert_query($sql);
                                             }}
                                             // --------------------------
-                                            ///edit code
-                                            check_edit("ad_timetable","time_id");
-                                            edit_display("ad_timetable","time_id");
-                                            //end of edit code -shift view below delete
-                                            // --------------------------
+//                                             ///edit code
+//                                             check_edit("ad_timetable","time_id");
+//                                             edit_display("ad_timetable","time_id");
+//                                             //end of edit code -shift view below delete
+//                                             // --------------------------
 
-                                            if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ad_timetable` WHERE `ad_timetable`.`time_id` = '.$_REQUEST['deleteid'];
+//                                             if(isset($_REQUEST['deleteid']) && is_numeric($_REQUEST['deleteid'])){ $sql = 'DELETE FROM `ad_timetable` WHERE `ad_timetable`.`time_id` = '.$_REQUEST['deleteid'];
 
-                                            insert_query($sql);
-                                            // echo "done deleting";
-                                                }
-                                            // $sql = "SELECT * FROM `ac_annual_appraisal`";
+//                                             insert_query($sql);
+//                                             // echo "done deleting";
+//                                                 }
+//                                             // $sql = "SELECT * FROM `ac_annual_appraisal`";
 
-                                            $sql = 'SELECT  `time_id`,`class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `day`, `day_value`, `comments` FROM `ad_timetable`';
-                                            // display_query($sql);
+//                                             $sql = 'SELECT  `time_id`,`class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `day`, `day_value`, `comments` FROM `ad_timetable`';
+//                                             // display_query($sql);
 
-function display_query_timetable($sql)
-{
+// function display_query_timetable($sql)
+// {
 
- $conn = connect_db();
-  $result = $conn->query($sql);
+//  $conn = connect_db();
+//   $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-  // output data of each row
+// if ($result->num_rows > 0) {
+//   // output data of each row
 
   
-//get_current_form();
+// //get_current_form();
                                                
-   $i = 0;                                     
-  while($row = $result->fetch_assoc()) {
-    if($i==0)
-    {
-echo '
-                <thead>
-                  <tr>
-                    <th>S.No</th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>';
-$row_data = array_keys($row);
-$id_column = "";
-for($j=0;$j<count($row_data);$j++){
+//    $i = 0;                                     
+//   while($row = $result->fetch_assoc()) {
+//     if($i==0)
+//     {
+// echo '
+//                 <thead>
+//                   <tr>
+//                     <th>S.No</th>
+//                     <th></th>
+//                     <th></th>
+//                     <th></th>
+//                     <th></th>';
+// $row_data = array_keys($row);
+// $id_column = "";
+// for($j=0;$j<count($row_data);$j++){
 
-  if($j==0) $id_column = $row_data[$j];
+//   if($j==0) $id_column = $row_data[$j];
 
-    echo  "<th>".$row_data[$j]."</th>"; }
+//     echo  "<th>".$row_data[$j]."</th>"; }
                                                    
-    echo   '</tr>
-         </thead>
-      <tbody>';
+//     echo   '</tr>
+//          </thead>
+//       <tbody>';
 
 
 
-    }
-  $i++;
+//     }
+//   $i++;
 
   
-    echo '<tr>
-              <td>'.$i.'</td>
-              <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
+//     echo '<tr>
+//               <td>'.$i.'</td>
+//               <td style="text-align:center;"><a style="color:rgb(16,196,105);" href="'.$_SERVER['PHP_SELF'].'?editid='.$row[$id_column].'"><i class="zmdi zmdi-edit"></i></a></td>
             
-              <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
-              <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
-              <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
+//               <td style="text-align:center;"><a style="color:rgb(255,87,90);" href="'.$_SERVER['PHP_SELF'].'?deleteid='.str_replace(" ","___",$row[$id_column]).'"><i class="fa fa-trash-o" onclick="return confirm(\'Are you sure?\')"></i></a></td>
+//               <td style="text-align:center;"><a style="color:rgb(120,108,150);" href="" ><i  class="zmdi zmdi-local-printshop"></i></a></td>
+//               <td style="text-align:center;"><a style="color:rgb(30,108,180);" href="" ><i class="zmdi zmdi-copy"></i></a></td>';
 
 
-for($k=0;$k<count($row_data);$k++){ 
-    if(substr($row_data[$k],0,3) == 'per'){
-        $sql_name = 'SELECT `subject_name` FROM `ad_subject` WHERE `subject_id` = '.$row[$row_data[$k]].'';
-        $result_name = mysqli_query($conn,$sql_name);
-        $row_name = mysqli_fetch_assoc($result_name);
-        // echo  '<td>'.$row_name['subject_name'].'</td>'
-        echo '<td data-name="'.$row_data[$k].'" class="'.$row_data[$k].'" data-type="text" data-pk="'.$row[$row_data[0]].'">'.$row_name['subject_name'].'</td>';
-           }
-    else{
-    echo '<td data-name="'.$row_data[$k].'" class="'.$row_data[$k].'" data-type="text" data-pk="'.$row[$row_data[0]].'">'.$row[$row_data[$k]].'</td>';}
-}
+// for($k=0;$k<count($row_data);$k++){ 
+//     if(substr($row_data[$k],0,3) == 'per'){
+//         $sql_name = 'SELECT `subject_name` FROM `ad_subject` WHERE `subject_id` = '.$row[$row_data[$k]].'';
+//         $result_name = mysqli_query($conn,$sql_name);
+//         $row_name = mysqli_fetch_assoc($result_name);
+//         // echo  '<td>'.$row_name['subject_name'].'</td>'
+//         echo '<td data-name="'.$row_data[$k].'" class="'.$row_data[$k].'" data-type="text" data-pk="'.$row[$row_data[0]].'">'.$row_name['subject_name'].'</td>';
+//            }
+//     else{
+//     echo '<td data-name="'.$row_data[$k].'" class="'.$row_data[$k].'" data-type="text" data-pk="'.$row[$row_data[0]].'">'.$row[$row_data[$k]].'</td>';}
+// }
 
-   echo  '</tr>';
-  }
+//    echo  '</tr>';
+//   }
 
-    echo '   </tbody>';
-} else {
-  echo "0 results";
-}
+//     echo '   </tbody>';
+// } else {
+//   echo "0 results";
+// }
     
 
-}
- $sql = 'SELECT  `time_id`,`class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `day`, `day_value`, `comments` FROM `ad_timetable`';
-display_query_timetable($sql);
+// }
+//  $sql = 'SELECT  `time_id`,`class_id`, `period1`, `period2`, `period3`, `period4`, `period5`, `period6`, `period7`, `period8`, `period9`, `period10`, `day`, `day_value`, `comments` FROM `ad_timetable`';
+// display_query_timetable($sql);
 
                                             ?>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- </table>
+                                    </div> -->
                         </div>   
                     </div>
                 </div>
             </div>
 
             <div class="content-page" id="formadd">
-                <div class="content">
+                <div class="">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
